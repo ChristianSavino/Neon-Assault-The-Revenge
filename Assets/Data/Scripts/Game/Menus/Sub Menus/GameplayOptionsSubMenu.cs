@@ -64,6 +64,7 @@ namespace Keru.Scripts.Game.Menus.SubMenus
         public void SaveControls()
         {
             ExternalFilesManager.UpdateGameData(LevelBase.GameOptions);
+            MenuConsole.menuConsole.Message("Controles Guardados");
             gameObject.SetActive(false);
         }
 
@@ -86,7 +87,7 @@ namespace Keru.Scripts.Game.Menus.SubMenus
                             }
                             else
                             {
-                                //Message("Esta Tecla no se puede asignar");
+                                MenuConsole.menuConsole.Message("Esta tecla no se puede asignar".ToUpper());
                             }
                         }
                         else if (e.isMouse)
@@ -101,9 +102,13 @@ namespace Keru.Scripts.Game.Menus.SubMenus
                             }
                             else
                             {
-                                //Message("La Rueda del Mouse no se puede asignar");
+                                MenuConsole.menuConsole.Message("La Rueda del Mouse no se puede asignar");
                             }
                         }
+                    }
+                    else
+                    {
+                        MenuConsole.menuConsole.Message("Tecla ya asignada");
                     }
                 }
             }

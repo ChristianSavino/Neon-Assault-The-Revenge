@@ -1,6 +1,5 @@
 using Keru.Scripts.Engine.Master;
 using Keru.Scripts.Visuals.Effects;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -15,7 +14,6 @@ namespace Keru.Scripts.Engine.Module
 
         private Camera _mainCamera;
         private UniversalAdditionalCameraData _cameraData;
-        private Camera _uICamera;
        
         private VolumeProfile _vp;
         private DepthOfField _depthOfField;
@@ -43,7 +41,6 @@ namespace Keru.Scripts.Engine.Module
         {
             _mainCamera.backgroundColor = Color.black;
             _mainCamera.nearClipPlane = 0.1f;
-            _uICamera = _cameraData.cameraStack[0];
             _cameraData.renderShadows = true;
             _cameraData.renderPostProcessing = true;
 
@@ -54,7 +51,6 @@ namespace Keru.Scripts.Engine.Module
             var qualityAsset = (UniversalRenderPipelineAsset)QualitySettings.renderPipeline;
 
             _mainCamera.fieldOfView = graphics.FieldOfView;
-            _uICamera.fieldOfView = graphics.FieldOfView;
             
             _cameraData.antialiasing = (AntialiasingMode)(int)graphics.AaMode;
             _cameraData.antialiasingQuality = (AntialiasingQuality)(int)graphics.AaQuality;
@@ -125,7 +121,7 @@ namespace Keru.Scripts.Engine.Module
             _feature.SetDirty();
         }
 
-        public static void FadeCamera(int direction)
+        public void FadeCamera(int direction)
         {
             if (_fading != null)
             {

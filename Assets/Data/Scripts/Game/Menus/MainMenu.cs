@@ -1,4 +1,6 @@
 using Keru.Scripts.Engine.FileSystem;
+using Keru.Scripts.Engine.Module;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,10 +14,12 @@ namespace Keru.Scripts.Game.Menus
         [SerializeField] private GameObject _optionsMenu;
         [SerializeField] private Button _continueButton;
         [SerializeField] private Text _continueButtonText;
+        [SerializeField] private GameObject _blackScreen;
 
         private void OnEnable()
         {
             BackMenu();
+            _blackScreen.SetActive(false);
         }
 
         private void Awake()
@@ -47,13 +51,22 @@ namespace Keru.Scripts.Game.Menus
 
         public void Quit()
         {
-            Application.Quit();
+            _blackScreen.SetActive(true);
+            StartCoroutine(ExitApplication());
         }
         
         public void BackMenu()
         {
             _continueSubMenu.SetActive(false);
             _newGameSubMenu.SetActive(false);
+        }
+
+        private IEnumerator ExitApplication()
+        {
+            GraphicsManager.graphicsManager.FadeCamera(1);
+            yield return new WaitForSeconds(2);
+
+            Application.Quit();
         }
     }
 }

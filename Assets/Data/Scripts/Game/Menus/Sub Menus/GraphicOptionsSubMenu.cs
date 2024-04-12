@@ -306,6 +306,7 @@ namespace Keru.Scripts.Game.Menus.SubMenus
         public void SaveChanges()
         {
             ExternalFilesManager.UpdateGameData(LevelBase.GameOptions);
+            MenuConsole.menuConsole.Message("Graficos configurados");
             gameObject.SetActive(false);
 
             GraphicsManager.graphicsManager.SetupGraphics();

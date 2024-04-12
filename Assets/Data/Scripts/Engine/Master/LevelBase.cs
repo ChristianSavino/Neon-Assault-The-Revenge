@@ -10,7 +10,7 @@ namespace Keru.Scripts.Engine.Master
 {
     public class LevelBase : MonoBehaviour
     {
-        public static LevelBase Singleton;
+        public static LevelBase levelBase;
         public static SaveGameFile CurrentSave;
         public static MainGameData GameOptions;
 
@@ -20,17 +20,22 @@ namespace Keru.Scripts.Engine.Master
 
         private AudioManager _audioManager;
         private GraphicsManager _graphicsManager;
+        private LevelSceneManager _levelSceneManager;
+        private SaveManager _saveManager;
         private JukeBox _jukeBox;
         private Fading _fading;
         private Volume _volume;
 
         private void Awake()
         {
-            Singleton = this;
-            DataLoad();
+            levelBase = this;
+            GameOptions = ExternalFilesManager.LoadGameData();
+           
             LoadModules();
 
-            if(_isMenu)
+            CurrentSave = _saveManager.LoadSaveGame(GameOptions.SaveGameLocation);
+
+            if (_isMenu)
             {
 
             }
@@ -45,11 +50,6 @@ namespace Keru.Scripts.Engine.Master
             }
         }
 
-        private void DataLoad()
-        {
-            GameOptions = ExternalFilesManager.LoadGameData();
-            CurrentSave = ExternalFilesManager.LoadSavedGame(GameOptions.SaveGameLocation);
-        }
 
         private void LoadModules()
         {
@@ -64,8 +64,26 @@ namespace Keru.Scripts.Engine.Master
             _graphicsManager = managerGameObject.GetComponent<GraphicsManager>();
             _graphicsManager.SetUp(_volume, _fading, _isMenu);
 
+            _levelSceneManager = managerGameObject.GetComponent<LevelSceneManager>();
+            _levelSceneManager.SetUp();
+
+            _saveManager = managerGameObject.GetComponent<SaveManager>();
+            _saveManager.SetUp();
+
             _jukeBox = GetComponent<JukeBox>();
-            _jukeBox.SetUp(GameOptions.AlternateMusic);
+            _jukeBox.SetUp(GameOptions.AlternateMusic);   
+        }
+
+        public void SetTimeScale(float timeScale)
+        {
+            Time.timeScale = timeScale;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+            if (timeScale == 0)
+            {
+                Time.fixedDeltaTime = 0.02f;
+            }
+
+            _audioManager.SetPitch(timeScale);
         }
     }
 }

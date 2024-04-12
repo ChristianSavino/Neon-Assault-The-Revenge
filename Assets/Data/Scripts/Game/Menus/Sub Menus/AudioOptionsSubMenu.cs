@@ -44,6 +44,7 @@ namespace Keru.Scripts.Game.Menus.SubMenus
         public void SaveChanges()
         {
             ExternalFilesManager.UpdateGameData(LevelBase.GameOptions);
+            MenuConsole.menuConsole.Message("Audio configurado");
             AudioManager.audioManager.SetNewAudioValues();
             gameObject.SetActive(false);
         }
