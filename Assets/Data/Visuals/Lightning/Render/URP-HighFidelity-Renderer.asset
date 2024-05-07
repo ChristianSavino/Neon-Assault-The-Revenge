@@ -98,7 +98,8 @@ MonoBehaviour:
   - {fileID: 5615728998465987303}
   - {fileID: -374448892481744020}
   - {fileID: 4083725223493968583}
-  m_RendererFeatureMap: adc0de57c6d2eee5e7e26c4cc513ef4d6c531659b7b0cdfac722a94a744eac38
+  - {fileID: 1220813521441397450}
+  m_RendererFeatureMap: adc0de57c6d2eee5e7e26c4cc513ef4d6c531659b7b0cdfac722a94a744eac38ca1a82fa6d33f110
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -141,6 +142,29 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &1220813521441397450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6589f404cc28f584494b80a94d9e1e36, type: 3}
+  m_Name: VolumetricLightScattering
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  DiffuseRadius: 30
+  LightQuality: 1800
+  HorizontalStep: 0.1
+  VerticalStep: 0.1
+  DiffuseLighting: 1
+  ColorFormat: 0
+  Quality:
+    ResolutionScale: 0.5
+    Intensity: 1
+    BlurWidth: 0.85
 --- !u!114 &4083725223493968583
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -50,8 +50,11 @@ namespace Keru.Scripts.Engine.Module
             QualitySettings.renderPipeline = pipelines[(int)graphics.ShadowQuality];
             var qualityAsset = (UniversalRenderPipelineAsset)QualitySettings.renderPipeline;
 
-            _mainCamera.fieldOfView = graphics.FieldOfView;
-            
+            if(!_isMenu)
+            {
+                _mainCamera.fieldOfView = graphics.FieldOfView;
+            }
+         
             _cameraData.antialiasing = (AntialiasingMode)(int)graphics.AaMode;
             _cameraData.antialiasingQuality = (AntialiasingQuality)(int)graphics.AaQuality;
 
