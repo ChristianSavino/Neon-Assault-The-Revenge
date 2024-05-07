@@ -760,7 +760,7 @@ MonoBehaviour:
   _pictureCamera: {fileID: 1221971026596161125}
   _cutsceneAnimator: {fileID: 0}
   _continueButton: {fileID: 6215810358359538506}
-  _skipButton: {fileID: 0}
+  _skipButton: {fileID: 6957057439368768406}
   _sceneToPlay: []
   _titleText: []
   _subTitleText: []

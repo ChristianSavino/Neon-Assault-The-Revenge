@@ -17,21 +17,23 @@ namespace Keru.Scripts.Game.Cutscene
 
         private int _currentDialog;
 
-        private void Start()
+        public bool ContinueDialog()
         {
-            StartCoroutine(ChangeDialog());
-        }
+            if (_currentDialog == _dialogString.Count)
+            {
+                Destroy(this.gameObject);
+                return true;
+            }
 
-        public void ContinueDialog()
-        {
             StartCoroutine(ChangeDialog());
+            return false;
         }
 
         private IEnumerator ChangeDialog()
         {
             var timeToAddLetter = 2f / _dialogString[_currentDialog].Length;
             var dialog = _dialogString[_currentDialog];
-            _characterBox.text = _characterString[_currentDialog];
+            _characterBox.text = _characterString[_currentDialog].ToUpper();
 
             var dialogAux = "";
             while (!dialogAux.Equals(dialog))
@@ -42,11 +44,6 @@ namespace Keru.Scripts.Game.Cutscene
             }
 
             _currentDialog++;
-
-            if(_currentDialog == _dialogString.Count)
-            {
-                Destroy(this);
-            }
         }
     }
 }

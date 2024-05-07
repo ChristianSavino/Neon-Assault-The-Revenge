@@ -262,8 +262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213bafc34f9527a49ab27f031adf0c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterBox: {fileID: 0}
-  _characterDialog: {fileID: 0}
+  _characterBox: {fileID: 4995309141380702116}
+  _characterDialog: {fileID: 8113633773660861121}
   _characterString: []
   _dialogString: []
 --- !u!1 &4763924991905290007

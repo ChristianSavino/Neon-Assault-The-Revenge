@@ -32,6 +32,7 @@ namespace Keru.Scripts.Game.Cutscene
         private ReflectionProbe _reflectionProbe;
         private int _currentFrame;
         private bool _isTitleScreen;
+        private string _lastAnimation = "";
 
         private void Start()
         {
@@ -51,9 +52,15 @@ namespace Keru.Scripts.Game.Cutscene
         public void AdvanceCutscene()
         {
             _continueButton.gameObject.SetActive(false);
-            
-            if(_currentFrame != _sceneToPlay.Count)
+
+            if (_currentFrame < _sceneToPlay.Count)
             {
+
+                if (!_lastAnimation.Equals(_sceneToPlay[_currentFrame]))
+                {
+                    ChangeCutscene();
+                }
+
                 if (_dialogPerScene[_currentFrame] == null)
                 {
                     if (_titleText[_currentFrame] != string.Empty || _subTitleText[_currentFrame] != string.Empty)
@@ -68,12 +75,22 @@ namespace Keru.Scripts.Game.Cutscene
                         _isTitleScreen = false;
                     }
 
-                    ChangeCutscene();
+                    _currentFrame++;
                     StartCoroutine(ToggleContinueButton(1f));
                 }
                 else
                 {
-                    _dialogPerScene[_currentFrame].ContinueDialog();
+                    _dialogPerScene[_currentFrame].gameObject.SetActive(true);
+                    var isDestroyed = _dialogPerScene[_currentFrame].ContinueDialog();
+                    if (isDestroyed)
+                    {
+                        _currentFrame++;
+                        AdvanceCutscene();
+                    }
+                    else
+                    {
+                        StartCoroutine(ToggleContinueButton(2f));
+                    }
                 }
             }
             else
@@ -84,6 +101,7 @@ namespace Keru.Scripts.Game.Cutscene
 
         private void ChangeCutscene()
         {
+            _lastAnimation = _sceneToPlay[_currentFrame];
             _cameraData.renderPostProcessing = false;
             _pictureCamera.enabled = true;
 
@@ -102,8 +120,7 @@ namespace Keru.Scripts.Game.Cutscene
 
             RenderTexture.active = activeRenderTexture;
 
-            _currentFrame++;
-            _cutsceneAnimator.Play(_sceneToPlay[_currentFrame]);
+            _cutsceneAnimator.Play(_lastAnimation);
 
             _pictureCamera.enabled = false;
             _cameraData.renderPostProcessing = true;
