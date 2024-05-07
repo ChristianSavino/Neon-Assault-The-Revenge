@@ -41,7 +41,12 @@ namespace Keru.Scripts.Game.Cutscene
                 yield return new WaitForSeconds(timeToAddLetter);
             }
 
+            _currentDialog++;
 
+            if(_currentDialog == _dialogString.Count)
+            {
+                Destroy(this);
+            }
         }
     }
 }

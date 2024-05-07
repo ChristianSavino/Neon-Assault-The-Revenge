@@ -1,3 +1,4 @@
+using Keru.Scripts.Engine.Module;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace Keru.Scripts.Game.Cutscene
         [SerializeField] private List<string> _sceneToPlay;
         [SerializeField] private List<string> _titleText;
         [SerializeField] private List<string> _subTitleText;
-        [SerializeField] private List<GameObject> _dialogPerScene;
+        [SerializeField] private List<CutsceneDialog> _dialogPerScene;
         [SerializeField] private List<AudioClip> _audioClip;
 
         private Animator _changesceneEffectAnimator;
@@ -51,20 +52,34 @@ namespace Keru.Scripts.Game.Cutscene
         {
             _continueButton.gameObject.SetActive(false);
             
-            if(_titleText[_currentFrame] != string.Empty || _subTitleText[_currentFrame] != string.Empty)
+            if(_currentFrame != _sceneToPlay.Count)
             {
-                _titleScreenHandler.EnableTitleScreen(_titleText[_currentFrame], _subTitleText[_currentFrame]);
-                _isTitleScreen = true;
-            }
+                if (_dialogPerScene[_currentFrame] == null)
+                {
+                    if (_titleText[_currentFrame] != string.Empty || _subTitleText[_currentFrame] != string.Empty)
+                    {
+                        _titleScreenHandler.EnableTitleScreen(_titleText[_currentFrame], _subTitleText[_currentFrame]);
+                        _isTitleScreen = true;
+                    }
 
-            if (_titleText[_currentFrame] == string.Empty && _subTitleText[_currentFrame] == string.Empty && _isTitleScreen == true)
+                    if (_titleText[_currentFrame] == string.Empty && _subTitleText[_currentFrame] == string.Empty && _isTitleScreen == true)
+                    {
+                        _titleScreenHandler.DisableTitleScreen();
+                        _isTitleScreen = false;
+                    }
+
+                    ChangeCutscene();
+                    StartCoroutine(ToggleContinueButton(1f));
+                }
+                else
+                {
+                    _dialogPerScene[_currentFrame].ContinueDialog();
+                }
+            }
+            else
             {
-                _titleScreenHandler.DisableTitleScreen();
-                _isTitleScreen = false;
+                StartCoroutine(EndCutscene());
             }
-
-            ChangeCutscene();
-            StartCoroutine(ToggleContinueButton(1f));
         }
 
         private void ChangeCutscene()
@@ -118,6 +133,12 @@ namespace Keru.Scripts.Game.Cutscene
             yield return new WaitForSeconds(timeToWait);
 
             _continueButton.gameObject.SetActive(true);
+        }
+
+        private IEnumerator EndCutscene()
+        {
+            GraphicsManager.graphicsManager.FadeCamera(1);
+            yield return new WaitForSeconds(2);
         }
     }
 }
