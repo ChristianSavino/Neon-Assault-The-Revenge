@@ -30,6 +30,7 @@ namespace Keru.Scripts.Game.Cutscene
         private CutsceneTitleScreen _titleScreenHandler;
         private UniversalAdditionalCameraData _cameraData;
         private ReflectionProbe _reflectionProbe;
+        private AudioSource _audioSource;
         private int _currentFrame;
         private bool _isTitleScreen;
         private string _lastAnimation = "";
@@ -41,6 +42,8 @@ namespace Keru.Scripts.Game.Cutscene
             _changesceneEffectAnimator = _changesceneEffect.GetComponent<Animator>();
             _titleScreenHandler = _titleScreen.GetComponent<CutsceneTitleScreen>();
             _pictureCamera.enabled = false;
+
+            _audioSource = AudioManager.audioManager.CreateNewAudioSource(gameObject, Engine.SoundType.Effect);
 
             CreateReflectionProbe();
 
@@ -55,28 +58,36 @@ namespace Keru.Scripts.Game.Cutscene
 
             if (_currentFrame < _sceneToPlay.Count)
             {
+                if (_audioClip[_currentFrame] != null)
+                {
+                    _audioSource.PlayOneShot(_audioClip[_currentFrame]);
+                    _audioClip[_currentFrame] = null;
+                }
 
                 if (!_lastAnimation.Equals(_sceneToPlay[_currentFrame]))
                 {
                     ChangeCutscene();
                 }
+                var timeToRestartButton = 1f;
+
+                if (_titleText[_currentFrame] != string.Empty || _subTitleText[_currentFrame] != string.Empty && _isTitleScreen == false)
+                {
+                    _titleScreenHandler.EnableTitleScreen(_titleText[_currentFrame], _subTitleText[_currentFrame]);
+                    _isTitleScreen = true;
+                    timeToRestartButton = 2f;
+                }
+
+                if (_titleText[_currentFrame] == string.Empty && _subTitleText[_currentFrame] == string.Empty && _isTitleScreen == true)
+                {
+                    _titleScreenHandler.DisableTitleScreen();
+                    _isTitleScreen = false;
+                    timeToRestartButton = 2f;
+                }
 
                 if (_dialogPerScene[_currentFrame] == null)
                 {
-                    if (_titleText[_currentFrame] != string.Empty || _subTitleText[_currentFrame] != string.Empty)
-                    {
-                        _titleScreenHandler.EnableTitleScreen(_titleText[_currentFrame], _subTitleText[_currentFrame]);
-                        _isTitleScreen = true;
-                    }
-
-                    if (_titleText[_currentFrame] == string.Empty && _subTitleText[_currentFrame] == string.Empty && _isTitleScreen == true)
-                    {
-                        _titleScreenHandler.DisableTitleScreen();
-                        _isTitleScreen = false;
-                    }
-
                     _currentFrame++;
-                    StartCoroutine(ToggleContinueButton(1f));
+                    StartCoroutine(ToggleContinueButton(timeToRestartButton));
                 }
                 else
                 {
@@ -89,7 +100,8 @@ namespace Keru.Scripts.Game.Cutscene
                     }
                     else
                     {
-                        StartCoroutine(ToggleContinueButton(2f));
+                        timeToRestartButton = 3.5f;
+                        StartCoroutine(ToggleContinueButton(timeToRestartButton));
                     }
                 }
             }

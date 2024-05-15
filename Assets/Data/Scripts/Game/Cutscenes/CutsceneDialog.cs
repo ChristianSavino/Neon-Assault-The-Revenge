@@ -25,13 +25,14 @@ namespace Keru.Scripts.Game.Cutscene
                 return true;
             }
 
-            StartCoroutine(ChangeDialog());
+            var timeToAddLetter = 2f / _dialogString[_currentDialog].Length;
+
+            StartCoroutine(ChangeDialog(timeToAddLetter));
             return false;
         }
 
-        private IEnumerator ChangeDialog()
-        {
-            var timeToAddLetter = 2f / _dialogString[_currentDialog].Length;
+        private IEnumerator ChangeDialog(float timeToAddLetter)
+        {          
             var dialog = _dialogString[_currentDialog];
             _characterBox.text = _characterString[_currentDialog].ToUpper();
 
