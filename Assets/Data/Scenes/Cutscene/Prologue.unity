@@ -7134,22 +7134,22 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[0]
-      value: (Este es el unico objeto fuera de lugar, es real esto?)
+      value: "(Esto es lo \xFAnico presente en la escena)"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[1]
-      value: "(si, emana una sensacion extra\xF1a, nunca he visto algo como esto)"
+      value: "(Ser\xE1 de la v\xEDctima? O del secuestrador?)"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[2]
-      value: (Voy a llamar al equipo, no me da buena espina)
+      value: Equipo, necesito una bolsa para evidencias
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[3]
-      value: "Muchachos, no sienten una extra\xF1a sensacion que viene de esta espada?"
+      value: (No me da buena espina)
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -8716,22 +8716,23 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[0]
-      value: Que frio hace, no podriamos haber comprado cafe antes?
+      value: "Que frio hace, no podr\xEDamos haber comprado caf\xE9 antes?"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[1]
-      value: Bancatela, hubieras agarrado una taza del que prepare antes
+      value: "B\xE1ncatela, hubieras agarrado una taza del que prepar\xE9 antes"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[2]
-      value: Terminemos esto que quiero probar Half-Life que salio hace unos dias
+      value: "Terminemos esto que quiero probar Half-Life que sali\xF3 hace unos
+        d\xEDas"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[3]
-      value: Por las dudas desenfunden las armas que no es un barrio amigable
+      value: Por las dudas tengan listas las armas que no es un barrio amigable
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -10163,12 +10164,12 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[0]
-      value: Policia, hay alguien ahi?
+      value: "Esta es la Polic\xEDa, hay alguien ah\xED?"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[1]
-      value: Pero la puta madre
+      value: No puede ser
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -10188,7 +10189,7 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[5]
-      value: Te dije que no encontrarias nada, a ver si te puedo sacar
+      value: "Te dije que no encontrar\xEDas nada\u2026 a ver si te puedo sacar"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -12041,17 +12042,17 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[0]
-      value: "Que extra\xF1o, yo no siento nada"
+      value: "Con que esto es lo \xFAnico que tenemos?"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[1]
-      value: Yo tampoco, sera sensacion tuya Keru?
+      value: "Que extra\xF1o, no parece una Katana com\xFAn"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[2]
-      value: 'Guarda la Katana con evidencia y vamos '
+      value: "Aqu\xED est\xE1 Keru, no hay nada m\xE1s en la escena"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -12680,33 +12681,32 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[0]
-      value: (No se por cuanto tiempo estuvimos inconscientes)
+      value: "(No s\xE9 por cu\xE1nto tiempo estuvimos inconscientes)"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[1]
-      value: (Cuando despertamos no sabiamos donde estabamos)
+      value: (Donde estamos? Todo parece... futurista, viajamos en el tiempo?)
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[2]
-      value: (Junto a nosotros habia una nota que decia que vayamos a un bar)
+      value: (Que es esto? Parece un mapa, hay un punto marcado)
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[3]
-      value: (Del otro lado, habia un mapa de como llegar)
+      value: (Y una nota, la cual dice que tenemos que ir)
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[4]
-      value: "(La ciudad era distinta, futurista, no se en que a\xF1o estaremos,
-        pero necesitamos respuestas)"
+      value: "(Y as\xED comenz\xF3 nuestro viaje para encontrar respuestas)"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[5]
-      value: Te dije que no encontrarias nada, a ver si te puedo sacar
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -16207,12 +16207,12 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[1]
-      value: No, todavia no
+      value: "No, todav\xEDa no"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[2]
-      value: Es al pedo que busques ahi
+      value: "Es in\xFAtil que busques ah\xED"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -16222,7 +16222,7 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[4]
-      value: (Que pendejo boludo)
+      value: (Cabeza dura)
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -22944,6 +22944,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5858916936216384684, guid: 3130223f8fa8b994f8e89e601f22cee5,
         type: 3}
+      propertyPath: _audioClip.Array.data[10]
+      value: 
+      objectReference: {fileID: 8300000, guid: 001cbdd2d16aca54c8dbe9293dd79d86, type: 3}
+    - target: {fileID: 5858916936216384684, guid: 3130223f8fa8b994f8e89e601f22cee5,
+        type: 3}
+      propertyPath: _audioClip.Array.data[11]
+      value: 
+      objectReference: {fileID: 8300000, guid: 77306fd908590d148bbba2cbd93e50a6, type: 3}
+    - target: {fileID: 5858916936216384684, guid: 3130223f8fa8b994f8e89e601f22cee5,
+        type: 3}
       propertyPath: _titleText.Array.data[11]
       value: '  '
       objectReference: {fileID: 0}
@@ -23015,7 +23025,7 @@ PrefabInstance:
     - target: {fileID: 5858916936216384684, guid: 3130223f8fa8b994f8e89e601f22cee5,
         type: 3}
       propertyPath: _subTitleText.Array.data[0]
-      value: LOS ANGELES
+      value: NEW YORK
       objectReference: {fileID: 0}
     - target: {fileID: 5858916936216384684, guid: 3130223f8fa8b994f8e89e601f22cee5,
         type: 3}
@@ -23185,19 +23195,20 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[0]
-      value: (Era una noche lluviosa, fria, de las cuales uno prefiere quedarse dormido)
+      value: "(Era una noche lluviosa, fr\xEDa, de las cuales uno prefiere quedarse
+        dormido)"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[1]
-      value: "(Estabamos investigando un caso de persona desaparecida, Darrel Vance,
-        22 a\xF1os, nacio aqui)"
+      value: "(Est\xE1bamos investigando un caso de persona desaparecida, Darrel
+        Vance, 22 a\xF1os, naci\xF3 aqu\xED)"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[2]
-      value: (Desaparecido desde el lunes de la semana pasada, parece pertenecer
-        a los Rollin' 30s Harlem Crips)
+      value: (Ultima vez visto el lunes de la semana pasada, pandillero de los Rollin'
+        30s Harlem Crips)
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -23208,7 +23219,7 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _dialogString.Array.data[4]
-      value: (Pero esa noche nos encontramos con algo que cambio nuestras vidas)
+      value: "(Pero esa noche nos encontramos con algo que cambi\xF3 nuestras vidas)"
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
