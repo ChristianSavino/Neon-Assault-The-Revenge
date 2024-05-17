@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class MainGameData
@@ -10,8 +11,8 @@ public class MainGameData
     public Options Options { get; set; }
     public MainGameData()
     {
-        Version = "0.5.0";
-        SaveGameLocation = 0;
+        Version = Application.version;
+        SaveGameLocation = -1;
         Achievements = new List<Achievements>();
         Options = new Options();
         Options.AudioOptions = new AudioOptions();

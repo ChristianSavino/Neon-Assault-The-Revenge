@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Keru.Scripts.Engine.FileSystem
 {
@@ -20,7 +21,15 @@ namespace Keru.Scripts.Engine.FileSystem
             }
             else
             {
-                return JsonConvert.DeserializeObject<MainGameData>(dataJson);
+                var gameData = JsonConvert.DeserializeObject<MainGameData>(dataJson);
+                if(gameData.Version != Application.version)
+                {
+                    var mainGameData = new MainGameData();
+                    mainGameData.Options = gameData.Options;
+                    gameData = mainGameData;
+                }
+
+                return gameData;
             }
         }
 

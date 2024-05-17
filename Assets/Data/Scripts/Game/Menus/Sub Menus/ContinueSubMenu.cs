@@ -2,6 +2,7 @@ using Keru.Scripts.Engine.FileSystem;
 using Keru.Scripts.Engine.Master;
 using Keru.Scripts.Engine.Module;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +28,8 @@ namespace Keru.Scripts.Game.Menus.SubMenus
 
                 if (saveFile != null)
                 {
-                    saveSlotText.text = $"{saveFile.SavePosition + 1} - {saveFile.Chapter.ToUpper()} - {saveFile.LastSaveDate.ToString("dd/MM/yyyy HH:mm:ss")}";
+                    var chapter = saveFile.AllLevelData.Where(x => x.Code == saveFile.CurrentLevelCode).FirstOrDefault();
+                    saveSlotText.text = $"{saveFile.SavePosition + 1} - {(chapter != null ? chapter.LevelName.ToUpper() : "Seleccion de mision".ToUpper())} - {saveFile.LastSaveDate.ToString("dd/MM/yyyy HH:mm:ss")}";
                 }
                 else
                 {
@@ -41,10 +43,7 @@ namespace Keru.Scripts.Game.Menus.SubMenus
         {
             DisableAllButtons();
 
-            var gameOptions = LevelBase.GameOptions;
-            gameOptions.SaveGameLocation = saveGameLocation;
-            ExternalFilesManager.UpdateGameData(gameOptions);
-            LevelSceneManager.levelSceneManager.LoadingScreen();
+            LevelBase.levelBase.LoadGame(saveGameLocation);
         }
 
         private void DisableAllButtons()

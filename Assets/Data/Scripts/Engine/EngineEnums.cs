@@ -55,4 +55,24 @@ namespace Keru.Scripts.Engine
         FPS120 = 3,
         FPS144 = 4
     }
+
+    public enum LevelType
+    {
+        Menu = 0,
+        Cutscene = 1,
+        Game = 2
+    }
+
+    public enum LevelCode
+    {
+        Nothing = -6,
+        Reset = -5,
+        Intro = -4,
+        MainMenu = -3,
+        GameMainMenu = -2,
+        LoadingScreen = -1,
+        Level0 = 0,
+        Level1 = 1,
+        Level2 = 2
+    }
 }

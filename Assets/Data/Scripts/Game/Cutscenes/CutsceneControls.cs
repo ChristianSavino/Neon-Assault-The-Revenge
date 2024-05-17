@@ -1,3 +1,4 @@
+using Keru.Scripts.Engine.Master;
 using Keru.Scripts.Engine.Module;
 using System.Collections;
 using System.Collections.Generic;
@@ -107,7 +108,7 @@ namespace Keru.Scripts.Game.Cutscene
             }
             else
             {
-                StartCoroutine(EndCutscene());
+                LevelBase.levelBase.CompleteLevel();
             }
         }
 
@@ -162,12 +163,6 @@ namespace Keru.Scripts.Game.Cutscene
             yield return new WaitForSeconds(timeToWait);
 
             _continueButton.gameObject.SetActive(true);
-        }
-
-        private IEnumerator EndCutscene()
-        {
-            GraphicsManager.graphicsManager.FadeCamera(1);
-            yield return new WaitForSeconds(2);
         }
     }
 }

@@ -117,5 +117,28 @@ namespace Keru.Scripts.Engine.Master
             _musicSource.volume = musicVolume;
             _auxMusicSource.Stop();
         }
+
+        public void StopMusic(bool smooth)
+        {
+            if(smooth)
+            {
+                StartCoroutine(SmoothStop());
+            }
+            else
+            {
+                _musicSource.Stop();
+            }
+        }
+
+        private IEnumerator SmoothStop()
+        {
+            var musicVolume = _musicSource.volume;
+            while (_musicSource.volume > 0)
+            {
+                yield return new WaitForSeconds(Time.deltaTime / 2);
+                var ammountToSum = musicVolume * (Time.deltaTime / 2);
+                _musicSource.volume -= ammountToSum;
+            }
+        }
     }
 }

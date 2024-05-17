@@ -3,6 +3,7 @@ using Keru.Scripts.Engine.Module;
 using Keru.Scripts.Visuals.Effects;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -33,8 +34,11 @@ namespace Keru.Scripts.Engine.Master
            
             LoadModules();
 
-            CurrentSave = _saveManager.LoadSaveGame(GameOptions.SaveGameLocation);
-
+            if(GameOptions.SaveGameLocation != -1)
+            {
+                CurrentSave = _saveManager.LoadSaveGame(GameOptions.SaveGameLocation);
+            }
+           
             if (_isMenu)
             {
 
@@ -72,6 +76,41 @@ namespace Keru.Scripts.Engine.Master
 
             _jukeBox = GetComponent<JukeBox>();
             _jukeBox.SetUp(GameOptions.AlternateMusic);   
+        }
+
+        public SaveGameFile CreateNewSaveGame(int saveGameSlot)
+        {
+            CurrentSave = SaveManager.saveManager.CreateNewSaveGame(saveGameSlot);
+            GameOptions.SaveGameLocation = saveGameSlot;
+            ExternalFilesManager.UpdateGameData(GameOptions);
+
+            return CurrentSave;
+        }
+
+        public void LoadGame(int saveGameLocation)
+        {
+            GameOptions.SaveGameLocation = saveGameLocation;
+            CurrentSave = SaveManager.saveManager.LoadSaveGame(saveGameLocation);
+            ExternalFilesManager.UpdateGameData(GameOptions);
+            
+            _levelSceneManager.LoadScene(CurrentSave.CurrentLevelCode);
+        }
+
+        public void CompleteLevel()
+        {
+            var currentLevelData = CurrentSave.AllLevelData[(int)CurrentSave.CurrentLevelCode];
+            currentLevelData.Completed = true;
+
+            if ((int)currentLevelData.Unlocks < CurrentSave.AllLevelData.Count)
+            {
+                var levelToUnlock = CurrentSave.AllLevelData[(int)currentLevelData.Unlocks];
+                levelToUnlock.Unlocked = true;
+            }
+
+            CurrentSave.CurrentLevelCode = currentLevelData.NextLevel;
+            _saveManager.SaveGame(CurrentSave);
+
+            _levelSceneManager.LoadScene(currentLevelData.NextLevel);
         }
 
         public void SetTimeScale(float timeScale)
