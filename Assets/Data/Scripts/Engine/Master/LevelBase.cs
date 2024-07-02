@@ -1,8 +1,7 @@
 using Keru.Scripts.Engine.FileSystem;
 using Keru.Scripts.Engine.Module;
 using Keru.Scripts.Visuals.Effects;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -26,6 +25,8 @@ namespace Keru.Scripts.Engine.Master
         private JukeBox _jukeBox;
         private Fading _fading;
         private Volume _volume;
+
+        private DateTime _startTime;
 
         private void Awake()
         {
@@ -52,6 +53,8 @@ namespace Keru.Scripts.Engine.Master
             {
                 _jukeBox.ChangeSong(MusicTracks.Ambience, false);
             }
+
+            _startTime = DateTime.Now;
         }
 
 
@@ -97,20 +100,40 @@ namespace Keru.Scripts.Engine.Master
         }
 
         public void CompleteLevel()
-        {
-            var currentLevelData = CurrentSave.AllLevelData[(int)CurrentSave.CurrentLevelCode];
-            currentLevelData.Completed = true;
-
-            if ((int)currentLevelData.Unlocks < CurrentSave.AllLevelData.Count)
+        {           
+            var currentSaveLevelData = CurrentSave.AllLevelData.FirstOrDefault(x => x.Code == CurrentSave.CurrentLevelCode);
+            if(currentSaveLevelData != null)
             {
-                var levelToUnlock = CurrentSave.AllLevelData[(int)currentLevelData.Unlocks];
-                levelToUnlock.Unlocked = true;
+                currentSaveLevelData.Completed = true;
+                currentSaveLevelData.CompletedTime = DateTime.Now - _startTime;
+            }      
+
+            var mainLevelData = MasterLevelData.AllLevels.First(x => x.Code == CurrentSave.CurrentLevelCode);
+
+            foreach (var unlockedLevelCode in mainLevelData.Unlocks)
+            {
+                var levelToUnlock = CurrentSave.AllLevelData.Find(x => x.Code == unlockedLevelCode);
+                if(levelToUnlock == null)
+                {
+                    var levelToAdd = MasterLevelData.AllLevels.First(x => x.Code == unlockedLevelCode);
+                    CurrentSave.AllLevelData.Add(new LevelSaveData()
+                    {
+                        Code = unlockedLevelCode,
+                        Completed = false
+                    });
+                }
             }
 
-            CurrentSave.CurrentLevelCode = currentLevelData.NextLevel;
+            CurrentSave.CurrentLevelCode = mainLevelData.NextLevel;
             _saveManager.SaveGame(CurrentSave);
 
-            _levelSceneManager.LoadScene(currentLevelData.NextLevel);
+            _levelSceneManager.LoadScene(mainLevelData.NextLevel);
+        }
+
+        public void LoadSelectedLevel()
+        {
+            _saveManager.SaveGame(CurrentSave);
+            _levelSceneManager.LoadScene(CurrentSave.CurrentLevelCode);
         }
 
         public void SetTimeScale(float timeScale)

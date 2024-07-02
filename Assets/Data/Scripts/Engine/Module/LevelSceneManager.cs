@@ -1,7 +1,6 @@
 using Keru.Scripts.Engine.Master;
-using Keru.Scripts.Engine.Module;
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,25 +28,18 @@ namespace Keru.Scripts.Engine.Module
 
         public void LoadScene(LevelCode levelCode)
         {
-            StartCoroutine(ChangeScene(levelCode));
-        }
-
-        private IEnumerator ChangeScene(LevelCode levelCode)
-        {
             JukeBox.jukebox.StopMusic(true);
-            
+
             var scene = GetNonPlayableLevelName(levelCode);
-            if(string.IsNullOrEmpty(scene))
+            if (string.IsNullOrEmpty(scene))
             {
-                var levelData = LevelBase.CurrentSave.AllLevelData.Where(x => x.Code == levelCode).FirstOrDefault();
+                var levelData = MasterLevelData.AllLevels.FirstOrDefault(x => x.Code == LevelBase.CurrentSave.CurrentLevelCode);
                 scene = levelData.LevelType == LevelType.Game ? "LoadingScreen" : levelData.SceneName;
             }
-      
-            GraphicsManager.graphicsManager.FadeCamera(1);
+
             LevelBase.levelBase.SetTimeScale(1);
 
-            yield return new WaitForSeconds(2f);
-            SceneManager.LoadScene(scene);
+            StartCoroutine(LoadSceneAsync(scene));
         }
 
         private string GetNonPlayableLevelName(LevelCode levelCode)
@@ -65,6 +57,24 @@ namespace Keru.Scripts.Engine.Module
             }
 
             return "";
+        }
+
+        IEnumerator LoadSceneAsync(string scene)
+        {
+            GraphicsManager.graphicsManager.FadeCamera(1);
+
+            yield return new WaitForSecondsRealtime(2);
+
+            var loadScene = SceneManager.LoadSceneAsync(scene);
+            loadScene.allowSceneActivation = false;
+
+            var startTime = DateTime.Now;          
+            while (loadScene.progress < 0.9f)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            loadScene.allowSceneActivation = true;
         }
     }
 }

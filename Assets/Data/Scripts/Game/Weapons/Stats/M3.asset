@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43e676e98bdc2641bc92361140eb8c7, type: 3}
+  m_Name: M3
+  m_EditorClassIdentifier: 
+  WeaponCode: 4
+  WeaponSlot: 0
+  WeaponType: 1
+  WeaponDataPerLevel:
+  - Damage: 20
+    AmmoType: 1
+    MagazineSize: 8
+    FireRate: 2
+    RecoilPerShot: 0
+    MaxRecoil: 100
+    RecoilRecover: 0
+    Attachments: 1
+    ShootSound: {fileID: 8300000, guid: 236c0e7175e43024ebf19d405ec604c2, type: 3}
+    IsSilenced: 0
+  - Damage: 20
+    AmmoType: 1
+    MagazineSize: 8
+    FireRate: 2
+    RecoilPerShot: 0
+    MaxRecoil: 90
+    RecoilRecover: 0
+    Attachments: 2
+    ShootSound: {fileID: 8300000, guid: 236c0e7175e43024ebf19d405ec604c2, type: 3}
+    IsSilenced: 0
+  - Damage: 30
+    AmmoType: 1
+    MagazineSize: 8
+    FireRate: 2
+    RecoilPerShot: 0
+    MaxRecoil: 80
+    RecoilRecover: 0
+    Attachments: 3
+    ShootSound: {fileID: 8300000, guid: 236c0e7175e43024ebf19d405ec604c2, type: 3}
+    IsSilenced: 0
+  - Damage: 30
+    AmmoType: 1
+    MagazineSize: 8
+    FireRate: 2
+    RecoilPerShot: 0
+    MaxRecoil: 70
+    RecoilRecover: 0
+    Attachments: 4
+    ShootSound: {fileID: 8300000, guid: 236c0e7175e43024ebf19d405ec604c2, type: 3}
+    IsSilenced: 0
+  HeadShotMultiplier: 2
+  Force: 30
+  Projectile: {fileID: 0}
+  MagazineToDrop: {fileID: 0}
+  CasingSpawnDelay: 0.5333334
+  BulletSpawn: 0
+  ReloadSound: {fileID: 8300000, guid: 5a5dbd4bf74e33f44be53fc1abe63678, type: 3}
+  EmptyReloadSound: {fileID: 0}
+  DrawSound: {fileID: 8300000, guid: 4aaa78b2722c0344cb0363a3980adf64, type: 3}
+  HolsterSound: {fileID: 8300000, guid: 8c4ede782a70c6e4b9e515d40d6e6e69, type: 3}
+  BeginReload: {fileID: 8300000, guid: ec06dc574549bf3489863bcb54a19eb9, type: 3}
+  FinishReload: {fileID: 8300000, guid: f26af1e6395c82741bbc18ad9c76286c, type: 3}

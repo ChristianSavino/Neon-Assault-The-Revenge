@@ -32,8 +32,8 @@ namespace Keru.Scripts.Game.Menus.SubMenus
 
                 if (saveFile != null)
                 {
-                    var chapter = saveFile.AllLevelData.Where(x => x.Code == saveFile.CurrentLevelCode).FirstOrDefault();
-                    _saveSlots[i].GetComponentInChildren<Text>().text = $"{saveFile.SavePosition+1} - {(chapter != null ? chapter.LevelName.ToUpper() : "Seleccion de mision".ToUpper())} - {saveFile.LastSaveDate.ToString("dd/MM/yyyy HH:mm:ss")}";
+                    var chapter = MasterLevelData.AllLevels.FirstOrDefault(x => x.Code == saveFile.CurrentLevelCode);
+                    _saveSlots[i].GetComponentInChildren<Text>().text = $"{saveFile.SavePosition+1} - {(chapter != null ? chapter.LevelName.ToUpper() : "Selección de misión".ToUpper())} - {saveFile.LastSaveDate.ToString("dd/MM/yyyy HH:mm:ss")}";
                 }
             }
         }

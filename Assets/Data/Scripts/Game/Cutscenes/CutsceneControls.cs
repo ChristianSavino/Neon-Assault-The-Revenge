@@ -39,6 +39,7 @@ namespace Keru.Scripts.Game.Cutscene
         private void Start()
         {
             _skipButton.gameObject.SetActive(false);
+            StartCoroutine(ToggleSkipButton());
 
             _changesceneEffectAnimator = _changesceneEffect.GetComponent<Animator>();
             _titleScreenHandler = _titleScreen.GetComponent<CutsceneTitleScreen>();
@@ -51,6 +52,11 @@ namespace Keru.Scripts.Game.Cutscene
             _cameraData = Camera.main.GetComponent<UniversalAdditionalCameraData>();
 
             AdvanceCutscene();
+        }
+
+        public void SkipCutscene()
+        {
+            CompleteLevel();
         }
 
         public void AdvanceCutscene()
@@ -108,7 +114,7 @@ namespace Keru.Scripts.Game.Cutscene
             }
             else
             {
-                LevelBase.levelBase.CompleteLevel();
+                CompleteLevel();                
             }
         }
 
@@ -163,6 +169,17 @@ namespace Keru.Scripts.Game.Cutscene
             yield return new WaitForSeconds(timeToWait);
 
             _continueButton.gameObject.SetActive(true);
+        }
+
+        private IEnumerator ToggleSkipButton()
+        {
+            yield return new WaitForSeconds(5);
+            _skipButton.gameObject.SetActive(true);
+        }
+
+        private void CompleteLevel()
+        {
+            LevelBase.levelBase.CompleteLevel();
         }
     }
 }

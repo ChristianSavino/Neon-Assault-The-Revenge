@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43e676e98bdc2641bc92361140eb8c7, type: 3}
+  m_Name: GL40
+  m_EditorClassIdentifier: 
+  WeaponCode: 12
+  WeaponSlot: 1
+  WeaponType: 0
+  WeaponDataPerLevel:
+  - Damage: 500
+    AmmoType: 7
+    MagazineSize: 1
+    FireRate: 1
+    RecoilPerShot: 10
+    MaxRecoil: 10
+    RecoilRecover: 10
+    Attachments: 1
+    ShootSound: {fileID: 8300000, guid: 42f4de63dc9ec8c4eab363058f3affa2, type: 3}
+    IsSilenced: 0
+  - Damage: 600
+    AmmoType: 7
+    MagazineSize: 1
+    FireRate: 1
+    RecoilPerShot: 10
+    MaxRecoil: 10
+    RecoilRecover: 10
+    Attachments: 1
+    ShootSound: {fileID: 8300000, guid: 42f4de63dc9ec8c4eab363058f3affa2, type: 3}
+    IsSilenced: 0
+  - Damage: 700
+    AmmoType: 7
+    MagazineSize: 1
+    FireRate: 1
+    RecoilPerShot: 10
+    MaxRecoil: 10
+    RecoilRecover: 10
+    Attachments: 1
+    ShootSound: {fileID: 8300000, guid: 42f4de63dc9ec8c4eab363058f3affa2, type: 3}
+    IsSilenced: 0
+  - Damage: 800
+    AmmoType: 7
+    MagazineSize: 1
+    FireRate: 1
+    RecoilPerShot: 10
+    MaxRecoil: 10
+    RecoilRecover: 10
+    Attachments: 1
+    ShootSound: {fileID: 8300000, guid: 42f4de63dc9ec8c4eab363058f3affa2, type: 3}
+    IsSilenced: 0
+  HeadShotMultiplier: 2
+  Force: 0
+  Projectile: {fileID: 0}
+  MagazineToDrop: {fileID: 919132149155446097, guid: 8d124b466886fea499cf933ecb2ed004,
+    type: 3}
+  CasingSpawnDelay: 0
+  BulletSpawn: 0
+  ReloadSound: {fileID: 0}
+  EmptyReloadSound: {fileID: 8300000, guid: 86d9485f160a09c47b54f543262d3037, type: 3}
+  DrawSound: {fileID: 8300000, guid: 4aaa78b2722c0344cb0363a3980adf64, type: 3}
+  HolsterSound: {fileID: 8300000, guid: 8c4ede782a70c6e4b9e515d40d6e6e69, type: 3}
+  BeginReload: {fileID: 0}
+  FinishReload: {fileID: 0}

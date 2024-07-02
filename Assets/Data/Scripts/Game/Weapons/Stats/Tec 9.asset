@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43e676e98bdc2641bc92361140eb8c7, type: 3}
+  m_Name: Tec 9
+  m_EditorClassIdentifier: 
+  WeaponCode: 3
+  WeaponSlot: 1
+  WeaponType: 2
+  WeaponDataPerLevel:
+  - Damage: 20
+    AmmoType: 0
+    MagazineSize: 20
+    FireRate: 16.66
+    RecoilPerShot: 15
+    MaxRecoil: 80
+    RecoilRecover: 40
+    Attachments: 1
+    ShootSound: {fileID: 8300000, guid: 4e73f78ce766bc74d80b2d36721c56d3, type: 3}
+    IsSilenced: 0
+  - Damage: 20
+    AmmoType: 0
+    MagazineSize: 20
+    FireRate: 16.66
+    RecoilPerShot: 10
+    MaxRecoil: 70
+    RecoilRecover: 35
+    Attachments: 2
+    ShootSound: {fileID: 8300000, guid: 4e73f78ce766bc74d80b2d36721c56d3, type: 3}
+    IsSilenced: 0
+  - Damage: 25
+    AmmoType: 0
+    MagazineSize: 32
+    FireRate: 16.66
+    RecoilPerShot: 10
+    MaxRecoil: 60
+    RecoilRecover: 30
+    Attachments: 3
+    ShootSound: {fileID: 8300000, guid: 4e73f78ce766bc74d80b2d36721c56d3, type: 3}
+    IsSilenced: 0
+  - Damage: 25
+    AmmoType: 0
+    MagazineSize: 32
+    FireRate: 16.66
+    RecoilPerShot: 10
+    MaxRecoil: 50
+    RecoilRecover: 25
+    Attachments: 3,4
+    ShootSound: {fileID: 8300000, guid: c1bd91cf7c20534478c9b9c5d69d1732, type: 3}
+    IsSilenced: 1
+  HeadShotMultiplier: 2
+  Force: 20
+  Projectile: {fileID: 0}
+  MagazineToDrop: {fileID: 100000, guid: 95871749829701646a14f51bf0cba2bc, type: 3}
+  CasingSpawnDelay: 0
+  BulletSpawn: 0
+  ReloadSound: {fileID: 8300000, guid: 0152069dde3b1e945908369da0b5631c, type: 3}
+  EmptyReloadSound: {fileID: 8300000, guid: b83b20f3220e12d4e9364a10874f630a, type: 3}
+  DrawSound: {fileID: 8300000, guid: 4aaa78b2722c0344cb0363a3980adf64, type: 3}
+  HolsterSound: {fileID: 8300000, guid: 8c4ede782a70c6e4b9e515d40d6e6e69, type: 3}
+  BeginReload: {fileID: 0}
+  FinishReload: {fileID: 0}

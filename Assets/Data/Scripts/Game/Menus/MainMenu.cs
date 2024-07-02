@@ -1,4 +1,5 @@
 using Keru.Scripts.Engine.FileSystem;
+using Keru.Scripts.Engine.Master;
 using Keru.Scripts.Engine.Module;
 using System.Collections;
 using System.Linq;
@@ -63,6 +64,7 @@ namespace Keru.Scripts.Game.Menus
 
         private IEnumerator ExitApplication()
         {
+            JukeBox.jukebox.StopMusic(true);
             GraphicsManager.graphicsManager.FadeCamera(1);
             yield return new WaitForSeconds(2);
 

@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43e676e98bdc2641bc92361140eb8c7, type: 3}
+  m_Name: Beretta M9
+  m_EditorClassIdentifier: 
+  WeaponCode: 1
+  WeaponSlot: 1
+  WeaponType: 0
+  WeaponDataPerLevel:
+  - Damage: 15
+    AmmoType: 0
+    MagazineSize: 15
+    FireRate: 10
+    RecoilPerShot: 5
+    MaxRecoil: 50
+    RecoilRecover: 25
+    Attachments: 4,1
+    ShootSound: {fileID: 8300000, guid: c1bd91cf7c20534478c9b9c5d69d1732, type: 3}
+    IsSilenced: 1
+  - Damage: 15
+    AmmoType: 0
+    MagazineSize: 19
+    FireRate: 10
+    RecoilPerShot: 5
+    MaxRecoil: 40
+    RecoilRecover: 20
+    Attachments: 4,2
+    ShootSound: {fileID: 8300000, guid: c1bd91cf7c20534478c9b9c5d69d1732, type: 3}
+    IsSilenced: 1
+  - Damage: 15
+    AmmoType: 0
+    MagazineSize: 19
+    FireRate: 10
+    RecoilPerShot: 5
+    MaxRecoil: 50
+    RecoilRecover: 25
+    Attachments: 4,2
+    ShootSound: {fileID: 8300000, guid: c1bd91cf7c20534478c9b9c5d69d1732, type: 3}
+    IsSilenced: 1
+  - Damage: 20
+    AmmoType: 0
+    MagazineSize: 19
+    FireRate: 10
+    RecoilPerShot: 4
+    MaxRecoil: 40
+    RecoilRecover: 25
+    Attachments: 4,3
+    ShootSound: {fileID: 8300000, guid: c1bd91cf7c20534478c9b9c5d69d1732, type: 3}
+    IsSilenced: 1
+  - Damage: 20
+    AmmoType: 0
+    MagazineSize: 19
+    FireRate: 10
+    RecoilPerShot: 3
+    MaxRecoil: 30
+    RecoilRecover: 15
+    Attachments: 4,3
+    ShootSound: {fileID: 8300000, guid: c1bd91cf7c20534478c9b9c5d69d1732, type: 3}
+    IsSilenced: 1
+  HeadShotMultiplier: 2
+  Force: 10
+  Projectile: {fileID: 0}
+  MagazineToDrop: {fileID: 100000, guid: b2e25e7361a93b843b6bb92b0c155374, type: 3}
+  CasingSpawnDelay: 0
+  BulletSpawn: 0
+  ReloadSound: {fileID: 8300000, guid: 125edb9e36f963249bc792cca38492b1, type: 3}
+  EmptyReloadSound: {fileID: 8300000, guid: c565065df3907944b8b58f0d27066ba8, type: 3}
+  DrawSound: {fileID: 8300000, guid: 4aaa78b2722c0344cb0363a3980adf64, type: 3}
+  HolsterSound: {fileID: 8300000, guid: 8c4ede782a70c6e4b9e515d40d6e6e69, type: 3}
+  BeginReload: {fileID: 0}
+  FinishReload: {fileID: 0}
