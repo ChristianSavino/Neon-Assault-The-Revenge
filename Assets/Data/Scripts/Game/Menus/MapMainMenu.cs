@@ -117,7 +117,7 @@ namespace Keru.Scripts.Game.Menus
                     new List<string>()
                     {
                         "Capítulo 1 - Club Nocturno",
-                        "La nota indica que debemos\nir a la zona indicada,\nel Club Babylon\n\nnuestro objetivo es encontrar\nal contacto para obtener información\n sobre que nos pasó"
+                        "La nota indica que debemos\nir a la zona indicada,\nun club nocturno\n\nnuestro objetivo es encontrar\nal contacto para obtener información\n sobre que nos pasó"
                     }
                 },
                 {

@@ -3478,7 +3478,7 @@ PrefabInstance:
     - target: {fileID: 5600111799429839980, guid: 6b7edde5d4e28c44e98bf01cfa9ebe50,
         type: 3}
       propertyPath: m_Name
-      value: Coni
+      value: Angel
       objectReference: {fileID: 0}
     - target: {fileID: 5600111799429839980, guid: 6b7edde5d4e28c44e98bf01cfa9ebe50,
         type: 3}
@@ -7164,22 +7164,22 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[0]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[1]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[2]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[3]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -8742,22 +8742,22 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[0]
-      value: Coni
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[1]
-      value: Bedu
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[2]
-      value: Mauro
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[3]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -10194,32 +10194,32 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[0]
-      value: Coni
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[1]
-      value: Mauro
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[2]
-      value: Bedu
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[3]
-      value: Coni
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[4]
-      value: Mauro
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[5]
-      value: Bedu
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9180571523589652182, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -12072,17 +12072,17 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[0]
-      value: Coni
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[1]
-      value: Bedu
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[2]
-      value: Mauro
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -12711,27 +12711,27 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[0]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[1]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[2]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[3]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[4]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -13096,7 +13096,7 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[0]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -16227,27 +16227,27 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[0]
-      value: Bedu
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[1]
-      value: Mauro
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[2]
-      value: Bedu
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[3]
-      value: Mauro
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[4]
-      value: Bedu
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9180571523589652182, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
@@ -23224,27 +23224,27 @@ PrefabInstance:
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[0]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[1]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[2]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[3]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3399318376323773846, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}
       propertyPath: _characterString.Array.data[4]
-      value: Keru
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9180571523589652182, guid: 81c80709b26431347a2e3fbf6fbea1b9,
         type: 3}

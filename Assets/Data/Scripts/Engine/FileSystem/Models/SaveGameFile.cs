@@ -98,7 +98,7 @@ public class SaveGameFile
             },
             new CharacterData()
             {
-                Character = Character.CONI,
+                Character = Character.ANGEL,
                 Level = 1,
                 BaseHealth = 100,
                 HealthPerLevel = 20,

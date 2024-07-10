@@ -4,8 +4,17 @@ namespace Keru.Scripts.Game
     {
         KERU = 0,
         BEDU = 1,
-        CONI = 2,
+        ANGEL = 2,
         MAURO = 3
+    }
+
+    public enum CharacterCutscene
+    {
+        KERU = 0,
+        BEDU = 1,
+        ANGEL = 2,
+        MAURO = 3,
+        PATOVICA = 4
     }
 
     public enum AbilityType

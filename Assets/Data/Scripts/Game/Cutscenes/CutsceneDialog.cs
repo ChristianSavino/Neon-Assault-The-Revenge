@@ -12,7 +12,7 @@ namespace Keru.Scripts.Game.Cutscene
         [SerializeField] private Text _characterDialog;
 
         [Header("Dialog")]
-        [SerializeField] private List<string> _characterString;
+        [SerializeField] private List<CharacterCutscene> _characterString;
         [SerializeField] private List<string> _dialogString;
 
         private int _currentDialog;
@@ -34,7 +34,7 @@ namespace Keru.Scripts.Game.Cutscene
         private IEnumerator ChangeDialog(float timeToAddLetter)
         {          
             var dialog = _dialogString[_currentDialog];
-            _characterBox.text = _characterString[_currentDialog].ToUpper();
+            _characterBox.text = _characterString[_currentDialog].ToString().ToUpper();
 
             var dialogAux = "";
             while (!dialogAux.Equals(dialog))
