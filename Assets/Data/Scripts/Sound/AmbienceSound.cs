@@ -1,7 +1,5 @@
 using Keru.Scripts.Engine;
 using Keru.Scripts.Engine.Module;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AmbienceSound : MonoBehaviour

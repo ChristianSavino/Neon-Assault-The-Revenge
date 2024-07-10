@@ -15,16 +15,20 @@ namespace Keru.Scripts.Game.Menus
         [SerializeField] private Text _levelName;
         [SerializeField] private Text _levelDescription;
         [SerializeField] private CharacterSelectionMenu _characterSelection;
+        [SerializeField] private Text _diffText;
         
         private SaveGameFile _savedGame;
         private string _selectedName;
         private Dictionary<string, List<string>> _levelData;
+        private int _difficulty;
 
         private void Start()
         {
             _savedGame = LevelBase.CurrentSave;
+            _difficulty = (int)_savedGame.Difficulty;
             Cancel();
             CreateLevelData();
+            LoadCorrectDiff();
         }
 
         private void ToggleOffAllButtons()
@@ -59,6 +63,38 @@ namespace Keru.Scripts.Game.Menus
 
             ToggleOffAllButtons();
             ToggleSelectedLevelData(true);
+        }
+
+        public void ChangeDifficulty()
+        {
+            _difficulty++;
+            if(_difficulty > 3)
+            {
+                _difficulty = 0;
+            }
+            var difficulty = (Difficulty)_difficulty;
+
+            _savedGame.Difficulty = difficulty;
+            LoadCorrectDiff();
+        }
+
+        private void LoadCorrectDiff()
+        {
+            switch (_savedGame.Difficulty)
+            {
+                case Difficulty.Easy:
+                    _diffText.text = "FÁCIL";
+                    break;
+                case Difficulty.Normal:
+                    _diffText.text = "NORMAL";
+                    break;
+                case Difficulty.Hard:
+                    _diffText.text = "DIFÍCIL";
+                    break;
+                case Difficulty.KeruMustDie:
+                    _diffText.text = "KERU DEBE MORIR";
+                    break;
+            }
         }
 
         public void Continue()

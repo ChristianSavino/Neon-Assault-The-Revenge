@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class SaveGameFile
 {
     public int SavePosition { get; set; }
+    public Difficulty Difficulty { get; set; }
     public int Checkpoint { get; set; }
     public LevelCode CurrentLevelCode { get; set; }
     public CurrentCharacterData SelectedCharacter { get; set; }
@@ -21,6 +22,7 @@ public class SaveGameFile
     {
         SavePosition = savePosition;
         Checkpoint = 0;
+        Difficulty = Difficulty.Normal;
         CurrentLevelCode = LevelCode.Level0;
         CreateLevelData();
         CreateCharacterData();
