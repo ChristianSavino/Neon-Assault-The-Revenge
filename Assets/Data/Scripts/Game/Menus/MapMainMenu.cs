@@ -19,7 +19,6 @@ namespace Keru.Scripts.Game.Menus
         
         private SaveGameFile _savedGame;
         private string _selectedName;
-        private Dictionary<string, List<string>> _levelData;
         private int _difficulty;
 
         private void Start()
@@ -27,7 +26,6 @@ namespace Keru.Scripts.Game.Menus
             _savedGame = LevelBase.CurrentSave;
             _difficulty = (int)_savedGame.Difficulty;
             Cancel();
-            CreateLevelData();
             LoadCorrectDiff();
         }
 
@@ -56,10 +54,10 @@ namespace Keru.Scripts.Game.Menus
         public void LevelPick(GameObject button)
         {
             _selectedName = button.gameObject.name;
-            var levelData = _levelData[_selectedName];
+            var levelData = MasterLevelData.AllLevels.First(x => x.SceneName == _selectedName);
 
-            _levelName.text = levelData[0].ToUpper();
-            _levelDescription.text = levelData[1].ToUpper();
+            _levelName.text = levelData.LevelName.ToUpper();
+            _levelDescription.text = levelData.ShortDescription.ToUpper();
 
             ToggleOffAllButtons();
             ToggleSelectedLevelData(true);
@@ -134,37 +132,6 @@ namespace Keru.Scripts.Game.Menus
         private void ToggleSelectedLevelData(bool toggle)
         {
             _selectedLevelData.SetActive(toggle);
-        }
-
-        private void CreateLevelData()
-        {
-            _levelData = new Dictionary<string, List<string>>()
-            {
-                {
-                    "Prologue", 
-                    new List<string>()
-                    {
-                        "Prólogo - 1998",
-                        "El Comienzo"
-                    } 
-                },
-                {
-                    "Level1",
-                    new List<string>()
-                    {
-                        "Capítulo 1 - Club Nocturno",
-                        "La nota indica que debemos\nir a la zona indicada,\nun club nocturno\n\nnuestro objetivo es encontrar\nal contacto para obtener información\n sobre que nos pasó"
-                    }
-                },
-                {
-                    "Special1",
-                    new List<string>()
-                    {
-                        "Especial 1 - Pasado Al Futuro",
-                        "El punto apareció misteriosamente,\nprobablemente sea una trampa\npero vale la pena investigar"
-                    }
-                }
-            };
         }
     }
 }

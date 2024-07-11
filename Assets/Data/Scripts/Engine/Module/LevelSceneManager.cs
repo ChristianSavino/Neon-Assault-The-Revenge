@@ -1,5 +1,4 @@
 using Keru.Scripts.Engine.Master;
-using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -10,6 +9,7 @@ namespace Keru.Scripts.Engine.Module
     public class LevelSceneManager : MonoBehaviour
     {
         public static LevelSceneManager levelSceneManager;
+        private AsyncOperation _levelLoadOperation;
 
         public void SetUp()
         {
@@ -42,6 +42,12 @@ namespace Keru.Scripts.Engine.Module
             StartCoroutine(LoadSceneAsync(scene));
         }
 
+        public void LoadByLoadScreen(LevelCode levelCode)
+        {
+            var levelData = MasterLevelData.AllLevels.FirstOrDefault(x => x.Code == levelCode);
+            StartCoroutine(LoadingByLoadingScreen(levelData.SceneName));
+        }
+
         private string GetNonPlayableLevelName(LevelCode levelCode)
         {
             switch (levelCode)
@@ -67,14 +73,39 @@ namespace Keru.Scripts.Engine.Module
 
             var loadScene = SceneManager.LoadSceneAsync(scene);
             loadScene.allowSceneActivation = false;
-
-            var startTime = DateTime.Now;          
+         
             while (loadScene.progress < 0.9f)
             {
                 yield return new WaitForEndOfFrame();
             }
 
             loadScene.allowSceneActivation = true;
+        }
+
+        IEnumerator LoadingByLoadingScreen(string scene)
+        {
+            _levelLoadOperation = SceneManager.LoadSceneAsync(scene);
+            _levelLoadOperation.allowSceneActivation = false;
+
+            while (_levelLoadOperation.progress < 0.9f)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        public bool HasSceneLoaded()
+        {
+            if(_levelLoadOperation != null)
+            {
+                return _levelLoadOperation.progress >= 0.9f;
+            }
+
+            return false;
+        }
+
+        public void ToggleSceneLoad()
+        {
+            _levelLoadOperation.allowSceneActivation = true;
         }
     }
 }
