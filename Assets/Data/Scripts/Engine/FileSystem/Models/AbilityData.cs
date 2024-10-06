@@ -4,6 +4,7 @@ using Keru.Scripts.Game;
 public class AbilityData
 {
     public int Code { get; set; }
+    public AbilitySlot AbilitySlot { get; set; }
     public AbilityType AbilityType { get; set; }
     public string PowerPerLevel { get; set; }
     public string RangePerLevel { get; set; }

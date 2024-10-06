@@ -16,7 +16,7 @@ namespace Keru.Scripts.Game.Menus.SubMenus
 
         [Header("Controls")]
         [SerializeField] private Text _up;
-        [SerializeField] private Text _left, _right, _back, _dash, _jump, _duck, _shoot, _reload, _flashlight, _special, _second, _pause, _use, _grenade, _knife, _autoReload;
+        [SerializeField] private Text _left, _right, _back, _dash, _jump, _duck, _shoot, _reload, _special, _second, _pause, _use, _grenade, _knife, _autoReload;
 
         private void OnEnable()
         {
@@ -31,7 +31,6 @@ namespace Keru.Scripts.Game.Menus.SubMenus
             _duck.text = _controlMapping.Keys["Duck"].ToString().ToUpper();
             _shoot.text = _controlMapping.Keys["Shoot"].ToString().ToUpper();
             _reload.text = _controlMapping.Keys["Reload"].ToString().ToUpper();
-            _flashlight.text = _controlMapping.Keys["Flashlight"].ToString().ToUpper();
             _special.text = _controlMapping.Keys["Special"].ToString().ToUpper();
             _second.text = _controlMapping.Keys["Second"].ToString().ToUpper();
             _pause.text = _controlMapping.Keys["Pause"].ToString().ToUpper();

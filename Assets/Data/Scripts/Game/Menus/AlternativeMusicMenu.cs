@@ -11,7 +11,7 @@ namespace Keru.Scripts.Game.Menus
 {
     public class AlternativeMusicMenu : MonoBehaviour
     {
-        [SerializeField] private WeaponSelectionMenu _weaponSelectionMenu;
+        //[SerializeField] private WeaponSelectionMenu _weaponSelectionMenu;
         [SerializeField] private List<MusicData> _originalSongs;
         [SerializeField] private List<MusicData> _alternateSongs;
         [SerializeField] Text _levelNameText;
@@ -39,7 +39,7 @@ namespace Keru.Scripts.Game.Menus
 
         public void GoBack()
         {
-            _weaponSelectionMenu.gameObject.SetActive(true);
+            //_weaponSelectionMenu.gameObject.SetActive(true);
             gameObject.SetActive(false);
         }
 

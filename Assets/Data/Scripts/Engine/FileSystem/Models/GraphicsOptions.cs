@@ -23,6 +23,8 @@ public class GraphicsOptions
     //1-none / x2 / x4 / x8
     public MSAAQuality MsaaSampleCount { get; set; }
 
+    public GraphicOptionsEnum ScreenSpaceReflections { get; set; }
+
     //0.75 min / 2 max
     public float RenderScale { get; set; }
 
@@ -44,7 +46,7 @@ public class GraphicsOptions
     
     public bool Dithering { get; set; }
     
-    public bool DepthOfFieldEnabled { get; set; }
+    public bool VolumetricLightning { get; set; }
 
     public bool AmbientOclussion { get; set; }
 
@@ -56,12 +58,13 @@ public class GraphicsOptions
         AaMode = AAMode.SMAA;
         AaQuality = GraphicOptionsEnum.Low;
         MsaaSampleCount = MSAAQuality.None;
+        ScreenSpaceReflections = GraphicOptionsEnum.Ultra;
         RenderScale = 1f;
         BloomEnabled = true;
         BloomIntensity = 1f;
         MotionblurEnabled = false;
         MotionblurIntensity = 0.5f;
-        DepthOfFieldEnabled = false;
+        VolumetricLightning = false;
         AmbientOclussion = true;
     }
 }

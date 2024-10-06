@@ -246,7 +246,7 @@ namespace LimWorks.Rendering.URP.ScreenSpaceReflections
         }
 
         [System.Serializable]
-        internal class SSRSettings
+        public class SSRSettings
         {
             public RaytraceModes tracingMode = RaytraceModes.LinearTracing;
             public float stepStrideLength = .03f;

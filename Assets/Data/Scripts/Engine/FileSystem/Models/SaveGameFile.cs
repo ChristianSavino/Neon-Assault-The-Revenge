@@ -3,7 +3,7 @@ using Keru.Scripts.Game;
 using System;
 using System.Collections.Generic;
 
-[System.Serializable]
+[Serializable]
 public class SaveGameFile
 {
     public int SavePosition { get; set; }
@@ -14,7 +14,7 @@ public class SaveGameFile
     public string CoopCharacterData { get; set; }
     public DateTime LastSaveDate { get; set; }
     public List<LevelSaveData> AllLevelData { get; set; }
-    public List<CharacterData> Characters { get; set; }
+    public List<SkillData> UnlockedSkills { get; set; }
     public List<WeaponData> Weapons { get; set; }
     public bool AlternateMusic { get; set; }
 
@@ -25,11 +25,10 @@ public class SaveGameFile
         Difficulty = Difficulty.Normal;
         CurrentLevelCode = LevelCode.Level0;
         CreateLevelData();
-        CreateCharacterData();
+        CreateSkillData();
         CreateWeaponData();
         SelectedCharacter = new CurrentCharacterData()
         {
-            Character = Character.KERU,
             CurrentHealth = 100,
             MaxHealth = 100,
             Primary = Weapons[4],
@@ -38,122 +37,22 @@ public class SaveGameFile
         LastSaveDate = DateTime.Now;       
     }
 
-    private void CreateCharacterData()
+    private void CreateSkillData()
     {
-        Characters = new List<CharacterData>()
+        UnlockedSkills = new List<SkillData>()
         {
-            new CharacterData()
+            new SkillData()
             {
-                Character = Character.KERU,
-                Level = 1,
-                BaseHealth = 100,
-                HealthPerLevel = 25,
-                Secondary = new AbilityData()
-                {
-                    Code = 0,
-                    AbilityType = AbilityType.CROWDCONTROL,
-                    PowerPerLevel = "0/0/0/0",
-                    RangePerLevel = "0/0/0/0",
-                    DurationPerLevel = "5/8/9/10",
-                    CoolDownPerLevel = "60/40/30/20"
-                },
-                Primary = new AbilityData()
-                {
-                    Code = 1,
-                    AbilityType = AbilityType.DAMAGE,
-                    PowerPerLevel = "1000/1500/2000/2500",
-                    RangePerLevel = "20/30/40/50",
-                    DurationPerLevel = "0/0/0/0",
-                    CoolDownPerLevel = "180/150/120/90"
-                },
-                Exp = 0,
-                ExpAmmountPerLevel = 2,
-                ExpToLevelUp = 2
+                Code = AbilityCodes.BULLETTIME,
+                CurrentUses = 0,
+                Level = 1
             },
-            new CharacterData()
+            new SkillData()
             {
-                Character = Character.BEDU,
-                Level = 1,
-                BaseHealth = 100,
-                HealthPerLevel = 20,
-                Secondary = new AbilityData()
-                {
-                    Code = 0,
-                    AbilityType = AbilityType.SUPPORT,
-                    PowerPerLevel = "15/20/25/30",
-                    RangePerLevel = "15/20/30/40",
-                    DurationPerLevel = "7/8/9/10",
-                    CoolDownPerLevel = "90/80/70/60"
-                },
-                Primary = new AbilityData()
-                {
-                    Code = 1,
-                    AbilityType = AbilityType.CROWDCONTROL,
-                    PowerPerLevel = "0/0/0/0",
-                    RangePerLevel = "20/30/40/50",
-                    DurationPerLevel = "9/10/11/12",
-                    CoolDownPerLevel = "180/150/120/90"
-                },
-                Exp = 0,
-                ExpAmmountPerLevel = 2,
-                ExpToLevelUp = 2
-            },
-            new CharacterData()
-            {
-                Character = Character.ANGEL,
-                Level = 1,
-                BaseHealth = 100,
-                HealthPerLevel = 20,
-                Secondary = new AbilityData()
-                {
-                    Code = 0,
-                    AbilityType = AbilityType.CROWDCONTROL,
-                    PowerPerLevel = "10/15/20/25",
-                    RangePerLevel = "8/10/20/30",
-                    DurationPerLevel = "3/4/5/6",
-                    CoolDownPerLevel = "80/70/60/50"
-                },
-                Primary = new AbilityData()
-                {
-                    Code = 1,
-                    AbilityType = AbilityType.DAMAGE,
-                    PowerPerLevel = "250/500/750/1000",
-                    RangePerLevel = "40/50/60/70",
-                    DurationPerLevel = "3/4/5/6",
-                    CoolDownPerLevel = "180/150/120/90"
-                },
-                Exp = 0,
-                ExpAmmountPerLevel = 2,
-                ExpToLevelUp = 2
-            },
-            new CharacterData()
-            {
-                Character = Character.MAURO,
-                Level = 1,
-                BaseHealth = 100,
-                HealthPerLevel = 20,
-                Secondary = new AbilityData()
-                {
-                    Code = 0,
-                    AbilityType = AbilityType.SUPPORT,
-                    PowerPerLevel = "5/10/15/20",
-                    RangePerLevel = "8/10/20/30",
-                    DurationPerLevel = "3/4/5/6",
-                    CoolDownPerLevel = "120/100/80/60"
-                },
-                Primary = new AbilityData()
-                {
-                    Code = 1,
-                    AbilityType = AbilityType.DAMAGE,
-                    PowerPerLevel = "500/600/700/800",
-                    RangePerLevel = "3/4/5/6",
-                    DurationPerLevel = "0/0/0/0",
-                    CoolDownPerLevel = "250/200/150/100"
-                },
-                Exp = 0,
-                ExpAmmountPerLevel = 2,
-                ExpToLevelUp = 2
-            },
+                Code = AbilityCodes.JUDGEMENTCUT,
+                CurrentUses = 0,
+                Level = 1
+            }
         };
     }
 

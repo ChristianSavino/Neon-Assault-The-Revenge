@@ -14,7 +14,7 @@ namespace Keru.Scripts.Game.Menus
         [SerializeField] private GameObject _selectedLevelData;
         [SerializeField] private Text _levelName;
         [SerializeField] private Text _levelDescription;
-        [SerializeField] private CharacterSelectionMenu _characterSelection;
+        //[SerializeField] private CharacterSelectionMenu _characterSelection;
         [SerializeField] private Text _diffText;
         
         private SaveGameFile _savedGame;
@@ -109,8 +109,8 @@ namespace Keru.Scripts.Game.Menus
 
             if(!currentLevel.HasPredefinedCharacters)
             {
-                _characterSelection.SetLevelName(_levelName.text);
-                _characterSelection.gameObject.SetActive(true);
+                //_characterSelection.SetLevelName(_levelName.text);
+                //_characterSelection.gameObject.SetActive(true);
                 ToggleSelectedLevelData(false);
 
                 ToggleOnButtons();

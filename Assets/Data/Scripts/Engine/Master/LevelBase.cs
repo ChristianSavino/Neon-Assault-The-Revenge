@@ -17,6 +17,7 @@ namespace Keru.Scripts.Engine.Master
         [SerializeField] private bool _isMenu;
         [SerializeField] private bool _usesMusic = true;
         [SerializeField] private float _localTimeScale = 1f;
+        [SerializeField] private bool _canUseVolumetricLights;
 
         private AudioManager _audioManager;
         private GraphicsManager _graphicsManager;
@@ -69,7 +70,7 @@ namespace Keru.Scripts.Engine.Master
             _audioManager.SetUp();
 
             _graphicsManager = managerGameObject.GetComponent<GraphicsManager>();
-            _graphicsManager.SetUp(_volume, _fading, _isMenu);
+            _graphicsManager.SetUp(_volume, _fading, _isMenu, _canUseVolumetricLights);
 
             _levelSceneManager = managerGameObject.GetComponent<LevelSceneManager>();
             _levelSceneManager.SetUp();

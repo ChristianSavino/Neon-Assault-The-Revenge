@@ -17,11 +17,23 @@ namespace Keru.Scripts.Game
         PATOVICA = 4
     }
 
+    public enum AbilitySlot
+    {
+        ULTIMATE = 0,
+        SECONDARY = 1
+    }
+
     public enum AbilityType
     {
         DAMAGE = 0,
         CROWDCONTROL = 1,
         SUPPORT = 2
+    }
+
+    public enum AbilityCodes
+    {
+        BULLETTIME = 0,
+        JUDGEMENTCUT = 1
     }
 
     public enum WeaponCodes
@@ -64,7 +76,7 @@ namespace Keru.Scripts.Game
 
     public enum WeaponSlot
     {
-        Primary = 0,
-        Secondary = 1
+        PRIMARY = 0,
+        SECONDARY = 1
     }
 }

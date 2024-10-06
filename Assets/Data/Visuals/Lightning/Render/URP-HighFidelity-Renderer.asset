@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   Settings:
-    tracingMode: 0
+    tracingMode: 1
     stepStrideLength: 0.03
     maxSteps: 128
     downSample: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4268db87361095c4ca643764150c94d6, type: 3}
   m_Name: DepthPyramid
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   depthPyramidShader: {fileID: 7200000, guid: b2ead2c2a0fb2bc4d8ff715cbf4b0403, type: 3}
 --- !u!114 &-1878332245247344467
 MonoBehaviour:
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6589f404cc28f584494b80a94d9e1e36, type: 3}
   m_Name: VolumetricLightScattering
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   DiffuseRadius: 30
   LightQuality: 1800
   HorizontalStep: 0.1

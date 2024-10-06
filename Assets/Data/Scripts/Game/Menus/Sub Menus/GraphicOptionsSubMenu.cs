@@ -35,6 +35,10 @@ namespace Keru.Scripts.Game.Menus.SubMenus
         [SerializeField] private Slider _msaaQuantity;
         [SerializeField] private Text _msaaAmmount;
 
+        [Header("Screen Space Reflections")]
+        [SerializeField] private Slider _ssrQuantity;
+        [SerializeField] private Text _ssrAmount;
+
         [Header("Render Scale")]
         [SerializeField] private Slider _renderQuantity;
         [SerializeField] private Text _renderAmmount;
@@ -69,9 +73,9 @@ namespace Keru.Scripts.Game.Menus.SubMenus
         [SerializeField] private Button _ditheringButton;
         [SerializeField] private Text _ditheringText;
 
-        [Header("Depth Of Field")]
-        [SerializeField] private Button _dofButton;
-        [SerializeField] private Text _dofText;
+        [Header("Volumetric Lights")]
+        [SerializeField] private Button _volButton;
+        [SerializeField] private Text _volText;
 
         [Header("Ambient Occlusion")]
         [SerializeField] private Button _aoButton;
@@ -85,6 +89,7 @@ namespace Keru.Scripts.Game.Menus.SubMenus
 
             _textureQuantity.value = (int)_graphicsOptions.TextureQuality;
             _shadowQuantity.value = (int)_graphicsOptions.ShadowQuality;
+            _ssrQuantity.value = (int)_graphicsOptions.ScreenSpaceReflections;
             _fovQuantity.value = _graphicsOptions.FieldOfView;
             _aaQuantity.value = (int)_graphicsOptions.AaMode;
             _aaQualityQuantity.value = (int)_graphicsOptions.AaQuality;
@@ -98,7 +103,7 @@ namespace Keru.Scripts.Game.Menus.SubMenus
             _motionBlurText.text = BooleanToName(_graphicsOptions.MotionblurEnabled);
             _motionBlurIntensifyQuantity.value = _graphicsOptions.MotionblurIntensity * 100;
             _ditheringText.text = BooleanToName(_graphicsOptions.Dithering);
-            _dofText.text = BooleanToName(_graphicsOptions.DepthOfFieldEnabled);
+            _volText.text = BooleanToName(_graphicsOptions.VolumetricLightning);
             _aoText.text = BooleanToName(_graphicsOptions.AmbientOclussion);
 
             UpdateTexture();
@@ -107,6 +112,7 @@ namespace Keru.Scripts.Game.Menus.SubMenus
             UpdateAAMode();
             UpdateAAQuality();
             UpdateMSAAQuality();
+            UpdateSsr();
             UpdateRenderScale();
             UpdateFrameLimiter();
 
@@ -128,6 +134,14 @@ namespace Keru.Scripts.Game.Menus.SubMenus
 
             _shadowAmmount.text = GetCorrectGraphicOptionsName(currentOption);
             _graphicsOptions.ShadowQuality = currentOption;
+        }
+
+        public void UpdateSsr()
+        {
+            var currentOption = (GraphicOptionsEnum)_ssrQuantity.value;
+
+            _ssrAmount.text = GetCorrectGraphicOptionsName(currentOption);
+            _graphicsOptions.ScreenSpaceReflections = currentOption;
         }
 
         public void UpdateFieldOfView()
@@ -250,8 +264,8 @@ namespace Keru.Scripts.Game.Menus.SubMenus
 
         public void UpdateDepthOfField()
         {
-            _graphicsOptions.DepthOfFieldEnabled = !_graphicsOptions.DepthOfFieldEnabled;
-            _dofText.text = BooleanToName(_graphicsOptions.DepthOfFieldEnabled);
+            _graphicsOptions.VolumetricLightning = !_graphicsOptions.VolumetricLightning;
+            _volText.text = BooleanToName(_graphicsOptions.VolumetricLightning);
         }
 
         public void UpdateAmbientOcclusion()

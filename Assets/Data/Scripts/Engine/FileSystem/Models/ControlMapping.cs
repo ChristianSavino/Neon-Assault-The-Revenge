@@ -10,23 +10,25 @@ public class ControlMapping
 
     public ControlMapping()
     {
-        Keys = new Dictionary<string, KeyCode>();
-        Keys.Add("Up", KeyCode.W);
-        Keys.Add("Left", KeyCode.A);
-        Keys.Add("Right", KeyCode.D);
-        Keys.Add("Back", KeyCode.S);
-        Keys.Add("Dash", KeyCode.LeftShift);
-        Keys.Add("Jump", KeyCode.Space);
-        Keys.Add("Duck", KeyCode.LeftControl);
-        Keys.Add("Shoot", KeyCode.Mouse0);
-        Keys.Add("Reload", KeyCode.R);
-        Keys.Add("Flashlight", KeyCode.H);
-        Keys.Add("Special", KeyCode.Q);
-        Keys.Add("Second", KeyCode.Mouse1);
-        Keys.Add("Pause", KeyCode.Escape);
-        Keys.Add("Use", KeyCode.E);
-        Keys.Add("Knife", KeyCode.F);
-        Keys.Add("Grenade", KeyCode.G);
+        Keys = new Dictionary<string, KeyCode>()
+        {
+            {"Up", KeyCode.W},
+            {"Left", KeyCode.A},
+            {"Right", KeyCode.D},
+            {"Back", KeyCode.S},
+            {"Dash", KeyCode.LeftShift},
+            {"Jump", KeyCode.Space},
+            {"Duck", KeyCode.LeftControl},
+            {"Shoot", KeyCode.Mouse0},
+            {"Reload", KeyCode.R},
+            {"Special", KeyCode.Q},
+            {"Second", KeyCode.Mouse1},
+            {"Pause", KeyCode.Escape},
+            {"Use", KeyCode.E},
+            {"Knife", KeyCode.F},
+            {"Grenade", KeyCode.G},
+        };
+        
         Sensibility = 5;
         AutoReload = true;
     }
