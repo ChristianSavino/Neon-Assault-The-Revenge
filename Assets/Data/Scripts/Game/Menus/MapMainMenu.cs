@@ -57,7 +57,6 @@ namespace Keru.Scripts.Game.Menus
             var levelData = MasterLevelData.AllLevels.First(x => x.SceneName == _selectedName);
 
             _levelName.text = levelData.LevelName.ToUpper();
-            _levelDescription.text = levelData.ShortDescription.ToUpper();
 
             ToggleOffAllButtons();
             ToggleSelectedLevelData(true);

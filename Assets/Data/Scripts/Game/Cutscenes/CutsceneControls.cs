@@ -1,7 +1,9 @@
 using Keru.Scripts.Engine.Master;
 using Keru.Scripts.Engine.Module;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -19,13 +21,10 @@ namespace Keru.Scripts.Game.Cutscene
         [SerializeField] private Animator _cutsceneAnimator;
         [SerializeField] private Button _continueButton;
         [SerializeField] private Button _skipButton;
+        [SerializeField] private CutsceneDialog _cutsceneDialog;
 
         [Header("Cutscene")]
-        [SerializeField] private List<string> _sceneToPlay;
-        [SerializeField] private List<string> _titleText;
-        [SerializeField] private List<string> _subTitleText;
-        [SerializeField] private List<CutsceneDialog> _dialogPerScene;
-        [SerializeField] private List<AudioClip> _audioClip;
+        [SerializeField] private List<CutsceneScene> _scenesToPlay;
 
         private Animator _changesceneEffectAnimator;
         private CutsceneTitleScreen _titleScreenHandler;
@@ -33,8 +32,9 @@ namespace Keru.Scripts.Game.Cutscene
         private ReflectionProbe _reflectionProbe;
         private AudioSource _audioSource;
         private int _currentFrame;
-        private bool _isTitleScreen;
-        private string _lastAnimation = "";
+        private int _currentDialogFrame;
+        private string _lastAnimation = string.Empty;
+        private bool _isBlackScreen;
 
         private void Start()
         {
@@ -63,54 +63,67 @@ namespace Keru.Scripts.Game.Cutscene
         {
             _continueButton.gameObject.SetActive(false);
 
-            if (_currentFrame < _sceneToPlay.Count)
+            if (_currentFrame < _scenesToPlay.Count)
             {
-                if (_audioClip[_currentFrame] != null)
-                {
-                    _audioSource.PlayOneShot(_audioClip[_currentFrame]);
-                    _audioClip[_currentFrame] = null;
-                }
-
-                if (!_lastAnimation.Equals(_sceneToPlay[_currentFrame]))
-                {
-                    ChangeCutscene();
-                }
+                var currentFrameData = _scenesToPlay[_currentFrame];
                 var timeToRestartButton = 1f;
 
-                if (_titleText[_currentFrame] != string.Empty || _subTitleText[_currentFrame] != string.Empty && _isTitleScreen == false)
+                if (currentFrameData.SoundToPlay != null)
                 {
-                    _titleScreenHandler.EnableTitleScreen(_titleText[_currentFrame], _subTitleText[_currentFrame]);
-                    _isTitleScreen = true;
-                    timeToRestartButton = 2f;
+                    _audioSource.PlayOneShot(currentFrameData.SoundToPlay);
                 }
 
-                if (_titleText[_currentFrame] == string.Empty && _subTitleText[_currentFrame] == string.Empty && _isTitleScreen == true)
+                if(_lastAnimation != currentFrameData.AnimationName)
                 {
-                    _titleScreenHandler.DisableTitleScreen();
-                    _isTitleScreen = false;
-                    timeToRestartButton = 2f;
+                    ChangeCutscene(currentFrameData.AnimationName);
                 }
 
-                if (_dialogPerScene[_currentFrame] == null)
+                if (currentFrameData.BlackBoxText != string.Empty || currentFrameData.BlackBoxDescription != string.Empty && !_isBlackScreen)
                 {
-                    _currentFrame++;
-                    StartCoroutine(ToggleContinueButton(timeToRestartButton));
+                    timeToRestartButton = 0;
+                    _titleScreenHandler.EnableTitleScreen(currentFrameData.BlackBoxText, currentFrameData.BlackBoxDescription, _continueButton.gameObject);
+                    _isBlackScreen = true;
                 }
-                else
+
+                if (currentFrameData.BlackBoxText == string.Empty && currentFrameData.BlackBoxDescription == string.Empty && _isBlackScreen)
                 {
-                    _dialogPerScene[_currentFrame].gameObject.SetActive(true);
-                    var isDestroyed = _dialogPerScene[_currentFrame].ContinueDialog();
-                    if (isDestroyed)
+                    timeToRestartButton = 0;
+                    if (currentFrameData.CharacterDialog.Count != 0)
                     {
-                        _currentFrame++;
-                        AdvanceCutscene();
+                        _titleScreenHandler.DisableTitleScreen();
                     }
                     else
                     {
-                        timeToRestartButton = 3.5f;
-                        StartCoroutine(ToggleContinueButton(timeToRestartButton));
+                        _titleScreenHandler.DisableTitleScreen(_continueButton.gameObject);
                     }
+                    _isBlackScreen = false;
+
                 }
+
+                if(_currentDialogFrame < currentFrameData.CharacterDialog.Count)
+                {
+                    timeToRestartButton = 0;
+                    _cutsceneDialog.gameObject.SetActive(true);                    
+                    _cutsceneDialog.LoadDialog(currentFrameData.CharacterNameDialog[_currentDialogFrame], currentFrameData.CharacterDialog[_currentDialogFrame], _continueButton.gameObject);             
+                    _currentDialogFrame++;
+                    
+                    if (_currentDialogFrame >= currentFrameData.CharacterDialog.Count)
+                    {
+                        _currentDialogFrame = 0;
+                        _currentFrame++;
+                    }    
+                }
+                else
+                {
+                    _cutsceneDialog.gameObject.SetActive(false);
+                    _currentDialogFrame = 0;
+                    _currentFrame++;
+                }
+
+                if(timeToRestartButton > 0)
+                {
+                    StartCoroutine(ToggleContinueButton(timeToRestartButton));
+                }               
             }
             else
             {
@@ -118,9 +131,9 @@ namespace Keru.Scripts.Game.Cutscene
             }
         }
 
-        private void ChangeCutscene()
+        private void ChangeCutscene(string animation)
         {
-            _lastAnimation = _sceneToPlay[_currentFrame];
+            _lastAnimation = animation;
             _cameraData.renderPostProcessing = false;
             _pictureCamera.enabled = true;
 
@@ -176,10 +189,20 @@ namespace Keru.Scripts.Game.Cutscene
             yield return new WaitForSeconds(5);
             _skipButton.gameObject.SetActive(true);
         }
-
         private void CompleteLevel()
         {
             LevelBase.levelBase.CompleteLevel();
         }
     }
+}
+
+[Serializable]
+public class CutsceneScene
+{
+    public string AnimationName;
+    public AudioClip SoundToPlay;
+    public List<string> CharacterNameDialog;
+    public List<string> CharacterDialog;
+    public string BlackBoxText;
+    public string BlackBoxDescription;
 }

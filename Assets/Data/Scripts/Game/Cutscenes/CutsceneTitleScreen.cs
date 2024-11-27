@@ -17,14 +17,14 @@ namespace Keru.Scripts.Game.Cutscene
             _blackScreenAnimator = GetComponent<Animator>();
         }
 
-        public void EnableTitleScreen(string title, string subTitle)
+        public void EnableTitleScreen(string title, string subTitle, GameObject continueButton)
         {
             _blackScreenAnimator.Play("ChangeSceneUp");
 
-            StartCoroutine(UpdateText(title, subTitle));
+            StartCoroutine(UpdateText(title, subTitle, continueButton));
         }
 
-        private IEnumerator UpdateText(string title, string subTitle)
+        private IEnumerator UpdateText(string title, string subTitle, GameObject continueButton)
         {
             yield return new WaitForSeconds(0.5f);
        
@@ -53,15 +53,17 @@ namespace Keru.Scripts.Game.Cutscene
                     yield return new WaitForSeconds(subTitleTime * Time.deltaTime);
                 }
             }
+
+            continueButton.SetActive(true);
         }
 
-        public void DisableTitleScreen()
+        public void DisableTitleScreen(GameObject continueButton = null)
         {
             _blackScreenAnimator.Play("ChangeScene");
-            StartCoroutine(RemoveText());
+            StartCoroutine(RemoveText(continueButton));
         }
 
-        private IEnumerator RemoveText()
+        private IEnumerator RemoveText(GameObject continueButton)
         {
             if (_titleText.text != string.Empty)
             {
@@ -85,6 +87,11 @@ namespace Keru.Scripts.Game.Cutscene
                     _subTitleText.text = subTitleAux.ToUpper();
                     yield return new WaitForSeconds(subTitleTime * Time.deltaTime);
                 }
+            }
+
+            if (continueButton != null)
+            {
+                continueButton.SetActive(true);
             }
         }
     }

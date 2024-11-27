@@ -1,3 +1,4 @@
+using Keru.Scripts.Helpers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,8 +27,7 @@ namespace Keru.Scripts.Game.Menus
 
         private void Update()
         {
-            var currentTime = DateTime.Now;
-            _clock.text = currentTime.ToString("HH:mm:ss");
+            _clock.text = ClockHelper.GetCurrentTime();
         }
 
         public void Message(string message)

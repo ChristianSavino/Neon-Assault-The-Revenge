@@ -10,7 +10,7 @@ public class SaveGameFile
     public Difficulty Difficulty { get; set; }
     public int Checkpoint { get; set; }
     public LevelCode CurrentLevelCode { get; set; }
-    public CurrentCharacterData SelectedCharacter { get; set; }
+    public CurrentCharacterData CurrentCharacterData { get; set; }
     public string CoopCharacterData { get; set; }
     public DateTime LastSaveDate { get; set; }
     public List<LevelSaveData> AllLevelData { get; set; }
@@ -27,12 +27,14 @@ public class SaveGameFile
         CreateLevelData();
         CreateSkillData();
         CreateWeaponData();
-        SelectedCharacter = new CurrentCharacterData()
+        CurrentCharacterData = new CurrentCharacterData()
         {
             CurrentHealth = 100,
             MaxHealth = 100,
             Primary = Weapons[4],
-            Secondary = Weapons[2]
+            Secondary = Weapons[2],
+            UltimateSkill = AbilityCodes.JUDGEMENTCUT,
+            SecondarySkill = AbilityCodes.BULLETTIME
            };
         LastSaveDate = DateTime.Now;       
     }

@@ -22,9 +22,10 @@ namespace Keru.Scripts.Engine.Module
             ExternalFilesManager.SaveGame(saveGameFile);
         }
 
-        public SaveGameFile CreateNewSaveGame(int savePosition)
+        public SaveGameFile CreateNewSaveGame(int savePosition, int difficulty)
         {
             var saveGame = new SaveGameFile(savePosition);
+            saveGame.Difficulty = (Difficulty)difficulty;
             ExternalFilesManager.SaveGame(saveGame);
 
             return saveGame;

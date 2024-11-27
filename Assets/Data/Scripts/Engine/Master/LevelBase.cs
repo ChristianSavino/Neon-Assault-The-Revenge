@@ -17,7 +17,8 @@ namespace Keru.Scripts.Engine.Master
         [SerializeField] private bool _isMenu;
         [SerializeField] private bool _usesMusic = true;
         [SerializeField] private float _localTimeScale = 1f;
-        [SerializeField] private bool _canUseVolumetricLights;
+        [SerializeField] private bool _useMainVolumetricLights;
+        [SerializeField] private bool _useExtraVolumetricLights;
 
         private AudioManager _audioManager;
         private GraphicsManager _graphicsManager;
@@ -70,7 +71,7 @@ namespace Keru.Scripts.Engine.Master
             _audioManager.SetUp();
 
             _graphicsManager = managerGameObject.GetComponent<GraphicsManager>();
-            _graphicsManager.SetUp(_volume, _fading, _isMenu, _canUseVolumetricLights);
+            _graphicsManager.SetUp(_volume, _fading, _isMenu, _useMainVolumetricLights, _useExtraVolumetricLights);
 
             _levelSceneManager = managerGameObject.GetComponent<LevelSceneManager>();
             _levelSceneManager.SetUp();
@@ -82,9 +83,9 @@ namespace Keru.Scripts.Engine.Master
             _jukeBox.SetUp(GameOptions.AlternateMusic);   
         }
 
-        public SaveGameFile CreateNewSaveGame(int saveGameSlot)
+        public SaveGameFile CreateNewSaveGame(int saveGameSlot, int difficulty)
         {
-            CurrentSave = SaveManager.saveManager.CreateNewSaveGame(saveGameSlot);
+            CurrentSave = SaveManager.saveManager.CreateNewSaveGame(saveGameSlot, difficulty);
             GameOptions.SaveGameLocation = saveGameSlot;
             ExternalFilesManager.UpdateGameData(GameOptions);
 

@@ -1,3 +1,4 @@
+using Keru.Scripts.Engine;
 using Keru.Scripts.Engine.FileSystem;
 using Keru.Scripts.Engine.Master;
 using Keru.Scripts.Engine.Module;
@@ -12,14 +13,17 @@ namespace Keru.Scripts.Game.Menus.SubMenus
     {
         [SerializeField] private List<Button> _saveSlots;
         [SerializeField] private GameObject _askMesssage;
+        [SerializeField] private Text _difficultyText;
 
         private int _saveGameSlot;
         private List<SaveGameFile> _saveFiles;
+        private int _difficulty;
 
         private void OnEnable()
         {
             _askMesssage.SetActive(false);
             LoadAllSaveFiles();
+            ChangeDiff(0);
         }
 
         private void LoadAllSaveFiles()
@@ -58,7 +62,7 @@ namespace Keru.Scripts.Game.Menus.SubMenus
 
             DisableAllButtons();
 
-            var saveGame = LevelBase.levelBase.CreateNewSaveGame(_saveGameSlot);         
+            var saveGame = LevelBase.levelBase.CreateNewSaveGame(_saveGameSlot, _difficulty);         
             LevelSceneManager.levelSceneManager.LoadScene(saveGame.CurrentLevelCode);
         }
 
@@ -73,6 +77,34 @@ namespace Keru.Scripts.Game.Menus.SubMenus
             {
                 button.interactable = false;
             }
+        }
+
+        public void ChangeDiff(int direction)
+        {
+            _difficulty += direction;
+            if(_difficulty > (int)Difficulty.KeruMustDie)
+            {
+                _difficulty = 0;
+            }
+            var text = "";
+
+            switch (_difficulty)
+            {
+                case 0:
+                    text = "Fácil";
+                    break;
+                case 1:
+                    text = "Normal";
+                    break;
+                case 2:
+                    text = "Difícil";
+                    break;
+                case 3:
+                    text = "Keru debe Morir";
+                    break;
+            }
+
+            _difficultyText.text = text.ToUpper();
         }
     }
 }

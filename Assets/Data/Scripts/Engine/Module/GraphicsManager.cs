@@ -1,15 +1,10 @@
 using Keru.Scripts.Engine.Master;
 using Keru.Scripts.Visuals.Effects;
 using LimWorks.Rendering.URP.ScreenSpaceReflections;
-using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.XR;
-using static LimWorks.Rendering.URP.ScreenSpaceReflections.LimSSR;
 
 namespace Keru.Scripts.Engine.Module
 {
@@ -25,18 +20,19 @@ namespace Keru.Scripts.Engine.Module
         private DepthOfField _depthOfField;
         private Bloom _bloom;
         private MotionBlur _motionBlur;
+        private VolumetricFogVolumeComponent _volumetric;
         private bool _isMenu;
 
         [SerializeField] private List<UniversalRenderPipelineAsset> pipelines;
         [SerializeField] private UniversalRendererData _feature;
 
         private int _ambientOclussionFeature = 0;
-        private int _volumetricLights = 4;
-        private int _ssrFeature = 5;
-        private int _hiRezSsrFeature = 6;
-        private bool _canUseVolumetric;
+        private int _ssrFeature = 4;
+        private int _hiRezSsrFeature = 5;
+        private bool _useMainVolumetricLights;
+        private bool _useExtraVolumetricLights;
 
-        public void SetUp(Volume volume, Fading fading, bool isMenu, bool canUseVolumetric)
+        public void SetUp(Volume volume, Fading fading, bool isMenu, bool useMainVolumetric, bool useExtraVolumetricLights)
         {
             graphicsManager = this;
            
@@ -45,7 +41,8 @@ namespace Keru.Scripts.Engine.Module
             _vp = volume.profile;
             _fading = fading;
             _isMenu = isMenu;
-            _canUseVolumetric = canUseVolumetric;
+            _useMainVolumetricLights = useMainVolumetric;
+            _useExtraVolumetricLights = useExtraVolumetricLights;
 
             SetupGraphics();
         }
@@ -96,9 +93,17 @@ namespace Keru.Scripts.Engine.Module
 
             _feature.rendererFeatures[_ambientOclussionFeature].SetActive(graphics.AmbientOclussion);
 
-            var toggleVolumetricLights = graphics.VolumetricLightning && _canUseVolumetric;
-            _feature.rendererFeatures[_volumetricLights].SetActive(toggleVolumetricLights);
-         
+            var toggleMainVolumetricLights = graphics.VolumetricLightning && _useMainVolumetricLights;
+            var toggleExtraVolumetricLights = graphics.VolumetricLightning && _useExtraVolumetricLights;
+
+            _vp.TryGet(out _volumetric);
+            if (_volumetric != null)
+            {
+                _volumetric.active = toggleMainVolumetricLights || toggleExtraVolumetricLights;
+                _volumetric.enableMainLightContribution.Override(toggleMainVolumetricLights);
+                _volumetric.enableAdditionalLightsContribution.Override(toggleExtraVolumetricLights);
+            }
+
             SetScreenSpaceReflections(graphics);
 
             _feature.SetDirty();

@@ -25,6 +25,73 @@ MonoBehaviour:
   clamp:
     m_OverrideState: 1
     m_Value: 0.02
+--- !u!114 &-4343042338702949467
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a074ec59f6e910b4e8c49f57e56cf95a, type: 3}
+  m_Name: VolumetricFogVolumeComponent
+  m_EditorClassIdentifier: 
+  active: 1
+  distance:
+    m_OverrideState: 0
+    m_Value: 128
+  baseHeight:
+    m_OverrideState: 1
+    m_Value: 0
+  maximumHeight:
+    m_OverrideState: 1
+    m_Value: 50
+  enableGround:
+    m_OverrideState: 1
+    m_Value: 0
+  groundHeight:
+    m_OverrideState: 0
+    m_Value: 0
+  density:
+    m_OverrideState: 0
+    m_Value: 0.2
+  attenuationDistance:
+    m_OverrideState: 0
+    m_Value: 128
+  enableMainLightContribution:
+    m_OverrideState: 1
+    m_Value: 1
+  mainLightAnisotropy:
+    m_OverrideState: 0
+    m_Value: 0.4
+  mainLightScattering:
+    m_OverrideState: 0
+    m_Value: 0.15
+  mainLightColorTint:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  enableAdditionalLightsContribution:
+    m_OverrideState: 1
+    m_Value: 0
+  additionalLightsAnisotropy:
+    m_OverrideState: 0
+    m_Value: 0.25
+  additionalLightsScattering:
+    m_OverrideState: 0
+    m_Value: 1
+  additionalLightsRadius:
+    m_OverrideState: 0
+    m_Value: 0.2
+  maxSteps:
+    m_OverrideState: 1
+    m_Value: 64
+  blurIterations:
+    m_OverrideState: 1
+    m_Value: 2
+  enabled:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &-1568320644410712182
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -83,6 +150,7 @@ MonoBehaviour:
   - {fileID: -5723951582687278235}
   - {fileID: 5536940397022304652}
   - {fileID: 3821021913141810533}
+  - {fileID: -4343042338702949467}
 --- !u!114 &2037872437753568923
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -95,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   skipIterations:
     m_OverrideState: 0
     m_Value: 1

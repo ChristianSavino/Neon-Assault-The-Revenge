@@ -10,41 +10,36 @@ namespace Keru.Scripts.Game.Cutscene
         [Header("Objects")]
         [SerializeField] private Text _characterBox;
         [SerializeField] private Text _characterDialog;
+        [SerializeField] private float _dialogSpeed = 0.05f;
+        [SerializeField] private bool _usesUpperCase = true;
 
-        [Header("Dialog")]
-        [SerializeField] private List<CharacterCutscene> _characterString;
-        [SerializeField] private List<string> _dialogString;
-
-        private int _currentDialog;
-
-        public bool ContinueDialog()
+        public void LoadDialog(string characterName, string dialog, GameObject continueButton)
         {
-            if (_currentDialog == _dialogString.Count)
-            {
-                Destroy(this.gameObject);
-                return true;
-            }
-
-            var timeToAddLetter = 2f / _dialogString[_currentDialog].Length;
-
-            StartCoroutine(ChangeDialog(timeToAddLetter));
-            return false;
+            StartCoroutine(ChangeDialog(characterName, dialog, continueButton));
         }
 
-        private IEnumerator ChangeDialog(float timeToAddLetter)
+        private IEnumerator ChangeDialog(string characterName, string dialog, GameObject continueButton)
         {          
-            var dialog = _dialogString[_currentDialog];
-            _characterBox.text = _characterString[_currentDialog].ToString().ToUpper();
+            _characterBox.text = characterName.ToUpper();
 
             var dialogAux = "";
             while (!dialogAux.Equals(dialog))
             {
                 dialogAux = dialog.Substring(0, dialogAux.Length + 1);
-                _characterDialog.text = dialogAux.ToUpper();
-                yield return new WaitForSeconds(timeToAddLetter);
+                
+                if(_usesUpperCase)
+                {
+                    _characterDialog.text = dialogAux.ToUpper();
+                }
+                else
+                {
+                    _characterDialog.text = dialogAux;
+                }
+
+                yield return new WaitForSeconds(_dialogSpeed);
             }
 
-            _currentDialog++;
+            continueButton.SetActive(true);
         }
     }
 }

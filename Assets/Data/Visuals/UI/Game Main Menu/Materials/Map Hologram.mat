@@ -136,7 +136,7 @@ Material:
     - _GlossyReflections: 0
     - _Hologram_Color: 0
     - _Hologram_Force: 0.97
-    - _Hologram_Intensity: 0.522
+    - _Hologram_Intensity: 0.615
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -162,7 +162,7 @@ Material:
     - _Diffusion_Tiling: {r: 1, g: 3, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Fresnel_Color: {r: 0.99056596, g: 0.4985826, b: 0, a: 1}
-    - _Hologram_Color: {r: 0, g: 1, b: 0.23529404, a: 1}
+    - _Hologram_Color: {r: 0, g: 0.8113208, b: 0.190899, a: 1}
     - _Hologram_Tiling: {r: 1, g: 3, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
