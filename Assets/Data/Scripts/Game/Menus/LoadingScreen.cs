@@ -55,6 +55,7 @@ namespace Keru.Scripts.Game.Menus
         private IEnumerator FinishLoadingScene()
         {
             GraphicsManager.graphicsManager.FadeCamera(1);
+            JukeBox.jukebox.StopMusic(true);
 
             yield return new WaitForSecondsRealtime(2);
 

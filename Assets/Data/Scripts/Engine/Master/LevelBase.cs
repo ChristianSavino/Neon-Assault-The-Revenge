@@ -36,11 +36,6 @@ namespace Keru.Scripts.Engine.Master
             GameOptions = ExternalFilesManager.LoadGameData();
            
             LoadModules();
-
-            if(GameOptions.SaveGameLocation != -1)
-            {
-                CurrentSave = _saveManager.LoadSaveGame(GameOptions.SaveGameLocation);
-            }
            
             if (_isMenu)
             {
@@ -79,8 +74,20 @@ namespace Keru.Scripts.Engine.Master
             _saveManager = managerGameObject.GetComponent<SaveManager>();
             _saveManager.SetUp();
 
+            if (GameOptions.SaveGameLocation != -1)
+            {
+                CurrentSave = _saveManager.LoadSaveGame(GameOptions.SaveGameLocation);
+            }
+
             _jukeBox = GetComponent<JukeBox>();
-            _jukeBox.SetUp(GameOptions.AlternateMusic);   
+            if (CurrentSave != null)
+            {
+                _jukeBox.SetUp(CurrentSave.AlternateMusic);
+            }
+            else
+            {
+                _jukeBox.SetUp(false);
+            }
         }
 
         public SaveGameFile CreateNewSaveGame(int saveGameSlot, int difficulty)

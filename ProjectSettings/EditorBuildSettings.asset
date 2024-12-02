@@ -18,9 +18,6 @@ EditorBuildSettings:
     path: Assets/Data/Scenes/Cutscene/Prologue.unity
     guid: d9ef2854f3564724f88bc4a78acbea3f
   - enabled: 1
-    path: Assets/Data/Scenes/Cutscene/Level1Cut.unity
-    guid: c8f1cb96d3cd2ff45bb5bb9db5e37157
-  - enabled: 1
     path: Assets/Data/Scenes/Game/Level1.unity
     guid: 9942768015d7374419a16dc4e5f0e693
   m_configObjects: {}

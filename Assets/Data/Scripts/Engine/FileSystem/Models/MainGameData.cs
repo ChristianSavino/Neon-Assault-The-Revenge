@@ -7,7 +7,6 @@ public class MainGameData
 {
     public string Version { get; set; }
     public int SaveGameLocation { get; set; }
-    public bool AlternateMusic { get; set; }
     public List<Achievements> Achievements { get; set; }
     public Options Options { get; set; }
     public MainGameData()
