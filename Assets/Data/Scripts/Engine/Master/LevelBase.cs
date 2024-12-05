@@ -1,5 +1,6 @@
 using Keru.Scripts.Engine.FileSystem;
 using Keru.Scripts.Engine.Module;
+using Keru.Scripts.Game.Entities.Player;
 using Keru.Scripts.Visuals.Effects;
 using System;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace Keru.Scripts.Engine.Master
         private Volume _volume;
 
         private DateTime _startTime;
+        private Player _player;
 
         private void Awake()
         {
@@ -37,13 +39,11 @@ namespace Keru.Scripts.Engine.Master
            
             LoadModules();
            
-            if (_isMenu)
+            if (!_isMenu)
             {
-
-            }
-            else
-            {
-
+                var player = GameObject.Find("Player");
+                _player = player.GetComponent<Player>();
+                _player.ConfigPlayer(GameOptions, CurrentSave);
             }
 
             if (_usesMusic)
@@ -155,6 +155,24 @@ namespace Keru.Scripts.Engine.Master
             }
 
             _audioManager.SetPitch(timeScale);
+        }
+
+        public void PauseManager(bool paused)
+        {
+            if (paused)
+            {
+                SetTimeScale(0);
+                _jukeBox.Pause(true);
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                SetTimeScale(_localTimeScale);
+                _jukeBox.Pause(false);
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 using Keru.Scripts.Engine;
 using Keru.Scripts.Engine.Master;
+using Keru.Scripts.Engine.Module;
 using Keru.Scripts.Game.Menus.GameMainMenu.MissionSelection;
 using Keru.Scripts.Helpers;
 using System;
@@ -99,6 +100,11 @@ namespace Keru.Scripts.Game.Menus.GameMainMenu
             var cameraPositionData = _cameraPositions[cameraPosition];
             cameraTransform.position = cameraPositionData.position;
             cameraTransform.rotation = Quaternion.Euler(cameraPositionData.rotation);
+        }
+
+        public void GoMainMenu()
+        {
+            LevelSceneManager.levelSceneManager.LoadScene(LevelCode.MainMenu);
         }
     }
 

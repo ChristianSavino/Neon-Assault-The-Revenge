@@ -4,14 +4,10 @@ namespace Keru.Scripts.Game.Entities
 {
     public class Entity : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        [SerializeField] protected int _life;
+        [SerializeField] protected bool _alive = true;
 
-        }
-
-        // Update is called once per frame
-        void Update()
+        public virtual void OnDamagedUnit(int damage, Vector3 hitpoint, GameObject origin, int damageType, float damageForce)
         {
 
         }

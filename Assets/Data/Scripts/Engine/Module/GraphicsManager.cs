@@ -15,9 +15,8 @@ namespace Keru.Scripts.Engine.Module
 
         private Camera _mainCamera;
         private UniversalAdditionalCameraData _cameraData;
-       
+
         private VolumeProfile _vp;
-        private DepthOfField _depthOfField;
         private Bloom _bloom;
         private MotionBlur _motionBlur;
         private VolumetricFogVolumeComponent _volumetric;
@@ -31,11 +30,12 @@ namespace Keru.Scripts.Engine.Module
         private int _hiRezSsrFeature = 5;
         private bool _useMainVolumetricLights;
         private bool _useExtraVolumetricLights;
+        private List<Volume> _volumetricLightVolumes = new List<Volume>();
 
         public void SetUp(Volume volume, Fading fading, bool isMenu, bool useMainVolumetric, bool useExtraVolumetricLights)
         {
             graphicsManager = this;
-           
+
             _mainCamera = Camera.main;
             _cameraData = _mainCamera.GetComponent<UniversalAdditionalCameraData>();
             _vp = volume.profile;
@@ -55,12 +55,12 @@ namespace Keru.Scripts.Engine.Module
             _cameraData.renderPostProcessing = true;
 
             var graphics = LevelBase.GameOptions.Options.GraphicsOptions;
-            QualitySettings.globalTextureMipmapLimit = 3-(int)graphics.TextureQuality;
-            
+            QualitySettings.globalTextureMipmapLimit = 3 - (int)graphics.TextureQuality;
+
             QualitySettings.renderPipeline = pipelines[(int)graphics.ShadowQuality];
             var qualityAsset = (UniversalRenderPipelineAsset)QualitySettings.renderPipeline;
 
-            if(!_isMenu)
+            if (!_isMenu)
             {
                 _mainCamera.fieldOfView = graphics.FieldOfView;
             }
@@ -103,6 +103,7 @@ namespace Keru.Scripts.Engine.Module
                 _volumetric.enableMainLightContribution.Override(toggleMainVolumetricLights);
                 _volumetric.enableAdditionalLightsContribution.Override(toggleExtraVolumetricLights);
             }
+            ToggleVolumetricLightVolumes(graphics.VolumetricLightning);
 
             SetScreenSpaceReflections(graphics);
 
@@ -117,12 +118,31 @@ namespace Keru.Scripts.Engine.Module
             }
         }
 
+        public void RegisterVolume(Volume volume)
+        {
+            _volumetricLightVolumes.Add(volume);
+
+            var graphics = LevelBase.GameOptions.Options.GraphicsOptions;
+            if (!graphics.VolumetricLightning)
+            {
+                volume.enabled = false;
+            }
+        }
+
+        public void ToggleVolumetricLightVolumes(bool toggle)
+        {
+            foreach (var volume in _volumetricLightVolumes)
+            {
+                volume.enabled = toggle;
+            }
+        }
+
         private void SetScreenSpaceReflections(GraphicsOptions graphics)
         {
-            if(graphics.ScreenSpaceReflections != GraphicOptionsEnum.Low)
+            if (graphics.ScreenSpaceReflections != GraphicOptionsEnum.Low)
             {
                 _feature.rendererFeatures[_ssrFeature].SetActive(true);
-                
+
                 var settings = new ScreenSpaceReflectionsSettings()
                 {
                     Downsample = (int)graphics.ScreenSpaceReflections > (int)GraphicOptionsEnum.High ? (uint)0 : (uint)1,
@@ -133,7 +153,7 @@ namespace Keru.Scripts.Engine.Module
                     TracingMode = RaytraceModes.LinearTracing
                 };
 
-                if(graphics.ScreenSpaceReflections == GraphicOptionsEnum.Ultra)
+                if (graphics.ScreenSpaceReflections == GraphicOptionsEnum.Ultra)
                 {
                     settings.TracingMode = RaytraceModes.HiZTracing;
                     _feature.rendererFeatures[_hiRezSsrFeature].SetActive(true);

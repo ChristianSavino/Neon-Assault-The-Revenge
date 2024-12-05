@@ -33,8 +33,8 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - Vector4_0531145fc8bd4885a11bbfd5e06d8bde: {r: 15, g: 30, b: 0.2, a: 0.2}
-    - Vector4_30ff1b7c168246afafa779c6e55a1329: {r: 15, g: 30, b: -0.1, a: -0.1}
+    - Vector4_0531145fc8bd4885a11bbfd5e06d8bde: {r: 16, g: 6, b: 0.2, a: 0.2}
+    - Vector4_30ff1b7c168246afafa779c6e55a1329: {r: 16, g: 6, b: -0.1, a: -0.1}
   m_BuildTextureStacks: []
 --- !u!114 &4185882697957999389
 MonoBehaviour:
