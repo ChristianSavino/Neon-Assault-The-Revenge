@@ -26,7 +26,10 @@ namespace Keru.Scripts.Engine.Master
         {
             jukebox = this;
             _musicSource = AudioManager.audioManager.CreateNewAudioSource(gameObject, SoundType.Music);
+            _musicSource.loop = true;
+
             _auxMusicSource = AudioManager.audioManager.CreateNewAudioSource(gameObject, SoundType.Music);
+            _auxMusicSource.loop = true;
             _usesAlternateMusic = usesAlternateMusic;
         }
 
