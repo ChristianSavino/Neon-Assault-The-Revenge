@@ -31,11 +31,10 @@ namespace Keru.Scripts.Engine.FileSystem
 
             foreach (FileInfo file in di.GetFiles())
             {
-                file.Delete();
-            }
-            foreach (DirectoryInfo dir in di.GetDirectories())
-            {
-                dir.Delete(true);
+                if(file.Name.Contains("SavedGame"))
+                {
+                    file.Delete();
+                }           
             }
         }
     }
