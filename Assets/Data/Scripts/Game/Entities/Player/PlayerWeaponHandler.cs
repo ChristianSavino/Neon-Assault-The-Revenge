@@ -1,9 +1,166 @@
+using Keru.Scripts.Game.Weapons;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Keru.Scripts.Game.Entities.Player
 {
     public class PlayerWeaponHandler : MonoBehaviour
     {
+        private PlayerThirdPersonAnimations _animations;
+        private Weapon _primaryWeapon;
+        private Weapon _secondaryWeapon;
+        private Weapon _currentWeapon;
+        private Dictionary<string, KeyCode> _keys;
+        private bool _canDeploy;
+        private Vector3 _direction;
+        private Camera _camera;
+        [SerializeField] private GameObject _leftHand;
 
+        [Header("Debug")]
+        [SerializeField] private bool _forceWeapons;
+        [SerializeField] private WeaponCodes _primaryForcedCode;
+        [SerializeField] private int _primaryForcedLevel = 1;
+        [SerializeField] private WeaponCodes _secondaryForcedCode;
+        [SerializeField] private int _secondaryForcedLevel = 1;
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                DeployWeapon(_primaryWeapon);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                DeployWeapon(_secondaryWeapon);
+            }
+
+            if (_currentWeapon != null)
+            {
+                CalculateDirection();
+                WeaponControls();
+            }
+        }
+
+        private void WeaponControls()
+        {
+            if(Input.GetKeyDown(_keys["Shoot"]))
+            {
+                _currentWeapon.StartsShoot();
+            }
+            if(Input.GetKeyUp(_keys["Shoot"]))
+            {
+                _currentWeapon.EndsShoot();
+            }
+            if (Input.GetKey(_keys["Shoot"]))
+            {
+                _currentWeapon.Shoot(_direction);
+            }
+
+            if (Input.GetKeyDown(_keys["Reload"]))
+            {
+                _currentWeapon.Reload();
+            }
+        }
+
+        private void CalculateDirection()
+        {
+            var ray = _camera.ScreenPointToRay(Input.mousePosition);
+            var plane = new Plane(Vector3.up, new Vector3(0, 1, 0));
+            float enter;
+
+            var targetPoint = Vector3.zero;
+
+            if (plane.Raycast(ray, out enter))
+            {
+                targetPoint = ray.GetPoint(enter);
+            }
+
+            _direction = (targetPoint - transform.position);
+        }
+
+        public void SetConfig(PlayerThirdPersonAnimations pta, SaveGameFile saveGame, Dictionary<string, KeyCode> keys)
+        {
+            _animations = pta;
+            _keys = keys;
+
+            if(_forceWeapons)
+            {
+                _primaryForcedLevel = Mathf.Clamp(_primaryForcedLevel, 1, 4);
+                _secondaryForcedLevel = Mathf.Clamp(_secondaryForcedLevel, 1, 4);
+            }
+
+            var primaryWeaponData = !_forceWeapons ? saveGame.CurrentCharacterData.Primary : saveGame.Weapons.First(x => x.Code == _primaryForcedCode);
+            var secondaryWeaponData = !_forceWeapons ? saveGame.CurrentCharacterData.Secondary : saveGame.Weapons.First(x => x.Code == _secondaryForcedCode);
+
+            var primaryWeaponModel = _animations.GetWeaponModel(primaryWeaponData.Code);
+            var secondaryWeaponModel = _animations.GetWeaponModel(secondaryWeaponData.Code);
+
+            _primaryWeapon = primaryWeaponModel.AddComponent<Weapon>();
+            _primaryWeapon.SetConfig(this, primaryWeaponModel, _leftHand, !_forceWeapons ? primaryWeaponData.Level : _primaryForcedLevel, primaryWeaponData.CurrentBulletsInMag);
+
+            _secondaryWeapon = secondaryWeaponModel.AddComponent<Weapon>();
+            _secondaryWeapon.SetConfig(this, secondaryWeaponModel, _leftHand, !_forceWeapons ? secondaryWeaponData.Level : _secondaryForcedLevel, secondaryWeaponData.CurrentBulletsInMag);
+
+            _camera = Camera.main;
+        }
+
+        public void DeployWeapon(Weapon weapon, bool forcedDeploy = false)
+        {
+            if(!_canDeploy && !forcedDeploy)
+            {
+                return;
+            }
+
+            _canDeploy = true;
+
+            if(_currentWeapon != null)
+            {
+                if (!_currentWeapon.CanChangeWeapon())
+                {
+                    return;
+                }
+            }
+
+            if (weapon == null)
+            {
+                _currentWeapon = _primaryWeapon;
+            }
+            else if (_currentWeapon == weapon)
+            {
+                return;
+            }
+            else
+            {
+                _currentWeapon = weapon;
+            }
+
+            ToggleWeapons(false);
+            _currentWeapon.gameObject.SetActive(true);
+            _currentWeapon.Deploy();
+        }
+
+        private void ToggleWeapons(bool toggle)
+        {
+            _primaryWeapon.gameObject.SetActive(toggle);
+            _secondaryWeapon.gameObject.SetActive(toggle);
+        }
+
+        public void PlayAnimation(WeaponActions weaponAction, WeaponCodes weaponCodes)
+        {
+            if (_currentWeapon == null)
+            {
+                return;
+            }
+
+            _animations.PlayWeaponAnimation(weaponAction, weaponCodes);
+        }
+
+        public void Die()
+        {
+            _canDeploy = false;
+            _currentWeapon?.Die();
+            enabled = false;
+        }
     }
 }

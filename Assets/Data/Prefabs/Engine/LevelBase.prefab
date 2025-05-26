@@ -169,6 +169,8 @@ MonoBehaviour:
   _isMenu: 1
   _usesMusic: 1
   _localTimeScale: 1
+  _useMainVolumetricLights: 0
+  _useExtraVolumetricLights: 0
 --- !u!114 &1219803289478327984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,6 +219,7 @@ GameObject:
   - component: {fileID: 7359435467128974877}
   - component: {fileID: 1327643983103214978}
   - component: {fileID: 5222393553137149584}
+  - component: {fileID: 536525996605364368}
   m_Layer: 0
   m_Name: Modules
   m_TagString: Untagged
@@ -294,3 +297,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f6035099656134994c99d7b944b6e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &536525996605364368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7052159982215687238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4567d2b6815685d4ab628554fd99b7ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletTrailDistortion: {fileID: 2100000, guid: 95a9b8acbd5903a42939c7fbc1af5411,
+    type: 2}
+  SmallBulletCasing: {fileID: 592762295993380993, guid: 138ede4007d2caa46a7c23742797382c,
+    type: 3}
+  BigBulletCasing: {fileID: 811216298675633739, guid: abaeec943a80d2047a3e5aac45e24aa1,
+    type: 3}
+  ShellCasing: {fileID: 1643658500053646582, guid: 65130cfba4a5086489adc9959ef4d4fd,
+    type: 3}
+  GrenadeCasing: {fileID: 2463474128003977284, guid: 6d1cd055ad1d3a8488889d7a20b0602c,
+    type: 3}

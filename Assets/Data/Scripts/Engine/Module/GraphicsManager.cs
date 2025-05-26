@@ -60,11 +60,6 @@ namespace Keru.Scripts.Engine.Module
             QualitySettings.renderPipeline = pipelines[(int)graphics.ShadowQuality];
             var qualityAsset = (UniversalRenderPipelineAsset)QualitySettings.renderPipeline;
 
-            if (!_isMenu)
-            {
-                _mainCamera.fieldOfView = graphics.FieldOfView;
-            }
-
             SetMsaa(graphics, qualityAsset);
 
             qualityAsset.renderScale = graphics.RenderScale;

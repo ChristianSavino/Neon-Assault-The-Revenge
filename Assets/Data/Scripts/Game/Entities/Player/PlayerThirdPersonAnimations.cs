@@ -1,33 +1,30 @@
+using Keru.Scripts.Game.Actions.Camera;
+using Keru.Scripts.Game.Entities.Humanoid;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Keru.Scripts.Game.Entities.Player
 {
-    public class PlayerThirdPersonAnimations : MonoBehaviour
+    public class PlayerThirdPersonAnimations : ThirdPersonAnimations
     {
-        [SerializeField] private Animator _body;
-        [SerializeField] private Animator _shadow;
+        private Collider _hips;
 
-        public void SetConfig()
+        public override void SetConfig()
         {
-
+            base.SetConfig();
+            _hips = _ragdollColliders.First(x => x.gameObject.name == "Hips");
         }
 
-        public void SetParameter(string parameterName, float value)
+        public override void Die(Vector3 hitpoint, float damageForce)
         {
-            _body.SetFloat(parameterName, value);
-            _shadow.SetFloat(parameterName, value);
-        }
-
-        public void SetParameter(string parameterName, bool value)
-        {
-            _body.SetBool(parameterName, value);
-            _shadow.SetBool(parameterName, value);
-        }
-
-        public void PlayAnimation(string animationName, int layer = 0, int timeAt = 0)
-        {
-            _body.Play(animationName, layer, timeAt);
-            _shadow.Play(animationName, layer, timeAt);
+            base.Die(hitpoint, damageForce);
+            if (_hips != null)
+            {
+                var camera = Camera.main;
+                var lookAt = camera.AddComponent<CameraFollowTarget>();
+                lookAt.SetConfig(_hips.transform);
+            }
         }
     }
 }

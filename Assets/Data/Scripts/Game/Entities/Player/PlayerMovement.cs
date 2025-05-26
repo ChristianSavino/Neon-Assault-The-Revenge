@@ -10,6 +10,7 @@ namespace Keru.Scripts.Game.Entities.Player
         [SerializeField] private float _maxSpeed;
         [SerializeField] private bool _canDoubleJump;
         [SerializeField] private int _maxDashes;
+        [SerializeField] private GameObject _model;
 
         private PlayerThirdPersonAnimations _animations;
         private PlayerUIHandler _uIHandler;
@@ -19,17 +20,13 @@ namespace Keru.Scripts.Game.Entities.Player
         private Camera _camera;
         private CapsuleCollider _capsuleCollider;
 
-        private float _yaw, _pitch, _sensitivity;
+        private float _sensitivity;
         //Walking
-        private float _originalSpeed;
         private float _acceleration;
-        private Vector2 _axis;
-        private float _x = 0;
-        private float _z = 0;
+        private Vector3 _axis;
 
         //Dashing
         private int _dash;
-        private bool _canDash;
         private bool _isDashing;
         
         [SerializeField] private float dashRefreshTime = 1f;
@@ -42,11 +39,9 @@ namespace Keru.Scripts.Game.Entities.Player
         
         private bool _isAbleToDoubleJump;
 
-        private Vector3 _legsCrouchPosition = new Vector3(0, -0.218f, 0);
-        private Vector3 _legsStandingPosition = new Vector3(0, -0.662f, 0);
-        private Vector3 _fullBodyStanding = new Vector3(0, -1, 0);
-        private Vector3 _fullBodyCrouching = new Vector3(0, -0.396f, 0);
         private Vector3 _crouchCenter = new Vector3(0, 0.33f, 0);
+        private Vector3 _modelCrouchingPos = new Vector3(0, -0.42f, 0);
+        private Vector3 _modelStandingPos = new Vector3(0,-1f, 0);
         private float _percentCrouch;
 
         private void Start()
@@ -56,7 +51,6 @@ namespace Keru.Scripts.Game.Entities.Player
             _capsuleCollider = GetComponent<CapsuleCollider>();
             _percentCrouch = 0;
 
-            Cursor.lockState = CursorLockMode.Locked;
             StartCoroutine(WalkSound());
         }
         public void SetConfig(PlayerThirdPersonAnimations animationReference, PlayerUIHandler uiHandler, Dictionary<string, KeyCode> keys, float sensivity)
@@ -65,6 +59,8 @@ namespace Keru.Scripts.Game.Entities.Player
             _keys = keys;
             _sensitivity = sensivity;
             _uIHandler = uiHandler;
+
+            _dash = _maxDashes;
         }
         
         private void Update()
@@ -76,17 +72,28 @@ namespace Keru.Scripts.Game.Entities.Player
         {
             Movement();
             JumpMovement();
-            //Dash();
-            //Crouching();
+            Dash();
+            Crouching();
         }
 
         private void Look()
         {
-            _pitch -= Input.GetAxisRaw("Mouse Y") * (_sensitivity * 100) * Time.deltaTime;
-            _pitch = Mathf.Clamp(_pitch, -89f, 90f);
-            _yaw += Input.GetAxisRaw("Mouse X") * (_sensitivity * 100) * Time.deltaTime;
-            _camera.transform.localRotation = Quaternion.Euler(_pitch, 0, 0);
-            transform.localRotation = Quaternion.Euler(0, _yaw, 0);
+            var ray = _camera.ScreenPointToRay(Input.mousePosition);
+            var groundPlane = new Plane(Vector3.up, _model.transform.position);
+
+            float rayDistance;
+            if (groundPlane.Raycast(ray, out rayDistance))
+            {
+                var lookPoint = ray.GetPoint(rayDistance);
+                var direction = (lookPoint - _model.transform.position).normalized;
+
+                // Calcula el ángulo y aplica la sensibilidad
+                var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                var currentAngle = _model.transform.eulerAngles.y;
+                var angle = Mathf.LerpAngle(currentAngle, targetAngle, _sensitivity * Time.deltaTime);
+
+                _model.transform.rotation = Quaternion.Euler(0, angle, 0);
+            }
         }
 
         private void JumpMovement()
@@ -120,7 +127,6 @@ namespace Keru.Scripts.Game.Entities.Player
                 {
                     _axis = getDirection();
                     accelerate = true;
-
                 }
 
                 if (accelerate)
@@ -134,79 +140,80 @@ namespace Keru.Scripts.Game.Entities.Player
                 
                 _acceleration = Mathf.Clamp(_acceleration, 0, 1);
 
-                _animations.SetParameter(ParameterNamesHelper.XParameter, _axis.y * _acceleration);
-                _animations.SetParameter(ParameterNamesHelper.YParameter, _axis.x * _acceleration);
+                Vector3 localInputDir = _model.transform.InverseTransformDirection(_axis.normalized);
 
-                _axis = new Vector2(_z, _x) * (_maxSpeed * _acceleration);
+                _animations.SetParameter(ParameterNamesHelper.XParameter, localInputDir.x * _acceleration);
+                _animations.SetParameter(ParameterNamesHelper.YParameter, localInputDir.z * _acceleration);
 
-                var forward = new Vector3(-_camera.transform.right.z, 0, _camera.transform.right.x);
-                var wishDirection = (forward * _axis.x + _camera.transform.right * _axis.y + Vector3.up * _rigidBody.velocity.y);
-                _rigidBody.velocity = wishDirection;
+                _axis = _axis.normalized * (CalculateMaxSpeed());
+                _axis.y = _rigidBody.velocity.y;
+
+                _rigidBody.velocity = _axis;
             }
         }
 
         private void Crouching()
         {
-            if (Input.GetKey(_keys["Duck"]))
+            if (Input.GetKeyDown(_keys["Duck"]))
             {
-                _isCrouching = true;
-            }
-            else
-            {
-                _isCrouching = CalculateIfCanStand();
+                _isCrouching = !_isCrouching;
+                
+                if(!_isCrouching)
+                {
+                    _isCrouching = CalculateIfCanStand();
+                }
             }
             
             CalculatePercentCrouch();
             _animations.SetParameter(ParameterNamesHelper.IsCrouchingParameter, _isCrouching);
         }
 
-        private Vector2 getDirection()
+        private Vector3 getDirection()
         {
-            _x = 0;
-            _z = 0;
+            var vector = Vector3.zero;
             if (Input.GetKey(_keys["Up"]))
             {
-                _z = 1;
+                vector += Vector3.right;
             }
                
             if (Input.GetKey(_keys["Left"]))
             {
-                _x = -1;
+                vector += Vector3.forward;
             }
                
             if (Input.GetKey(_keys["Back"]))
             {
-                _z = -1;
+                vector += Vector3.left;
             }
                
             if (Input.GetKey(_keys["Right"]))
             {
-                _x = 1;
+                vector += Vector3.back;
             }
-            
-            return new Vector2(_z, _x);
+
+            return vector;
         }
 
         private void Dash()
         {
             if (Input.GetKeyDown(_keys["Dash"]) && !_isDashing && _dash > 0 && _maxDashes > 0 && !_isCrouching)
             {
-                if (getDirection() != Vector2.zero)
+                var direction = getDirection();
+                if (direction != Vector3.zero)
                 {
-                    StartCoroutine(Dashing());
+                    StartCoroutine(Dashing(direction.normalized));
                 }
             }
         }
 
-        private IEnumerator Dashing()
+        private IEnumerator Dashing(Vector3 direction)
         {
             _isDashing = true;
-            _axis = getDirection() * 50;
-            var forward = new Vector3(-_camera.transform.right.z, 0, _camera.transform.right.x);
-            var wishDirection = (forward * _axis.x + _camera.transform.right * _axis.y);
+            _animations.PlayAnimation(AnimationNamesHelper.DashAnimation);
+            direction *= 50;
             _rigidBody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
             _dash--;
-            _rigidBody.velocity = wishDirection;
+            _rigidBody.velocity = direction;
             //UI Code
 
             yield return new WaitForSeconds(0.1f);
@@ -243,6 +250,8 @@ namespace Keru.Scripts.Game.Entities.Player
         public void Die()
         {
             _rigidBody.constraints = RigidbodyConstraints.FreezeAll;
+            _capsuleCollider.enabled = false;
+            enabled = false;
         }
 
         private bool GroundCheck()
@@ -270,11 +279,14 @@ namespace Keru.Scripts.Game.Entities.Player
             _percentCrouch += direction * Time.deltaTime * 4f;
             _percentCrouch = Mathf.Clamp01(_percentCrouch);
 
-            //legs.transform.localPosition = Vector3.Lerp(legsStandingPosition, legsCrouchPosition, percentCrouch);
-            //torso.transform.localPosition = Vector3.Lerp(fullBodyStanding, fullBodyCrouching, percentCrouch);
-            _capsuleCollider.height = Mathf.Lerp(2, 1.5f, _percentCrouch);
+            _capsuleCollider.height = Mathf.Lerp(1.95f, 1.5f, _percentCrouch);
             _capsuleCollider.center = Vector3.Lerp(Vector3.zero, _crouchCenter, _percentCrouch);
-            _maxSpeed = Mathf.Lerp(_originalSpeed, _originalSpeed / 2, _percentCrouch);
+            _model.transform.localPosition = Vector3.Lerp(_modelStandingPos, _modelCrouchingPos, _percentCrouch);
+        }
+
+        private float CalculateMaxSpeed()
+        {
+            return _maxSpeed * _acceleration * (_isCrouching ? 0.5f : 1);
         }
     }
 }

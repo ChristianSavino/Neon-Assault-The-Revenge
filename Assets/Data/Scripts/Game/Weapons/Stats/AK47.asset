@@ -58,13 +58,15 @@ MonoBehaviour:
     IsSilenced: 1
   HeadShotMultiplier: 2
   Force: 30
+  ReloadTime: 2.667
+  ReloadTimeEmpty: 3.433
   Projectile: {fileID: 0}
-  MagazineToDrop: {fileID: 0}
+  MagazineToDrop: {fileID: 100000, guid: 916efe20fd3c2e64d9def61ee6c3d381, type: 3}
   CasingSpawnDelay: 0
-  BulletSpawn: 0
-  ReloadSound: {fileID: 0}
-  EmptyReloadSound: {fileID: 0}
-  DrawSound: {fileID: 0}
-  HolsterSound: {fileID: 0}
+  MagSpawn: 0.5
+  ReloadSound: {fileID: 8300000, guid: 778c7be53403f9e45804f5a61a13a3e6, type: 3}
+  EmptyReloadSound: {fileID: 8300000, guid: 1fe5c2e1733f354428fe88c1a7cbafe4, type: 3}
+  DrawSound: {fileID: 8300000, guid: 4aaa78b2722c0344cb0363a3980adf64, type: 3}
+  HolsterSound: {fileID: 8300000, guid: 8c4ede782a70c6e4b9e515d40d6e6e69, type: 3}
   BeginReload: {fileID: 0}
   FinishReload: {fileID: 0}

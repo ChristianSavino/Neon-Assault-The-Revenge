@@ -1,22 +1,5 @@
 namespace Keru.Scripts.Game
 {
-    public enum Character
-    {
-        KERU = 0,
-        BEDU = 1,
-        ANGEL = 2,
-        MAURO = 3
-    }
-
-    public enum CharacterCutscene
-    {
-        KERU = 0,
-        BEDU = 1,
-        ANGEL = 2,
-        MAURO = 3,
-        PATOVICA = 4
-    }
-
     public enum AbilitySlot
     {
         ULTIMATE = 0,
@@ -78,5 +61,34 @@ namespace Keru.Scripts.Game
     {
         PRIMARY = 0,
         SECONDARY = 1
+    }
+
+    public enum DamageType
+    {
+        NONE = 0,
+        MELEE = 1,
+        BULLET = 2,
+        EXPLOSION = 3,
+        FIRE = 4,
+        LIGHTNING = 5,
+        POISON = 6,
+    }
+
+    public enum AnimationLayers
+    {
+        BASE = 0,
+        WEAPON = 1,
+        SPECIAL = 2
+    }
+
+    public enum WeaponActions
+    {
+        DEPLOY = 0,
+        SHOOT = 1,
+        RELOAD = 2,
+        RELOAD_EMPTY = 3,
+        RELOAD_OPEN = 4,
+        RELOAD_CLOSE = 5,
+        RELOAD_INSERT = 6
     }
 }

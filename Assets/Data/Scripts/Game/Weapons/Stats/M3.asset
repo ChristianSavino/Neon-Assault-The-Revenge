@@ -19,7 +19,7 @@ MonoBehaviour:
   - Damage: 20
     AmmoType: 1
     MagazineSize: 8
-    FireRate: 2
+    FireRate: 1
     RecoilPerShot: 0
     MaxRecoil: 100
     RecoilRecover: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
   - Damage: 20
     AmmoType: 1
     MagazineSize: 8
-    FireRate: 2
+    FireRate: 1
     RecoilPerShot: 0
     MaxRecoil: 90
     RecoilRecover: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
   - Damage: 30
     AmmoType: 1
     MagazineSize: 8
-    FireRate: 2
+    FireRate: 1
     RecoilPerShot: 0
     MaxRecoil: 80
     RecoilRecover: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   - Damage: 30
     AmmoType: 1
     MagazineSize: 8
-    FireRate: 2
+    FireRate: 1
     RecoilPerShot: 0
     MaxRecoil: 70
     RecoilRecover: 0
@@ -58,10 +58,12 @@ MonoBehaviour:
     IsSilenced: 0
   HeadShotMultiplier: 2
   Force: 30
+  ReloadTime: 0.5
+  ReloadTimeEmpty: 0.5
   Projectile: {fileID: 0}
   MagazineToDrop: {fileID: 0}
-  CasingSpawnDelay: 0.5333334
-  BulletSpawn: 0
+  CasingSpawnDelay: 0.6
+  MagSpawn: 0
   ReloadSound: {fileID: 8300000, guid: 5a5dbd4bf74e33f44be53fc1abe63678, type: 3}
   EmptyReloadSound: {fileID: 0}
   DrawSound: {fileID: 8300000, guid: 4aaa78b2722c0344cb0363a3980adf64, type: 3}

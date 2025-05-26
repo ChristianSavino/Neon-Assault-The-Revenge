@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -79,7 +80,15 @@ namespace Keru.Scripts.Engine.Debug
         private void CalculateAvgFps()
         {
             var countedFps = _avgFpsCount.Where(x => x > 0);
-            var avgFps = countedFps.Average();
+            var avgFps = 0;
+            try
+            {
+                avgFps = (int)countedFps.Average();
+            }
+            catch (Exception)
+            {
+
+            }
 
             _avgFps.text = avgFps.ToString("#.##");
         }

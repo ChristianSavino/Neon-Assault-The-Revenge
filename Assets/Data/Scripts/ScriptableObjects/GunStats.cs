@@ -14,12 +14,14 @@ namespace Keru.Scripts.Game.ScriptableObjects
         public List<WeaponLevel> WeaponDataPerLevel;
         public float HeadShotMultiplier = 2;
         public float Force;
+        public float ReloadTime;
+        public float ReloadTimeEmpty;
 
         [Header("Extras")]
         public GameObject Projectile;
         public GameObject MagazineToDrop;
         public float CasingSpawnDelay;
-        public float BulletSpawn;
+        public float MagSpawn;
 
         [Header("Sound")]
         public AudioClip ReloadSound;

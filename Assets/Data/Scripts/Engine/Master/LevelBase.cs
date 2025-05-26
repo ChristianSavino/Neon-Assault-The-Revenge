@@ -25,6 +25,7 @@ namespace Keru.Scripts.Engine.Master
         private GraphicsManager _graphicsManager;
         private LevelSceneManager _levelSceneManager;
         private SaveManager _saveManager;
+        private CommonItemsManager _commonItemsManager;
         private JukeBox _jukeBox;
         private Fading _fading;
         private Volume _volume;
@@ -34,6 +35,9 @@ namespace Keru.Scripts.Engine.Master
 
         private void Awake()
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
             levelBase = this;
             GameOptions = ExternalFilesManager.LoadGameData();
            
@@ -73,6 +77,9 @@ namespace Keru.Scripts.Engine.Master
 
             _saveManager = managerGameObject.GetComponent<SaveManager>();
             _saveManager.SetUp();
+
+            _commonItemsManager = managerGameObject.GetComponent<CommonItemsManager>();
+            _commonItemsManager.SetUp();
 
             if (GameOptions.SaveGameLocation != -1)
             {
@@ -163,15 +170,11 @@ namespace Keru.Scripts.Engine.Master
             {
                 SetTimeScale(0);
                 _jukeBox.Pause(true);
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
             }
             else
             {
                 SetTimeScale(_localTimeScale);
                 _jukeBox.Pause(false);
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
             }
         }
     }

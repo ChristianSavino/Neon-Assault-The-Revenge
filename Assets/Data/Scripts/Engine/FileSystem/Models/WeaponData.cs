@@ -1,6 +1,7 @@
 using Keru.Scripts.Game;
+using System;
 
-[System.Serializable]
+[Serializable]
 public class WeaponData
 {
     public WeaponCodes Code { get; set; }

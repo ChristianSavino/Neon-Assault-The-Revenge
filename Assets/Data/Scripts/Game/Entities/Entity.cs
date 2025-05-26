@@ -7,7 +7,12 @@ namespace Keru.Scripts.Game.Entities
         [SerializeField] protected int _life;
         [SerializeField] protected bool _alive = true;
 
-        public virtual void OnDamagedUnit(int damage, Vector3 hitpoint, GameObject origin, int damageType, float damageForce)
+        public virtual void OnDamagedUnit(int damage, Vector3 hitpoint, GameObject origin, DamageType damageType, float damageForce)
+        {
+
+        }
+
+        public virtual void ForceDeployWeapon()
         {
 
         }

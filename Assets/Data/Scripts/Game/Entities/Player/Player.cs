@@ -32,8 +32,17 @@ namespace Keru.Scripts.Game.Entities.Player
             }
         }
 
-        public override void OnDamagedUnit(int damage, Vector3 hitpoint, GameObject origin, int damageType, float damageForce)
+        public override void OnDamagedUnit(int damage, Vector3 hitpoint, GameObject origin, DamageType damageType, float damageForce)
         {
+            if (_alive)
+            {
+                _life -= damage;
+                if (_life <= 0)
+                {
+                    _alive = false;
+                    Die(hitpoint, damageForce);
+                }
+            }
         }
 
         public void PauseGame(bool overwrite = false)
@@ -52,11 +61,32 @@ namespace Keru.Scripts.Game.Entities.Player
             _animations = gameObject.GetComponent<PlayerThirdPersonAnimations>();
 
             _keys = gameOptions.Options.PlayerControls.Keys;
-            
             _maxLife = saveGame.CurrentCharacterData.MaxHealth;
             _life = saveGame.CurrentCharacterData.CurrentHealth;
 
             _movement.SetConfig(_animations, _uIHandler , _keys, gameOptions.Options.PlayerControls.Sensibility);
+            _animations.SetConfig();
+
+            _weaponHandler.SetConfig(_animations, saveGame, _keys);
         }
+
+        private void Die(Vector3 hitpoint, float damageForce)
+        {
+            _movement.Die();
+            _weaponHandler.Die();
+            _animations.Die(hitpoint, damageForce);
+            //_uIHandler.Die();
+        }
+
+        public override void ForceDeployWeapon()
+        {
+            _weaponHandler.DeployWeapon(null, true);
+        }
+
+        //public void SetLife(int life)
+        //{
+        //    _life += life;
+        //    _uIHandler.SetLife(_life, _maxLife);
+        //}
     }
 }
