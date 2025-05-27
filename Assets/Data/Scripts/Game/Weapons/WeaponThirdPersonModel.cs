@@ -12,9 +12,12 @@ namespace Keru.Scripts.Game.Weapons
     {
         public GunStats WeaponData;
         [SerializeField] private List<GameObject> _attachments;
+        [SerializeField] private GameObject _bulletModel;
         [SerializeField] private GameObject _magazine;
         [SerializeField] private List<WeaponAnimationStamp> _reloadAnimationStamps;
         [SerializeField] private Vector3 _leftHandMagRotation = Vector3.zero;
+        [SerializeField] private List<WeaponAnimationStamp> _overrideAnimationEmptyReloadStamps;
+        [SerializeField] private float _overrideReloadtime;
 
         private bool _changeOnStart = true;
         private int _level;
@@ -54,23 +57,35 @@ namespace Keru.Scripts.Game.Weapons
             }
         }
 
-        public void PlayReloadAnimation()
+        public void PlayReloadAnimation(bool isEmpty = false)
         {
-            if (_reloadAnimationStamps.Count != 0)
+            if(isEmpty && _overrideAnimationEmptyReloadStamps.Count != 0)
             {
-                StartCoroutine(AnimationReload());
+                StartCoroutine(AnimationReload(_overrideAnimationEmptyReloadStamps));
+            }
+            else if (_reloadAnimationStamps.Count != 0)
+            {
+                StartCoroutine(AnimationReload(_reloadAnimationStamps));
             }
         }
 
-        private IEnumerator AnimationReload()
+        public void TurnBulletModel(bool toggle)
+        {
+            if (_bulletModel != null)
+            {
+                _bulletModel.SetActive(toggle);
+            }
+        }
+
+        private IEnumerator AnimationReload(List<WeaponAnimationStamp> animationStamps)
         {
             var leftHandMag = SetLeftHandMag(_magazine);
             leftHandMag.SetActive(false);
 
-            for (int i = 0; i < _reloadAnimationStamps.Count; i++)
+            for (int i = 0; i < animationStamps.Count; i++)
             {
-                var stamp = _reloadAnimationStamps[i];
-                var previousStamp = i - 1 >= 0 ? _reloadAnimationStamps[i - 1] : null;
+                var stamp = animationStamps[i];
+                var previousStamp = i - 1 >= 0 ? animationStamps[i - 1] : null;
 
                 var time = stamp.Time - (previousStamp != null ? previousStamp.Time : 0f);
                 yield return new WaitForSeconds(time);
@@ -93,6 +108,8 @@ namespace Keru.Scripts.Game.Weapons
                         break;
                 }
             }
+
+            TurnBulletModel(true);
         }
 
         private GameObject SetLeftHandMag(GameObject mag)

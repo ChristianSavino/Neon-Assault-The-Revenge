@@ -26,9 +26,19 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private void ActionKeys()
         {
-            if (Input.GetKeyDown(_keys["Pause"]))
+            if(_alive)
             {
-                PauseGame();
+                if (Input.GetKeyDown(_keys["Pause"]))
+                {
+                    PauseGame();
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    RestartLevel();
+                }
             }
         }
 
@@ -68,6 +78,7 @@ namespace Keru.Scripts.Game.Entities.Player
             _animations.SetConfig();
 
             _weaponHandler.SetConfig(_animations, saveGame, _keys);
+            _uIHandler.SetConfig();
         }
 
         private void Die(Vector3 hitpoint, float damageForce)
@@ -75,12 +86,20 @@ namespace Keru.Scripts.Game.Entities.Player
             _movement.Die();
             _weaponHandler.Die();
             _animations.Die(hitpoint, damageForce);
-            //_uIHandler.Die();
+            _uIHandler.Die();
+
+            LevelBase.levelBase.SetTimeScale(0.5f);
         }
 
         public override void ForceDeployWeapon()
         {
             _weaponHandler.DeployWeapon(null, true);
+        }
+
+        public void RestartLevel()
+        {
+            LevelBase.levelBase.PlayerDeathHandler();
+            Destroy(this);
         }
 
         //public void SetLife(int life)

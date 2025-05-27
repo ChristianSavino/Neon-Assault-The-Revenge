@@ -20,8 +20,8 @@ MonoBehaviour:
     AmmoType: 6
     MagazineSize: 1
     FireRate: 1
-    RecoilPerShot: 10
-    MaxRecoil: 10
+    RecoilPerShot: 0
+    MaxRecoil: 0
     RecoilRecover: 10
     Attachments: 1
     ShootSound: {fileID: 8300000, guid: 42f4de63dc9ec8c4eab363058f3affa2, type: 3}
@@ -30,9 +30,9 @@ MonoBehaviour:
     AmmoType: 6
     MagazineSize: 1
     FireRate: 1
-    RecoilPerShot: 10
-    MaxRecoil: 10
-    RecoilRecover: 10
+    RecoilPerShot: 0
+    MaxRecoil: 0
+    RecoilRecover: 0
     Attachments: 1
     ShootSound: {fileID: 8300000, guid: 42f4de63dc9ec8c4eab363058f3affa2, type: 3}
     IsSilenced: 0
@@ -40,9 +40,9 @@ MonoBehaviour:
     AmmoType: 6
     MagazineSize: 1
     FireRate: 1
-    RecoilPerShot: 10
-    MaxRecoil: 10
-    RecoilRecover: 10
+    RecoilPerShot: 0
+    MaxRecoil: 0
+    RecoilRecover: 0
     Attachments: 1
     ShootSound: {fileID: 8300000, guid: 42f4de63dc9ec8c4eab363058f3affa2, type: 3}
     IsSilenced: 0
@@ -57,16 +57,17 @@ MonoBehaviour:
     ShootSound: {fileID: 8300000, guid: 42f4de63dc9ec8c4eab363058f3affa2, type: 3}
     IsSilenced: 0
   HeadShotMultiplier: 2
-  Force: 0
+  Force: 200
   ReloadTime: 3.2
   ReloadTimeEmpty: 3.2
-  Projectile: {fileID: 0}
+  Projectile: {fileID: 5864664011019253596, guid: 8efbd936478bb2849b3f759a2647e905,
+    type: 3}
   MagazineToDrop: {fileID: 0}
   CasingSpawnDelay: 0
   MagSpawn: 0
   ReloadSound: {fileID: 0}
   EmptyReloadSound: {fileID: 8300000, guid: aeb0216aa156efb42b367875458a0662, type: 3}
-  DrawSound: {fileID: 0}
-  HolsterSound: {fileID: 0}
+  DrawSound: {fileID: 8300000, guid: 4aaa78b2722c0344cb0363a3980adf64, type: 3}
+  HolsterSound: {fileID: 8300000, guid: 8c4ede782a70c6e4b9e515d40d6e6e69, type: 3}
   BeginReload: {fileID: 0}
   FinishReload: {fileID: 0}

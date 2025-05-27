@@ -177,5 +177,10 @@ namespace Keru.Scripts.Engine.Master
                 _jukeBox.Pause(false);
             }
         }
+
+        public void PlayerDeathHandler()
+        {
+            _levelSceneManager.ReloadScene();
+        }
     }
 }

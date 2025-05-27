@@ -125,7 +125,7 @@ namespace Keru.Scripts.Game.Weapons
                     WeaponShoot(damageMultiplier, direction);
                 }
             }
-            if (_isReloading && _weaponData.WeaponType == WeaponType.SHOTGUN && !_reloadCancel)
+            else if (_isReloading && _weaponData.WeaponType == WeaponType.SHOTGUN && !_reloadCancel)
             {
                 _reloadCancel = true;
             }
@@ -150,7 +150,7 @@ namespace Keru.Scripts.Game.Weapons
                 }
                 else
                 {
-
+                    CreateBulletObject(damageMultiplier, GetDirectionRecoil(direction));
                 }
             }
 
@@ -160,6 +160,11 @@ namespace Keru.Scripts.Game.Weapons
             _currentBulletsInMag--;
             CalculateRecoilAmmount(_currentWeaponLevel.RecoilPerShot);
             StartCasingSpawn();
+
+            if (_currentBulletsInMag == 0)
+            {
+                _weaponModel.TurnBulletModel(false);
+            }
         }
 
         private void CalculateRecoilAmmount(float ammountToSum)
@@ -196,6 +201,18 @@ namespace Keru.Scripts.Game.Weapons
                     entity.OnDamagedUnit(Mathf.RoundToInt(damage), hit.point, _owner, DamageType.BULLET, _weaponData.Force);
                 }
             }
+        }
+
+        private void CreateBulletObject(float damageMultiplier, Vector3 direction)
+        {
+            var bullet = Instantiate(_weaponData.Projectile, _muzzleFlash.transform.position, Quaternion.identity);
+            bullet.transform.forward = direction;
+            bullet.layer = _owner.layer;
+            var bulletData = bullet.GetComponent<Bullet>();
+            bulletData.SetUp(
+                Mathf.RoundToInt(damageMultiplier * _currentWeaponLevel.Damage),
+                _weaponData.Force,
+                _owner);
         }
 
         private void CreateLine(Vector3 hit)
@@ -260,7 +277,7 @@ namespace Keru.Scripts.Game.Weapons
 
         private IEnumerator ReloadWeapon(bool isEmpty)
         {
-            _weaponModel.PlayReloadAnimation();
+            _weaponModel.PlayReloadAnimation(isEmpty);
             yield return new WaitForSeconds(isEmpty ? _weaponData.ReloadTimeEmpty : _weaponData.ReloadTime);
             _currentBulletsInMag = _currentWeaponLevel.MagazineSize;
 

@@ -11,6 +11,8 @@ namespace Keru.Scripts.Engine.Module
         public GameObject ShellCasing;
         public GameObject GrenadeCasing;
         public GameObject ImpactEffect;
+        public GameObject BigExplosionEffect;
+        public GameObject SmallExplosionEffect;
 
         public void SetUp()
         {
