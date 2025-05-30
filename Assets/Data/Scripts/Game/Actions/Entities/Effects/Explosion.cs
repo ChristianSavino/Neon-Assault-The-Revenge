@@ -38,6 +38,10 @@ namespace Keru.Game.Actions.Entities.Effects
                     if (_affectOwner || entity.gameObject != _owner)
                     {
                         var distance = Vector3.Distance(transform.position, obj.transform.position);
+                        if(distance >= _radius)
+                        {
+                            continue;
+                        }
                         var realDamage = Mathf.RoundToInt((1 - distance / _radius) * _damage);
                         entity.OnDamagedUnit(realDamage, transform.position, _owner, DamageType.EXPLOSION, _force);
                     }

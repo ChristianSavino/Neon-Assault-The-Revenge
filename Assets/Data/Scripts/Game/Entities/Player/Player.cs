@@ -177,7 +177,7 @@ namespace Keru.Scripts.Game.Entities.Player
         {
             _life += life;
             _life = Mathf.Clamp(_life, 0, _maxLife);
-            _lifeUIHandler.SetLife(_life, isHealing, origin.transform);
+            _lifeUIHandler.SetLife(_life, isHealing, origin?.transform);
         }
 
         public void SetArmor(int armor)

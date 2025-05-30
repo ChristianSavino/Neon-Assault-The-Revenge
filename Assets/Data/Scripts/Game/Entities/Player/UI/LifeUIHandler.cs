@@ -90,16 +90,16 @@ namespace Keru.Scripts.Game.Entities.Player.UI
 
             float duration = 0.5f;
             float elapsed = 0f;
-            float startFill = _coloredLifeBar.fillAmount;
+            float startFill = fillImage.fillAmount;
 
             while (elapsed < duration)
             {
                 elapsed += Time.deltaTime;
-                _coloredLifeBar.fillAmount = Mathf.Lerp(startFill, targetFill, elapsed / duration);
+                fillImage.fillAmount = Mathf.Lerp(startFill, targetFill, elapsed / duration);
                 yield return null;
             }
 
-            _coloredLifeBar.fillAmount = targetFill;
+            fillImage.fillAmount = targetFill;
         }
 
         private void CalculateVolumeWeight(float currentLife)
