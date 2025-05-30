@@ -7,6 +7,7 @@ namespace Keru.Scripts.Game.Entities.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
+        [Header("Movement Settings")]
         [SerializeField] private float _maxSpeed;
         [SerializeField] private bool _canDoubleJump;
         [SerializeField] private int _maxDashes;
@@ -28,10 +29,12 @@ namespace Keru.Scripts.Game.Entities.Player
         //Dashing
         private int _dash;
         private bool _isDashing;
-        
+
+        [Header("Dash Settings")]
         [SerializeField] private float dashRefreshTime = 1f;
         [SerializeField] private AudioClip dashClip;
         [SerializeField] private AudioClip dashRestoreClip;
+        [SerializeField] private TrailRenderer _dashTrail;
 
         private bool _isCrouching;
 
@@ -50,6 +53,7 @@ namespace Keru.Scripts.Game.Entities.Player
             _rigidBody = GetComponent<Rigidbody>();
             _capsuleCollider = GetComponent<CapsuleCollider>();
             _percentCrouch = 0;
+            _dashTrail.emitting = false;
 
             StartCoroutine(WalkSound());
         }
@@ -87,7 +91,6 @@ namespace Keru.Scripts.Game.Entities.Player
                 var lookPoint = ray.GetPoint(rayDistance);
                 var direction = (lookPoint - _model.transform.position).normalized;
 
-                // Calcula el ángulo y aplica la sensibilidad
                 var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
                 var currentAngle = _model.transform.eulerAngles.y;
                 var angle = Mathf.LerpAngle(currentAngle, targetAngle, _sensitivity * Time.deltaTime);
@@ -210,6 +213,7 @@ namespace Keru.Scripts.Game.Entities.Player
         {
             _isDashing = true;
             _animations.PlayAnimation(AnimationNamesHelper.DashAnimation);
+            _dashTrail.emitting = true;
             direction *= 50;
             _rigidBody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
             _dash--;
@@ -219,6 +223,7 @@ namespace Keru.Scripts.Game.Entities.Player
             yield return new WaitForSeconds(0.1f);
 
             _rigidBody.constraints = RigidbodyConstraints.FreezeRotation;
+            _dashTrail.emitting = false;
             _isDashing = false;
             StartCoroutine(RestoreDashPoint());
         }

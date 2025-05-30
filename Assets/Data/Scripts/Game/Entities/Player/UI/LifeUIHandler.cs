@@ -1,4 +1,7 @@
+using Keru.Scripts.Game.UI;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -20,8 +23,12 @@ namespace Keru.Scripts.Game.Entities.Player.UI
         [SerializeField] private GameObject _armorBox;
         [SerializeField] private Text _armorText;
 
+        [Header("Indicators")]
+        [SerializeField] private GameObject _indicatorPrefab;
+
         private int _maxLife;
         private Coroutine _redBarCoroutine;
+        private List<DamageIndicator> _indicators = new List<DamageIndicator>();
 
         public void SetConfig(int life, int maxLife)
         {
@@ -32,7 +39,7 @@ namespace Keru.Scripts.Game.Entities.Player.UI
             _lifeText.text = life.ToString();
         }
 
-        public void SetLife(int life, bool isHealing = false)
+        public void SetLife(int life, bool isHealing = false, Transform origin = null)
         {
             var currentLife = (float)life / _maxLife;
             _lifeText.text = life.ToString();
@@ -60,6 +67,14 @@ namespace Keru.Scripts.Game.Entities.Player.UI
                 }
 
                 _redBarCoroutine = StartCoroutine(AnimateBar(currentLife, _coloredLifeBar));
+
+                if(origin.gameObject != Player.Singleton.gameObject)
+                {
+                    var indicator = Instantiate(_indicatorPrefab, Player.Singleton.transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+                    indicator.transform.parent = Player.Singleton.transform;
+                    indicator.SetConfig(origin);
+                    AddIndicator(indicator);
+                }
             }
         }
 
@@ -99,9 +114,22 @@ namespace Keru.Scripts.Game.Entities.Player.UI
             }
         }
 
+        private void AddIndicator(DamageIndicator indicator)
+        {
+            _indicators = _indicators.Where(x => x != null).ToList();
+            _indicators.Add(indicator);
+        }
+
         public void Die()
         {
             _volume.weight = 1;
+            foreach (var indicator in _indicators)
+            {
+                if(indicator != null)
+                {
+                    Destroy(indicator.gameObject);
+                }
+            }
         }
     }
 }

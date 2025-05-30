@@ -56,15 +56,11 @@ namespace Keru.Scripts.Game.Entities.Player
 
             if (_alive)
             {
-                SetLife(-damage, false);
+                SetLife(-damage, false, origin);
                 if (_life <= 0)
                 {
                     _alive = false;
                     Die(hitpoint, damageForce);
-                }
-                else
-                {
-                    _lifeUIHandler.SetLife(_life);
                 }
             }
         }
@@ -177,11 +173,11 @@ namespace Keru.Scripts.Game.Entities.Player
             _lifeUIHandler.SetArmor(_armor);
         }
 
-        public void SetLife(int life, bool isHealing = true)
+        public void SetLife(int life, bool isHealing = true, GameObject origin = null)
         {
             _life += life;
             _life = Mathf.Clamp(_life, 0, _maxLife);
-            _lifeUIHandler.SetLife(_life, isHealing);
+            _lifeUIHandler.SetLife(_life, isHealing, origin.transform);
         }
 
         public void SetArmor(int armor)
