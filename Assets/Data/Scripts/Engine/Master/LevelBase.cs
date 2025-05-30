@@ -33,6 +33,9 @@ namespace Keru.Scripts.Engine.Master
         private DateTime _startTime;
         private Player _player;
 
+        [SerializeField] private bool _debug;
+        [SerializeField] private Difficulty _debugDifficulty;
+
         private void Awake()
         {
             Cursor.visible = true;
@@ -84,6 +87,10 @@ namespace Keru.Scripts.Engine.Master
             if (GameOptions.SaveGameLocation != -1)
             {
                 CurrentSave = _saveManager.LoadSaveGame(GameOptions.SaveGameLocation);
+                if(_debug)
+                {
+                    CurrentSave.Difficulty = _debugDifficulty;
+                }
             }
 
             _jukeBox = GetComponent<JukeBox>();

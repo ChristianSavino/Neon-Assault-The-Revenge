@@ -18,7 +18,7 @@ namespace Keru.Scripts.Game.Entities.Player
         [SerializeField] private GameObject _leftHand;
 
         [Header("Debug")]
-        [SerializeField] private bool _forceWeapons;
+        [SerializeField] private bool _debug;
         [SerializeField] private WeaponCodes _primaryForcedCode;
         [SerializeField] private int _primaryForcedLevel = 1;
         [SerializeField] private WeaponCodes _secondaryForcedCode;
@@ -84,23 +84,17 @@ namespace Keru.Scripts.Game.Entities.Player
             _animations = pta;
             _keys = keys;
 
-            if(_forceWeapons)
-            {
-                _primaryForcedLevel = Mathf.Clamp(_primaryForcedLevel, 1, 4);
-                _secondaryForcedLevel = Mathf.Clamp(_secondaryForcedLevel, 1, 4);
-            }
-
-            var primaryWeaponData = !_forceWeapons ? saveGame.CurrentCharacterData.Primary : saveGame.Weapons.First(x => x.Code == _primaryForcedCode);
-            var secondaryWeaponData = !_forceWeapons ? saveGame.CurrentCharacterData.Secondary : saveGame.Weapons.First(x => x.Code == _secondaryForcedCode);
+            var primaryWeaponData = !_debug ? saveGame.CurrentCharacterData.Primary : saveGame.Weapons.First(x => x.Code == _primaryForcedCode);
+            var secondaryWeaponData = !_debug ? saveGame.CurrentCharacterData.Secondary : saveGame.Weapons.First(x => x.Code == _secondaryForcedCode);
 
             var primaryWeaponModel = _animations.GetWeaponModel(primaryWeaponData.Code);
             var secondaryWeaponModel = _animations.GetWeaponModel(secondaryWeaponData.Code);
 
             _primaryWeapon = primaryWeaponModel.AddComponent<Weapon>();
-            _primaryWeapon.SetConfig(this, primaryWeaponModel, _leftHand, !_forceWeapons ? primaryWeaponData.Level : _primaryForcedLevel, primaryWeaponData.CurrentBulletsInMag);
+            _primaryWeapon.SetConfig(this, primaryWeaponModel, _leftHand, !_debug ? primaryWeaponData.Level : _primaryForcedLevel, primaryWeaponData.CurrentBulletsInMag);
 
             _secondaryWeapon = secondaryWeaponModel.AddComponent<Weapon>();
-            _secondaryWeapon.SetConfig(this, secondaryWeaponModel, _leftHand, !_forceWeapons ? secondaryWeaponData.Level : _secondaryForcedLevel, secondaryWeaponData.CurrentBulletsInMag);
+            _secondaryWeapon.SetConfig(this, secondaryWeaponModel, _leftHand, !_debug ? secondaryWeaponData.Level : _secondaryForcedLevel, secondaryWeaponData.CurrentBulletsInMag);
 
             _camera = Camera.main;
         }

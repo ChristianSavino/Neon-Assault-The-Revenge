@@ -4,6 +4,7 @@ using Keru.Scripts.Game;
 public class CurrentCharacterData
 {
     public int CurrentHealth { get; set; }
+    public int CurrentArmor { get; set; }
     public int MaxHealth { get; set; }
     public WeaponData Secondary { get; set; }
     public WeaponData Primary { get; set; }

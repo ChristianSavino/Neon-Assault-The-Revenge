@@ -138,7 +138,8 @@ MonoBehaviour:
   - {fileID: -8612965758780347302}
   - {fileID: -6058981560004682951}
   - {fileID: 6079359702158480276}
-  m_RendererFeatureMap: adc0de57c6d2eee5e7e26c4cc513ef4d6c531659b7b0cdfac722a94a744eac385a6c4b9d46997888395b477f5f2ceaab9413fb7470395e54
+  - {fileID: 8857487555898265636}
+  m_RendererFeatureMap: adc0de57c6d2eee5e7e26c4cc513ef4d6c531659b7b0cdfac722a94a744eac385a6c4b9d46997888395b477f5f2ceaab9413fb7470395e542450c2cb001eec7a
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -262,3 +263,17 @@ MonoBehaviour:
   downsampleDepthShader: {fileID: 4800000, guid: cffeaeec0396a2c4dad475266cc8dfeb,
     type: 3}
   volumetricFogShader: {fileID: 4800000, guid: 08f816187f9af0244a95556ee0cab83f, type: 3}
+--- !u!114 &8857487555898265636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6367534649014ee4f9c82a9d28b7dbe9, type: 3}
+  m_Name: SelectiveRedFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  material: {fileID: 2100000, guid: c180342fb65145040b5cba39184e122f, type: 2}

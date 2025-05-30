@@ -65,13 +65,13 @@ namespace Keru.Scripts.Game
 
     public enum DamageType
     {
-        NONE = 0,
+        TRUE_DAMAGE = 0,
         MELEE = 1,
         BULLET = 2,
         EXPLOSION = 3,
         FIRE = 4,
         LIGHTNING = 5,
-        POISON = 6,
+        POISON = 6
     }
 
     public enum AnimationLayers

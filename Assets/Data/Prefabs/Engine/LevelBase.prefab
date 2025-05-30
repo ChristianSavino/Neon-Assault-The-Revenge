@@ -319,3 +319,8 @@ MonoBehaviour:
     type: 3}
   GrenadeCasing: {fileID: 2463474128003977284, guid: 6d1cd055ad1d3a8488889d7a20b0602c,
     type: 3}
+  ImpactEffect: {fileID: 0}
+  BigExplosionEffect: {fileID: 6079224122516446114, guid: f72dfddfc0099144d93a1e827fde311e,
+    type: 3}
+  SmallExplosionEffect: {fileID: 7644276997484666445, guid: 2aed92a1ec7b9bf43b444476f33c5ebd,
+    type: 3}
