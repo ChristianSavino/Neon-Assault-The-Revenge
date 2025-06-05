@@ -8,22 +8,20 @@ namespace Keru.Scripts.Game.Entities.Player
         [SerializeField] private GameObject _pauseMenu;
         [SerializeField] private GameObject _deathHud;
 
-        private void Start()
-        {
-            _pauseMenu.SetActive(false);
-            _inGameHud.SetActive(true);
-            _deathHud.SetActive(false);
-        }
-
         public void SetConfig()
         {
+            _inGameHud.SetActive(true);
+            _pauseMenu.SetActive(true);
+            _deathHud.SetActive(false);
 
+            _pauseMenu.transform.localScale = Vector3.zero;
+            _inGameHud.transform.localScale = Vector3.one;
         }
 
         public void SetPause(bool toggle)
         {
-            _pauseMenu.SetActive(toggle);
-            _inGameHud.SetActive(!toggle);
+            _pauseMenu.transform.localScale = toggle ? Vector3.one : Vector3.zero;
+            _inGameHud.transform.localScale = toggle ? Vector3.zero : Vector3.one;
         }
 
         public void Die()

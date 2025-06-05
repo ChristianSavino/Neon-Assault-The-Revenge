@@ -373,7 +373,7 @@ PrefabInstance:
     - target: {fileID: 5565418876918208183, guid: 9004800c2d1b5d645b64d451cd0a91f9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -782,7 +782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_IsActive
@@ -1067,7 +1067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_LocalScale.x
@@ -1611,7 +1611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_LocalScale.x
@@ -1729,7 +1729,7 @@ GameObject:
   - component: {fileID: 79581425}
   - component: {fileID: 79581427}
   - component: {fileID: 79581426}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: assault_rifle_01_mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1965,7 +1965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d2e9abb71fbca5e40ac79034300f9c79, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d2e9abb71fbca5e40ac79034300f9c79, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2112,7 +2112,7 @@ GameObject:
   - component: {fileID: 85154040}
   - component: {fileID: 85154039}
   - component: {fileID: 85154038}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Beretta M9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2539,7 +2539,7 @@ GameObject:
   - component: {fileID: 94618579}
   - component: {fileID: 94618581}
   - component: {fileID: 94618580}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_01_slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3908,7 +3908,7 @@ GameObject:
   - component: {fileID: 150851201}
   - component: {fileID: 150851203}
   - component: {fileID: 150851202}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: handgun_03_slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4242,7 +4242,7 @@ GameObject:
   - component: {fileID: 164519765}
   - component: {fileID: 164519767}
   - component: {fileID: 164519766}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: assault_rifle_02_mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4339,22 +4339,22 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -80
+    limit: -10
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 0
+    limit: 10
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -4374,7 +4374,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166418238}
   serializedVersion: 4
-  m_Mass: 1.875
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4412,7 +4412,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.10788697
+  m_Radius: 0.08
   m_Height: 0.4
   m_Direction: 0
   m_Center: {x: -0.2, y: 0, z: 0}
@@ -4767,7 +4767,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 176414077}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5349,6 +5349,101 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203398980}
   m_CullTransparentMesh: 1
+--- !u!1 &203604661
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 203604662}
+  - component: {fileID: 203604665}
+  - component: {fileID: 203604664}
+  - component: {fileID: 203604663}
+  m_Layer: 9
+  m_Name: Mission Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &203604662
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203604661}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 597482886}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 545, y: -405}
+  m_SizeDelta: {x: 800, y: 70}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &203604663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203604661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
+--- !u!114 &203604664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203604661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: b3aa0163a4385ff498d7cc10881eb239, type: 3}
+    m_FontSize: 300
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 300
+    m_Alignment: 5
+    m_AlignByGeometry: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: MISION FALLIDA
+--- !u!222 &203604665
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203604661}
+  m_CullTransparentMesh: 1
 --- !u!1 &206963010
 GameObject:
   m_ObjectHideFlags: 0
@@ -5398,7 +5493,7 @@ GameObject:
   - component: {fileID: 212045430}
   - component: {fileID: 212045429}
   - component: {fileID: 212045428}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: M4A1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5595,7 +5690,7 @@ PrefabInstance:
     - target: {fileID: 4181011847856609038, guid: 6894fdac9b36fc344a5e27a029914bd9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5976,7 +6071,7 @@ PrefabInstance:
     - target: {fileID: 4181011847856609038, guid: 6894fdac9b36fc344a5e27a029914bd9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6294,7 +6389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_IsActive
@@ -6369,6 +6464,101 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 245187745}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &250755135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 250755136}
+  - component: {fileID: 250755139}
+  - component: {fileID: 250755138}
+  - component: {fileID: 250755137}
+  m_Layer: 9
+  m_Name: Death Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &250755136
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250755135}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 597482886}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 545, y: -485}
+  m_SizeDelta: {x: 800, y: 70}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &250755137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250755135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
+--- !u!114 &250755138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250755135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: b3aa0163a4385ff498d7cc10881eb239, type: 3}
+    m_FontSize: 300
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 300
+    m_Alignment: 5
+    m_AlignByGeometry: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: MUERTO
+--- !u!222 &250755139
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250755135}
+  m_CullTransparentMesh: 1
 --- !u!1 &259380151
 GameObject:
   m_ObjectHideFlags: 0
@@ -6473,7 +6663,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 263056076}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7139,7 +7329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_IsActive
@@ -7363,7 +7553,7 @@ GameObject:
   - component: {fileID: 329945767}
   - component: {fileID: 329945769}
   - component: {fileID: 329945768}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_05_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7518,7 +7708,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 339922160}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7791,7 +7981,7 @@ PrefabInstance:
     - target: {fileID: 4181011847856609038, guid: 6894fdac9b36fc344a5e27a029914bd9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7908,7 +8098,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 352763874}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8011,7 +8201,7 @@ PrefabInstance:
     - target: {fileID: 5565418876918208183, guid: 9004800c2d1b5d645b64d451cd0a91f9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8035,7 +8225,7 @@ GameObject:
   - component: {fileID: 363229143}
   - component: {fileID: 363229145}
   - component: {fileID: 363229144}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: grenade_launcher_01_front_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8153,7 +8343,7 @@ GameObject:
   - component: {fileID: 366297422}
   - component: {fileID: 366297424}
   - component: {fileID: 366297423}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: assault_rifle_01_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8339,7 +8529,7 @@ GameObject:
   - component: {fileID: 370521025}
   - component: {fileID: 370521027}
   - component: {fileID: 370521026}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: assault_rifle_01_slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8425,7 +8615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8493,7 +8683,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 380401740}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9513,7 +9703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_IsActive
@@ -9759,7 +9949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_IsActive
@@ -9848,7 +10038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9921,7 +10111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_IsActive
@@ -9995,7 +10185,7 @@ GameObject:
   - component: {fileID: 426083090}
   - component: {fileID: 426083092}
   - component: {fileID: 426083091}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: handgun_02_mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10173,7 +10363,7 @@ GameObject:
   - component: {fileID: 440394689}
   - component: {fileID: 440394692}
   - component: {fileID: 440394691}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: handgun_01_slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10263,7 +10453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 91bc5e4b061c2fa46939a0b21a1b12d4, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 91bc5e4b061c2fa46939a0b21a1b12d4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10345,7 +10535,7 @@ GameObject:
   - component: {fileID: 447017771}
   - component: {fileID: 447017773}
   - component: {fileID: 447017772}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10586,6 +10776,101 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &459420213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 459420214}
+  - component: {fileID: 459420217}
+  - component: {fileID: 459420216}
+  - component: {fileID: 459420215}
+  m_Layer: 9
+  m_Name: Press Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &459420214
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459420213}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.000100008314}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 597482886}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -664.017, y: 500.16324}
+  m_SizeDelta: {x: 550, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &459420215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459420213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
+--- !u!114 &459420216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459420213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: b3aa0163a4385ff498d7cc10881eb239, type: 3}
+    m_FontSize: 300
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 300
+    m_Alignment: 3
+    m_AlignByGeometry: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: PRESIONA R PARA REINICIAR
+--- !u!222 &459420217
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459420213}
+  m_CullTransparentMesh: 1
 --- !u!1 &467124455
 GameObject:
   m_ObjectHideFlags: 0
@@ -11141,7 +11426,7 @@ GameObject:
   - component: {fileID: 488229343}
   - component: {fileID: 488229345}
   - component: {fileID: 488229344}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: rocket_launcher_01_projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11887,17 +12172,17 @@ PrefabInstance:
     - target: {fileID: 43718118627275523, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 333011089193179052, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 411728070395250733, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 453910535891099923, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -11927,27 +12212,27 @@ PrefabInstance:
     - target: {fileID: 453952810559390391, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 497607215441943067, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 702276370686658295, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 802289277868188207, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 805590374946428895, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 973981512786795921, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -11958,17 +12243,17 @@ PrefabInstance:
     - target: {fileID: 975832899871250639, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1016179905393600657, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1268857131294102797, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1349345823044505978, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -11983,12 +12268,12 @@ PrefabInstance:
     - target: {fileID: 1362409470092037798, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1362822140763495524, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1509058816757755301, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -11998,7 +12283,7 @@ PrefabInstance:
     - target: {fileID: 1509058816757755301, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1509058816757755301, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -12013,97 +12298,97 @@ PrefabInstance:
     - target: {fileID: 1554530326708761658, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1628234441185801748, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1833927000707577856, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1870050424222215187, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2073073924939783700, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2502755010182110671, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2662936580870112929, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2666678173762942881, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2790106454507783761, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2855580992574297029, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3018364937445920543, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3320684035748802410, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3808096067315028924, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3924929608197686521, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3987499782180710254, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4061444814263139327, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4218019665574378615, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4380937460115551996, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4384042458123942192, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4384042458123942192, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -12113,12 +12398,12 @@ PrefabInstance:
     - target: {fileID: 4404558990942349083, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4421881977682988896, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4477419148982291366, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -12128,12 +12413,12 @@ PrefabInstance:
     - target: {fileID: 4500640789814970314, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4591379724288213442, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4706080149992377170, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -12153,7 +12438,7 @@ PrefabInstance:
     - target: {fileID: 5022640303303311830, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5022640303303311830, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -12163,27 +12448,27 @@ PrefabInstance:
     - target: {fileID: 5170298803300173655, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5193448222043674233, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5461257439690790389, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5487462825253651255, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5487510924370352162, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5509983384904595886, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -12193,32 +12478,32 @@ PrefabInstance:
     - target: {fileID: 5548219648738466337, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5582809643665232444, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5795564679526439274, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6233387182699858922, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6435943369652833795, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6535929003107243947, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6571519728415892623, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -12234,12 +12519,12 @@ PrefabInstance:
     - target: {fileID: 6685026563843514091, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6740795248148036745, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6774859377794138217, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -12294,12 +12579,12 @@ PrefabInstance:
     - target: {fileID: 6807743830046616014, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7292365408602151374, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7432632989634049303, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -12309,17 +12594,17 @@ PrefabInstance:
     - target: {fileID: 7453594033968476631, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7646084742141595353, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7646901949720200184, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7646901949720200184, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
@@ -12329,22 +12614,22 @@ PrefabInstance:
     - target: {fileID: 7707553245373172988, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7791421510946016635, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8731844636256696393, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 9069620748903828034, guid: 3e5f23f04920096438eafedf6daba089,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12604,7 +12889,7 @@ PrefabInstance:
     - target: {fileID: 4181011847856609038, guid: 6894fdac9b36fc344a5e27a029914bd9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12721,7 +13006,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 537978927}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12850,7 +13135,7 @@ GameObject:
   - component: {fileID: 546191229}
   - component: {fileID: 546191228}
   - component: {fileID: 546191227}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Scar H
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12978,7 +13263,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13070,7 +13355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 500000
-  _force: 150
+  _force: 80
   _damageType: 0
 --- !u!65 &555806865
 BoxCollider:
@@ -13152,7 +13437,7 @@ Transform:
   m_GameObject: {fileID: 555806863}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.5, y: 0.5, z: 0}
+  m_LocalPosition: {x: 17.5, y: 1.75, z: 0}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13986,7 +14271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 594982276}
   - component: {fileID: 594982277}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: AimRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14023,6 +14308,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Effectors: []
+--- !u!1 &597482885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 597482886}
+  - component: {fileID: 597482887}
+  m_Layer: 9
+  m_Name: Animator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &597482886
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597482885}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 250755136}
+  - {fileID: 203604662}
+  - {fileID: 459420214}
+  m_Father: {fileID: 1338570874}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &597482887
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597482885}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4834a8c6040000246a2e0ecb418edfff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &598437131
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14037,7 +14382,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_IsActive
@@ -14109,7 +14454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 602995411}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14145,7 +14490,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606280932}
   serializedVersion: 4
-  m_Mass: 1.875
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -14183,22 +14528,22 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -20
+    limit: -10
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 70
+    limit: 10
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 30
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -14229,7 +14574,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.11979278
+  m_Radius: 0.09
   m_Height: 0.39930925
   m_Direction: 0
   m_Center: {x: 0.19965462, y: 0, z: 0}
@@ -14242,7 +14587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 608548654}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14273,7 +14618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 614515399}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14403,7 +14748,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_LocalScale.x
@@ -15492,7 +15837,7 @@ GameObject:
   - component: {fileID: 688053381}
   - component: {fileID: 688053383}
   - component: {fileID: 688053382}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: grenade_launcher_01_barrel (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15579,7 +15924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_IsActive
@@ -15889,7 +16234,7 @@ GameObject:
   - component: {fileID: 703854798}
   - component: {fileID: 703854800}
   - component: {fileID: 703854799}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_05_mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16050,7 +16395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16118,7 +16463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 715021221}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16244,11 +16589,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -40
+    limit: -15
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 25
+    limit: 15
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
@@ -16259,7 +16604,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -16279,7 +16624,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 723941986}
   serializedVersion: 4
-  m_Mass: 1.25
+  m_Mass: 1.5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -16333,7 +16678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_IsActive
@@ -16633,22 +16978,22 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -80
+    limit: -10
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 0
+    limit: 10
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -16668,7 +17013,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732324960}
   serializedVersion: 4
-  m_Mass: 1.875
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -16706,7 +17051,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.10788681
+  m_Radius: 0.08
   m_Height: 0.4
   m_Direction: 0
   m_Center: {x: 0.2, y: 0, z: 0}
@@ -16794,7 +17139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 738438715}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16907,7 +17252,7 @@ GameObject:
   - component: {fileID: 745068252}
   - component: {fileID: 745068251}
   - component: {fileID: 745068250}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: P90
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17065,7 +17410,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 755998505}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17404,7 +17749,7 @@ PrefabInstance:
     - target: {fileID: 4181011847856609038, guid: 6894fdac9b36fc344a5e27a029914bd9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17431,7 +17776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_IsActive
@@ -17505,7 +17850,7 @@ GameObject:
   - component: {fileID: 804749349}
   - component: {fileID: 804749351}
   - component: {fileID: 804749350}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: handgun_01_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17658,7 +18003,7 @@ PrefabInstance:
     - target: {fileID: 4181011847856609038, guid: 6894fdac9b36fc344a5e27a029914bd9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17760,7 +18105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18111,22 +18456,22 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -90
+    limit: -10
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 0
+    limit: 10
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -18146,7 +18491,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822905849}
   serializedVersion: 4
-  m_Mass: 1.25
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -18184,7 +18529,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.098117106
+  m_Radius: 0.07
   m_Height: 0.4905855
   m_Direction: 0
   m_Center: {x: -0.24529275, y: 0, z: 0}
@@ -18294,7 +18639,7 @@ GameObject:
   - component: {fileID: 828240738}
   - component: {fileID: 828240740}
   - component: {fileID: 828240739}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: handgun_03_hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18573,7 +18918,7 @@ GameObject:
   - component: {fileID: 845444050}
   - component: {fileID: 845444052}
   - component: {fileID: 845444051}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: assault_rifle_03_grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18655,7 +19000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 853422430}
   - component: {fileID: 853422431}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MultiAim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18927,7 +19272,7 @@ GameObject:
   - component: {fileID: 857765436}
   - component: {fileID: 857765438}
   - component: {fileID: 857765437}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_01_mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19010,7 +19355,7 @@ GameObject:
   - component: {fileID: 876725338}
   - component: {fileID: 876725340}
   - component: {fileID: 876725339}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_04_mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19168,7 +19513,7 @@ GameObject:
   - component: {fileID: 879696853}
   - component: {fileID: 879696855}
   - component: {fileID: 879696854}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: grenade_launcher_01_back_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19665,7 +20010,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 912135652}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19701,7 +20046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_IsActive
@@ -19773,7 +20118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 913645780}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19841,7 +20186,7 @@ GameObject:
   - component: {fileID: 917420042}
   - component: {fileID: 917420044}
   - component: {fileID: 917420043}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: assault_rifle_02_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20025,7 +20370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 919332603}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Rifles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20132,7 +20477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 923741373}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20569,7 +20914,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942239260}
   serializedVersion: 4
-  m_Mass: 1.875
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -20607,22 +20952,22 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -20
+    limit: -10
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 70
+    limit: 10
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 30
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -20653,7 +20998,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.11979278
+  m_Radius: 0.09
   m_Height: 0.39930925
   m_Direction: 0
   m_Center: {x: -0.19965462, y: 0, z: 0}
@@ -20671,7 +21016,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943953947}
   serializedVersion: 4
-  m_Mass: 3.125
+  m_Mass: 6
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -20720,7 +21065,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 949384936}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21361,7 +21706,7 @@ GameObject:
   - component: {fileID: 973182358}
   - component: {fileID: 973182360}
   - component: {fileID: 973182359}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: assault_rifle_03_mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21442,7 +21787,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 974764916}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21548,7 +21893,7 @@ PrefabInstance:
     - target: {fileID: 5565418876918208183, guid: 9004800c2d1b5d645b64d451cd0a91f9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21773,7 +22118,7 @@ GameObject:
   - component: {fileID: 1009257786}
   - component: {fileID: 1009257788}
   - component: {fileID: 1009257787}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_05_slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21870,22 +22215,22 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -90
+    limit: -10
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 0
+    limit: 10
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -21905,7 +22250,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011746115}
   serializedVersion: 4
-  m_Mass: 1.25
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -21943,7 +22288,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.09811639
+  m_Radius: 0.07
   m_Height: 0.49058193
   m_Direction: 0
   m_Center: {x: 0.24529096, y: 0, z: 0}
@@ -22497,7 +22842,7 @@ GameObject:
   - component: {fileID: 1050277916}
   - component: {fileID: 1050277915}
   - component: {fileID: 1050277914}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: RPG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22891,7 +23236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1065358546}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22928,7 +23273,7 @@ GameObject:
   - component: {fileID: 1066277550}
   - component: {fileID: 1066277549}
   - component: {fileID: 1066277548}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: M1911
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23085,7 +23430,7 @@ GameObject:
   - component: {fileID: 1075476020}
   - component: {fileID: 1075476022}
   - component: {fileID: 1075476021}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: handgun_01_mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24255,7 +24600,7 @@ GameObject:
   - component: {fileID: 1126937913}
   - component: {fileID: 1126937915}
   - component: {fileID: 1126937914}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: handgun_03_mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24373,7 +24718,7 @@ GameObject:
   - component: {fileID: 1143659087}
   - component: {fileID: 1143659089}
   - component: {fileID: 1143659088}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: assault_rifle_03_slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24457,7 +24802,7 @@ GameObject:
   - component: {fileID: 1144097141}
   - component: {fileID: 1144097140}
   - component: {fileID: 1144097139}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: AK47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25154,7 +25499,7 @@ GameObject:
   - component: {fileID: 1170698829}
   - component: {fileID: 1170698831}
   - component: {fileID: 1170698830}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: grenade_launcher_01_barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25406,7 +25751,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1173484003}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: HandPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25439,7 +25784,7 @@ GameObject:
   - component: {fileID: 1176635894}
   - component: {fileID: 1176635896}
   - component: {fileID: 1176635895}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: grenade_launcher_01_grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25595,7 +25940,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1189063826}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25634,7 +25979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_IsActive
@@ -25708,7 +26053,7 @@ GameObject:
   - component: {fileID: 1191188325}
   - component: {fileID: 1191188327}
   - component: {fileID: 1191188326}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: grenade_launcher_01_front_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25946,7 +26291,7 @@ GameObject:
   - component: {fileID: 1207805557}
   - component: {fileID: 1207805559}
   - component: {fileID: 1207805558}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: handgun_02_slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26031,7 +26376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1215904821}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26825,7 +27170,7 @@ GameObject:
   - component: {fileID: 1235130988}
   - component: {fileID: 1235130987}
   - component: {fileID: 1235130986}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27204,7 +27549,7 @@ GameObject:
   - component: {fileID: 1241141319}
   - component: {fileID: 1241141321}
   - component: {fileID: 1241141320}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: shotgun_01_slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27290,7 +27635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d2e9abb71fbca5e40ac79034300f9c79, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d2e9abb71fbca5e40ac79034300f9c79, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27737,7 +28082,7 @@ GameObject:
   - component: {fileID: 1267342497}
   - component: {fileID: 1267342496}
   - component: {fileID: 1267342495}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Uzi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28051,7 +28396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1278480195}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: WeaponModels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28921,7 +29266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1314341932}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29334,7 +29679,7 @@ PrefabInstance:
     - target: {fileID: 4181011847856609038, guid: 6894fdac9b36fc344a5e27a029914bd9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29356,6 +29701,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1338570874}
+  - component: {fileID: 1338570875}
+  - component: {fileID: 1338570876}
   m_Layer: 9
   m_Name: Death Hud
   m_TagString: Untagged
@@ -29374,7 +29721,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 597482886}
   m_Father: {fileID: 1390381607}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -29382,6 +29730,40 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1338570875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338570873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f59440702e76d43a0f3d76450143c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundEffect: {fileID: 8300000, guid: 49caec2aeea28a642bdd7195f2477d46, type: 3}
+  _soundType: 1
+  _pitch: 0.8
+  _loop: 1
+  _delay: 25
+--- !u!114 &1338570876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338570873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f59440702e76d43a0f3d76450143c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundEffect: {fileID: 8300000, guid: d889d26c2add1d24886dfaaf0d84aee9, type: 3}
+  _soundType: 1
+  _pitch: 0.75
+  _loop: 0
+  _delay: 0.01
 --- !u!1 &1340780288
 GameObject:
   m_ObjectHideFlags: 0
@@ -29433,7 +29815,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_LocalScale.x
@@ -29622,7 +30004,7 @@ PrefabInstance:
     - target: {fileID: 4181011847856609038, guid: 6894fdac9b36fc344a5e27a029914bd9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29719,7 +30101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1362855563}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29750,7 +30132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1367559957}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29878,7 +30260,7 @@ GameObject:
   - component: {fileID: 1382750797}
   - component: {fileID: 1382750799}
   - component: {fileID: 1382750798}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: shotgun_01_grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30040,7 +30422,7 @@ GameObject:
   - component: {fileID: 1383959422}
   - component: {fileID: 1383959424}
   - component: {fileID: 1383959423}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_02_slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30121,7 +30503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1383979826}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30457,7 +30839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30530,7 +30912,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408319719}
   serializedVersion: 4
-  m_Mass: 1.25
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -30568,7 +30950,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -70
+    limit: -10
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
@@ -30579,11 +30961,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 50
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -30614,7 +30996,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.084868506
+  m_Radius: 0.07
   m_Height: 0.33947402
   m_Direction: 0
   m_Center: {x: -0.16973701, y: 0, z: 0}
@@ -30886,7 +31268,7 @@ GameObject:
   - component: {fileID: 1418383118}
   - component: {fileID: 1418383120}
   - component: {fileID: 1418383119}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_03_slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30969,7 +31351,7 @@ GameObject:
   - component: {fileID: 1420031953}
   - component: {fileID: 1420031955}
   - component: {fileID: 1420031954}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_02_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31469,7 +31851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_LocalPosition.x
@@ -31904,7 +32286,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1449684096}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32110,7 +32492,7 @@ GameObject:
   - component: {fileID: 1458667998}
   - component: {fileID: 1458668000}
   - component: {fileID: 1458667999}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: handgun_02_hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32310,7 +32692,7 @@ GameObject:
   - component: {fileID: 1464545987}
   - component: {fileID: 1464545989}
   - component: {fileID: 1464545988}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: handgun_03_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32433,7 +32815,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32984,7 +33366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -33147,7 +33529,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1494972396}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33183,7 +33565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d2e9abb71fbca5e40ac79034300f9c79, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d2e9abb71fbca5e40ac79034300f9c79, type: 3}
       propertyPath: m_LocalPosition.x
@@ -33253,7 +33635,7 @@ GameObject:
   - component: {fileID: 1499548182}
   - component: {fileID: 1499548184}
   - component: {fileID: 1499548183}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: handgun_02_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33967,7 +34349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1542107119}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: SMGS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34898,7 +35280,7 @@ GameObject:
   - component: {fileID: 1586511669}
   - component: {fileID: 1586511671}
   - component: {fileID: 1586511670}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_02_mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35403,7 +35785,7 @@ GameObject:
   - component: {fileID: 1607549504}
   - component: {fileID: 1607549503}
   - component: {fileID: 1607549502}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Glock17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35525,7 +35907,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609380132}
   serializedVersion: 4
-  m_Mass: 1.25
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -35563,7 +35945,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -70
+    limit: -10
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
@@ -35574,11 +35956,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 50
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -35609,7 +35991,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.084868655
+  m_Radius: 0.07
   m_Height: 0.33947462
   m_Direction: 0
   m_Center: {x: 0.16973731, y: 0, z: 0}
@@ -35622,7 +36004,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1609749483}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35797,7 +36179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_IsActive
@@ -36528,7 +36910,7 @@ GameObject:
   - component: {fileID: 1649721617}
   - component: {fileID: 1649721616}
   - component: {fileID: 1649721615}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: GL40
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36742,7 +37124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_IsActive
@@ -37246,7 +37628,7 @@ GameObject:
   - component: {fileID: 1680600097}
   - component: {fileID: 1680600096}
   - component: {fileID: 1680600095}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Vector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37425,7 +37807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1688958177}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Special
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37994,7 +38376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1710430855}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38030,7 +38412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_IsActive
@@ -38102,7 +38484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1720514863}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38210,7 +38592,7 @@ GameObject:
   - component: {fileID: 1728828147}
   - component: {fileID: 1728828149}
   - component: {fileID: 1728828148}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_03_mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38581,7 +38963,7 @@ GameObject:
   - component: {fileID: 1767078650}
   - component: {fileID: 1767078649}
   - component: {fileID: 1767078648}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Tec 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38796,7 +39178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1784258593}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39157,7 +39539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39509,7 +39891,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1828419972}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39619,7 +40001,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1831442752}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39653,7 +40035,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1835636439}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39821,7 +40203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d2e9abb71fbca5e40ac79034300f9c79, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d2e9abb71fbca5e40ac79034300f9c79, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40095,7 +40477,7 @@ PrefabInstance:
     - target: {fileID: 4181011847856609038, guid: 6894fdac9b36fc344a5e27a029914bd9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -40755,7 +41137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40825,7 +41207,7 @@ GameObject:
   - component: {fileID: 1885308874}
   - component: {fileID: 1885308876}
   - component: {fileID: 1885308875}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: shotgun_01_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40983,7 +41365,7 @@ GameObject:
   - component: {fileID: 1887067532}
   - component: {fileID: 1887067534}
   - component: {fileID: 1887067533}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_03_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41318,7 +41700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -41708,7 +42090,7 @@ GameObject:
   - component: {fileID: 1951984988}
   - component: {fileID: 1951984990}
   - component: {fileID: 1951984989}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_01_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42656,7 +43038,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982537720}
   serializedVersion: 4
-  m_Mass: 3.125
+  m_Mass: 6
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -42694,22 +43076,22 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -20
+    limit: -10
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 20
+    limit: 10
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 10
+    limit: 15
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 10
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -42753,7 +43135,7 @@ GameObject:
   - component: {fileID: 1987877051}
   - component: {fileID: 1987877053}
   - component: {fileID: 1987877052}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: assault_rifle_03_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43216,7 +43598,7 @@ GameObject:
   - component: {fileID: 2003588174}
   - component: {fileID: 2003588176}
   - component: {fileID: 2003588175}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_04_slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43392,7 +43774,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2011805309}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43426,7 +43808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2013529437}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43891,7 +44273,7 @@ GameObject:
   - component: {fileID: 2034581137}
   - component: {fileID: 2034581139}
   - component: {fileID: 2034581138}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: rocket_launcher_01_iron_sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43977,7 +44359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_IsActive
@@ -44054,7 +44436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_LocalPosition.x
@@ -44122,7 +44504,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2039860390}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44159,7 +44541,7 @@ GameObject:
   - component: {fileID: 2040420385}
   - component: {fileID: 2040420384}
   - component: {fileID: 2040420383}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MP5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44684,7 +45066,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2046746792}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Pistols
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44818,7 +45200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -44891,7 +45273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e677bd3addca49c4dba25b4ed4baddb9, type: 3}
       propertyPath: m_LocalScale.x
@@ -45309,7 +45691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -45510,7 +45892,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2091798751}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45541,7 +45923,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2093209385}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45652,7 +46034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 87047118f2ab2c4409a2468c049eeffd, type: 3}
       propertyPath: m_IsActive
@@ -45799,7 +46181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2103729326}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46158,7 +46540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 91a6f008108aaef40a2aa200cbda6390, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46231,7 +46613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d85367650d294cc4f859e04eb060541f, type: 3}
       propertyPath: m_IsActive
@@ -46305,7 +46687,7 @@ GameObject:
   - component: {fileID: 2124203437}
   - component: {fileID: 2124203439}
   - component: {fileID: 2124203438}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: assault_rifle_02_grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46483,7 +46865,7 @@ GameObject:
   - component: {fileID: 2131561854}
   - component: {fileID: 2131561856}
   - component: {fileID: 2131561855}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: smg_01_grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46643,7 +47025,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2134072575}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46712,7 +47094,7 @@ GameObject:
   - component: {fileID: 2139203973}
   - component: {fileID: 2139203975}
   - component: {fileID: 2139203974}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: assault_rifle_02_slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46793,7 +47175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2140547231}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Bullet Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47131,7 +47513,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2147051665}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: MagDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47329,7 +47711,7 @@ PrefabInstance:
     - target: {fileID: 5565418876918208183, guid: 9004800c2d1b5d645b64d451cd0a91f9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -47417,7 +47799,7 @@ PrefabInstance:
     - target: {fileID: 4181011847856609038, guid: 6894fdac9b36fc344a5e27a029914bd9,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

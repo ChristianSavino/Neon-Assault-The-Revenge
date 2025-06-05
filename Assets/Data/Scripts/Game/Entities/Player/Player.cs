@@ -112,7 +112,7 @@ namespace Keru.Scripts.Game.Entities.Player
             _lifeUIHandler.Die();
             _uIHandler.Die();
 
-            LevelBase.levelBase.SetTimeScale(0.5f);
+            LevelBase.levelBase.Die();
         }
 
         public override void ForceDeployWeapon()

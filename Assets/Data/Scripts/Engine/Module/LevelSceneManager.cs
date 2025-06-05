@@ -37,8 +37,6 @@ namespace Keru.Scripts.Engine.Module
                 scene = levelData.LevelType == LevelType.Game ? "LoadingScreen" : levelData.SceneName;
             }
 
-            LevelBase.levelBase.SetTimeScale(1);
-
             StartCoroutine(LoadSceneAsync(scene));
         }
 

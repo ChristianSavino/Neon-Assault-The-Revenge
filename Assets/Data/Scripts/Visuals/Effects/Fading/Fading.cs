@@ -14,7 +14,7 @@ namespace Keru.Scripts.Visuals.Effects
 
         void OnGUI()
         {
-            _alpha += _fadeDir * fadeSpeed * Time.deltaTime;
+            _alpha += _fadeDir * fadeSpeed * Time.unscaledDeltaTime;
             _alpha = Mathf.Clamp01(_alpha);
             GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, _alpha);
             GUI.depth = drawDepth;

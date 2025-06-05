@@ -49,9 +49,10 @@ namespace Keru.Scripts.Game.Entities.Humanoid
         public virtual void Die(Vector3 hitpoint, float damageForce)
         {
             _model.Update(0);
+            _model.enabled = false;
+
             ToggleCollider(true);
             ApplyForceToClosestCollider(hitpoint, damageForce);
-            _model.enabled = false;
         }
 
         protected void ToggleCollider(bool value)
@@ -81,6 +82,9 @@ namespace Keru.Scripts.Game.Entities.Humanoid
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = Vector3.zero;
                     rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+                    rb.interpolation = RigidbodyInterpolation.Interpolate;
+                    rb.drag = 1;
+                    rb.angularDrag = 0.5f;
                     if (distance < minDistance)
                     {
                         minDistance = distance;
@@ -93,6 +97,7 @@ namespace Keru.Scripts.Game.Entities.Humanoid
             {
                 var direction = (transform.position - hitpoint).normalized;
                 closestCollider.AddForce(direction * damageForce, ForceMode.Impulse);
+                print(closestCollider.gameObject.name);
             }
         }
 

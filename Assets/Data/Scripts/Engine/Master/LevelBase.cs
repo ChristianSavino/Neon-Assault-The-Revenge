@@ -59,6 +59,7 @@ namespace Keru.Scripts.Engine.Master
             }
 
             _startTime = DateTime.Now;
+            SetTimeScale(_localTimeScale);
         }
 
 
@@ -188,6 +189,12 @@ namespace Keru.Scripts.Engine.Master
         public void PlayerDeathHandler()
         {
             _levelSceneManager.ReloadScene();
+        }
+
+        public void Die()
+        {
+            SetTimeScale(0.5f);
+            _jukeBox.StopMusic(false);
         }
     }
 }
