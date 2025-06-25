@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3097c6aa9a1a466468a6415d6db08ab8, type: 3}
+  m_Name: Bullet Time
+  m_EditorClassIdentifier: 
+  AbilityCode: 0
+  AbilitySlot: 1
+  SpecialEffects: {fileID: 7193458108169528074, guid: 2fd8c407b6271b24682498dfe1dc0821,
+    type: 3}
+  SpecialObject: {fileID: 0}
+  Volume: {fileID: 11400000, guid: 49d8ec527dff4c345b0069e7de297f79, type: 2}
+  Icon: {fileID: 21300000, guid: 95ee17b03af640d42b8783a7e0d843f2, type: 3}
+  CastTime: 0.5
+  SoundEffect: {fileID: 0}
+  EndSoundEffect: {fileID: 0}
+  SpecialLevels:
+  - Power: 0.5
+    Cooldown: 30
+    Duration: 5
+    Range: 0
+  - Power: 0.5
+    Cooldown: 25
+    Duration: 6
+    Range: 0
+  - Power: 0.5
+    Cooldown: 20
+    Duration: 7
+    Range: 0

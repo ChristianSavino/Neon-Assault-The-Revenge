@@ -12,4 +12,5 @@ public class WeaponData
     public int KillsRequired { get; set; }
     public int KillsAmmountPerLevel { get; set; }
     public bool Unlocked { get; set; }
+    public int CurrentTotalBullets { get; set; }
 }

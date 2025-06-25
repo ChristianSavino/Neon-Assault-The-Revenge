@@ -47,13 +47,15 @@ public class SaveGameFile
             {
                 Code = AbilityCodes.BULLETTIME,
                 CurrentUses = 0,
-                Level = 1
+                Level = 1, 
+                AbilitySlot = AbilitySlot.SECONDARY
             },
             new SkillData()
             {
                 Code = AbilityCodes.JUDGEMENTCUT,
                 CurrentUses = 0,
-                Level = 1
+                Level = 1,
+                AbilitySlot = AbilitySlot.ULTIMATE
             }
         };
     }

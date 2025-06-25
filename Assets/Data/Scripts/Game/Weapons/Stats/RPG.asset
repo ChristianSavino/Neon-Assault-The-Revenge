@@ -57,7 +57,7 @@ MonoBehaviour:
     ShootSound: {fileID: 8300000, guid: 42f4de63dc9ec8c4eab363058f3affa2, type: 3}
     IsSilenced: 0
   HeadShotMultiplier: 2
-  Force: 200
+  Force: 500
   ReloadTime: 3.2
   ReloadTimeEmpty: 3.2
   Projectile: {fileID: 5864664011019253596, guid: 8efbd936478bb2849b3f759a2647e905,

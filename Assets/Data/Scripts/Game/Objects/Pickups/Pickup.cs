@@ -5,8 +5,8 @@ namespace Keru.Scripts.Game.Objects.Pickups
     [RequireComponent(typeof(BoxCollider))]
     public class Pickup : MonoBehaviour
     {
-        [SerializeField] private AudioClip _soundToPlay;
-        [SerializeField] private bool _objectSpins;
+        [SerializeField] protected AudioClip _soundToPlay;
+        [SerializeField] protected bool _objectSpins;
 
         private void Start()
         {

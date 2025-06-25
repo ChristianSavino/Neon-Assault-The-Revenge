@@ -171,6 +171,8 @@ MonoBehaviour:
   _localTimeScale: 1
   _useMainVolumetricLights: 0
   _useExtraVolumetricLights: 0
+  _debug: 0
+  _debugDifficulty: 0
 --- !u!114 &1219803289478327984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,6 +312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletTrailDistortion: {fileID: 2100000, guid: 95a9b8acbd5903a42939c7fbc1af5411,
+    type: 2}
+  PlayerAfterImageMaterial: {fileID: 2100000, guid: f4ec59a5fd8b0ad41b357b57a85ffe9d,
     type: 2}
   SmallBulletCasing: {fileID: 592762295993380993, guid: 138ede4007d2caa46a7c23742797382c,
     type: 3}

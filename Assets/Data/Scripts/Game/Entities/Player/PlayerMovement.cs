@@ -1,3 +1,5 @@
+using Keru.Debug.Scripts.Game.Entities.Player.UI;
+using Keru.Game.Effects.AfterImages;
 using Keru.Scripts.Helpers;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private PlayerThirdPersonAnimations _animations;
         private PlayerUIHandler _uIHandler;
+        private Player _player;
         private Dictionary<string, KeyCode> _keys;
 
         private Rigidbody _rigidBody;
@@ -31,21 +34,26 @@ namespace Keru.Scripts.Game.Entities.Player
         private bool _isDashing;
 
         [Header("Dash Settings")]
-        [SerializeField] private float dashRefreshTime = 1f;
-        [SerializeField] private AudioClip dashClip;
-        [SerializeField] private AudioClip dashRestoreClip;
+        [SerializeField] private float _dashRefreshTime = 1f;
+        [SerializeField] private AudioClip _dashClip;
         [SerializeField] private TrailRenderer _dashTrail;
+        private Coroutine _dashCoroutine;
 
         private bool _isCrouching;
 
         //Jump/DoubleJump
-        
+
         private bool _isAbleToDoubleJump;
 
         private Vector3 _crouchCenter = new Vector3(0, 0.33f, 0);
         private Vector3 _modelCrouchingPos = new Vector3(0, -0.42f, 0);
-        private Vector3 _modelStandingPos = new Vector3(0,-1f, 0);
+        private Vector3 _modelStandingPos = new Vector3(0, -1f, 0);
         private float _percentCrouch;
+
+        private DashUIHandler _dashUIHandler;
+
+        //Effects
+        public bool CanMove { get; set; } = true;
 
         private void Start()
         {
@@ -57,27 +65,33 @@ namespace Keru.Scripts.Game.Entities.Player
 
             StartCoroutine(WalkSound());
         }
-        public void SetConfig(PlayerThirdPersonAnimations animationReference, PlayerUIHandler uiHandler, Dictionary<string, KeyCode> keys, float sensivity)
+        public void SetConfig(Player player, PlayerThirdPersonAnimations animationReference, PlayerUIHandler uiHandler, Dictionary<string, KeyCode> keys, float sensivity)
         {
+            _player = player;
             _animations = animationReference;
             _keys = keys;
             _sensitivity = sensivity;
             _uIHandler = uiHandler;
 
             _dash = _maxDashes;
+            _dashUIHandler = _uIHandler.GetComponentInChildren<DashUIHandler>();
+            _dashUIHandler.SetUp(_maxDashes, _dashRefreshTime);
         }
-        
+
         private void Update()
         {
             Look();
+            if(CanMove)
+            {
+                Dash();
+                Crouching();
+                JumpMovement();
+            }
         }
 
         private void FixedUpdate()
         {
             Movement();
-            JumpMovement();
-            Dash();
-            Crouching();
         }
 
         private void Look()
@@ -101,31 +115,45 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private void JumpMovement()
         {
-            if (Input.GetKeyDown(_keys["Jump"]) && _isAbleToDoubleJump)
+            if (Input.GetKeyDown(_keys["Jump"]) && _isAbleToDoubleJump && !_isCrouching)
             {
                 Jump();
                 _isAbleToDoubleJump = false;
             }
-            if (Input.GetKey(_keys["Jump"]) && GroundCheck())
+            if (Input.GetKeyDown(_keys["Jump"]) && GroundCheck() && !_isCrouching)
             {
                 Jump();
                 _isAbleToDoubleJump = _canDoubleJump;
+            }
+            else if(Input.GetKeyDown(_keys["Jump"]) && _isCrouching)
+            {
+                SetCrouching();
             }
         }
 
         private void Jump()
         {
+            if (!CanMove)
+            {
+                return;
+            }
+            else if (_isCrouching)
+            {
+                _isCrouching = false;
+                return;
+            }
+
             _rigidBody.velocity = new Vector3(_rigidBody.velocity.x, 5.0f, _rigidBody.velocity.z);
             _animations.PlayAnimation(AnimationNamesHelper.JumpAnimation);
         }
 
         private void Movement()
         {
-            if (!_isDashing)
+            if (!_isDashing && CanMove)
             {
                 GroundCheck();
                 var accelerate = false;
-                
+
                 if (Input.GetKey(_keys["Up"]) || Input.GetKey(_keys["Left"]) || Input.GetKey(_keys["Back"]) || Input.GetKey(_keys["Right"]))
                 {
                     _axis = getDirection();
@@ -140,7 +168,7 @@ namespace Keru.Scripts.Game.Entities.Player
                 {
                     _acceleration -= (Time.deltaTime * 4);
                 }
-                
+
                 _acceleration = Mathf.Clamp(_acceleration, 0, 1);
 
                 Vector3 localInputDir = _model.transform.InverseTransformDirection(_axis.normalized);
@@ -153,42 +181,49 @@ namespace Keru.Scripts.Game.Entities.Player
 
                 _rigidBody.velocity = _axis;
             }
+            else if (!CanMove)
+            {
+                _rigidBody.velocity = new Vector3(0, _rigidBody.velocity.y, 0);
+            }
         }
 
         private void Crouching()
         {
             if (Input.GetKeyDown(_keys["Duck"]))
             {
-                _isCrouching = !_isCrouching;
-                
-                if(!_isCrouching)
-                {
-                    _isCrouching = CalculateIfCanStand();
-                }
+                SetCrouching();
             }
-            
+
             CalculatePercentCrouch();
             _animations.SetParameter(ParameterNamesHelper.IsCrouchingParameter, _isCrouching);
+        }
+
+        private void SetCrouching()
+        {
+            _isCrouching = !_isCrouching;
+
+            if (!_isCrouching)
+            {
+                _isCrouching = CalculateIfCanStand();
+            }
         }
 
         private Vector3 getDirection()
         {
             var vector = Vector3.zero;
+
             if (Input.GetKey(_keys["Up"]))
             {
                 vector += Vector3.right;
             }
-               
             if (Input.GetKey(_keys["Left"]))
             {
                 vector += Vector3.forward;
             }
-               
             if (Input.GetKey(_keys["Back"]))
             {
                 vector += Vector3.left;
             }
-               
             if (Input.GetKey(_keys["Right"]))
             {
                 vector += Vector3.back;
@@ -213,6 +248,8 @@ namespace Keru.Scripts.Game.Entities.Player
         {
             _isDashing = true;
             _animations.PlayAnimation(AnimationNamesHelper.DashAnimation);
+            _player.AddEffect(_dashClip);
+            AfterImageCreator.CreateAfterImage(_model, 0.5f, 2);
             _dashTrail.emitting = true;
             direction *= 50;
             _rigidBody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
@@ -225,20 +262,29 @@ namespace Keru.Scripts.Game.Entities.Player
             _rigidBody.constraints = RigidbodyConstraints.FreezeRotation;
             _dashTrail.emitting = false;
             _isDashing = false;
-            StartCoroutine(RestoreDashPoint());
+            
+            if(_dashCoroutine != null)
+            {
+                StopCoroutine(_dashCoroutine);
+            }   
+            _dashCoroutine = StartCoroutine(RestoreDashPoint());
         }
 
         private IEnumerator RestoreDashPoint()
         {
-            yield return new WaitForSeconds(dashRefreshTime);
+            _dashUIHandler.UpdateBars(_dash);
+            yield return new WaitForSeconds(_dashRefreshTime);
             _dash++;
-            //UI Code
+            if (_dash != _maxDashes)
+            {
+                _dashCoroutine = StartCoroutine(RestoreDashPoint());
+            }
         }
 
         private IEnumerator WalkSound()
         {
             yield return new WaitForSeconds(0.5f);
-            
+
             if (_rigidBody.velocity != Vector3.zero && !_isCrouching && GroundCheck())
             {
                 //Director Code
@@ -256,6 +302,8 @@ namespace Keru.Scripts.Game.Entities.Player
         {
             _rigidBody.constraints = RigidbodyConstraints.FreezeAll;
             _capsuleCollider.enabled = false;
+            _dashUIHandler.Die();
+            StopCoroutine(RestoreDashPoint());
             enabled = false;
         }
 
@@ -293,5 +341,7 @@ namespace Keru.Scripts.Game.Entities.Player
         {
             return _maxSpeed * _acceleration * (_isCrouching ? 0.5f : 1);
         }
+
+
     }
 }

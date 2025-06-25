@@ -1,3 +1,4 @@
+using Keru.Scripts.Game.Entities.Player.UI;
 using Keru.Scripts.Game.Weapons;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace Keru.Scripts.Game.Entities.Player
     public class PlayerWeaponHandler : MonoBehaviour
     {
         private PlayerThirdPersonAnimations _animations;
+        private WeaponUIHandler _uiHandler;
         private Weapon _primaryWeapon;
         private Weapon _secondaryWeapon;
         private Weapon _currentWeapon;
@@ -15,6 +17,7 @@ namespace Keru.Scripts.Game.Entities.Player
         private bool _canDeploy;
         private Vector3 _direction;
         private Camera _camera;
+
         [SerializeField] private GameObject _leftHand;
 
         [Header("Debug")]
@@ -24,31 +27,37 @@ namespace Keru.Scripts.Game.Entities.Player
         [SerializeField] private WeaponCodes _secondaryForcedCode;
         [SerializeField] private int _secondaryForcedLevel = 1;
 
+        //Effects
+        public bool CanInteract { get; set; } = true;
+
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Alpha1))
+            if (CanInteract)
             {
-                DeployWeapon(_primaryWeapon);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                DeployWeapon(_secondaryWeapon);
-            }
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    DeployWeapon(_primaryWeapon);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    DeployWeapon(_secondaryWeapon);
+                }
 
-            if (_currentWeapon != null)
-            {
-                CalculateDirection();
-                WeaponControls();
+                if (_currentWeapon != null)
+                {
+                    CalculateDirection();
+                    WeaponControls();
+                }
             }
         }
 
         private void WeaponControls()
         {
-            if(Input.GetKeyDown(_keys["Shoot"]))
+            if (Input.GetKeyDown(_keys["Shoot"]))
             {
                 _currentWeapon.StartsShoot();
             }
-            if(Input.GetKeyUp(_keys["Shoot"]))
+            if (Input.GetKeyUp(_keys["Shoot"]))
             {
                 _currentWeapon.EndsShoot();
             }
@@ -79,7 +88,7 @@ namespace Keru.Scripts.Game.Entities.Player
             _direction = (targetPoint - transform.position);
         }
 
-        public void SetConfig(PlayerThirdPersonAnimations pta, SaveGameFile saveGame, Dictionary<string, KeyCode> keys)
+        public void SetConfig(PlayerThirdPersonAnimations pta, SaveGameFile saveGame, Dictionary<string, KeyCode> keys, WeaponUIHandler weaponUiHandler)
         {
             _animations = pta;
             _keys = keys;
@@ -91,24 +100,25 @@ namespace Keru.Scripts.Game.Entities.Player
             var secondaryWeaponModel = _animations.GetWeaponModel(secondaryWeaponData.Code);
 
             _primaryWeapon = primaryWeaponModel.AddComponent<Weapon>();
-            _primaryWeapon.SetConfig(this, primaryWeaponModel, _leftHand, !_debug ? primaryWeaponData.Level : _primaryForcedLevel, primaryWeaponData.CurrentBulletsInMag);
+            _primaryWeapon.SetConfig(this, primaryWeaponModel, _leftHand, !_debug ? primaryWeaponData.Level : _primaryForcedLevel, primaryWeaponData.CurrentBulletsInMag, primaryWeaponData.CurrentTotalBullets);
 
             _secondaryWeapon = secondaryWeaponModel.AddComponent<Weapon>();
-            _secondaryWeapon.SetConfig(this, secondaryWeaponModel, _leftHand, !_debug ? secondaryWeaponData.Level : _secondaryForcedLevel, secondaryWeaponData.CurrentBulletsInMag);
+            _secondaryWeapon.SetConfig(this, secondaryWeaponModel, _leftHand, !_debug ? secondaryWeaponData.Level : _secondaryForcedLevel, secondaryWeaponData.CurrentBulletsInMag, secondaryWeaponData.CurrentTotalBullets);
 
             _camera = Camera.main;
+            _uiHandler = weaponUiHandler;
         }
 
         public void DeployWeapon(Weapon weapon, bool forcedDeploy = false)
         {
-            if(!_canDeploy && !forcedDeploy)
+            if (!_canDeploy && !forcedDeploy)
             {
                 return;
             }
 
             _canDeploy = true;
 
-            if(_currentWeapon != null)
+            if (_currentWeapon != null)
             {
                 if (!_currentWeapon.CanChangeWeapon())
                 {
@@ -155,6 +165,25 @@ namespace Keru.Scripts.Game.Entities.Player
             _canDeploy = false;
             _currentWeapon?.Die();
             enabled = false;
+        }
+
+        public void SetWeaponData(string name, AmmoType munitionType, int bulletsInMag, int maxBulletsInMag, int currentTotalBullets)
+        {
+            _uiHandler.SetWeapon(name, munitionType, bulletsInMag, maxBulletsInMag, currentTotalBullets);
+        }
+
+        public void UpdateWeaponData(int bulletsInMag, int currentTotalBullets)
+        {
+            _uiHandler.UpdateBullets(bulletsInMag, currentTotalBullets);
+        }
+
+        public bool RefillAmmo(float ammount)
+        {
+            var primaryResult = _primaryWeapon.RefillMaxAmmo(ammount);
+            var secondaryResult = _secondaryWeapon.RefillMaxAmmo(ammount);
+
+            return primaryResult || secondaryResult;
+
         }
     }
 }

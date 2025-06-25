@@ -11,8 +11,16 @@ namespace Keru.Scripts.Game.Objects.Pickups
         {
             base.OnTriggerEnter(other);
             var player = other.GetComponent<Player>();
-            player.SetLife(_healthAmount);
-            Destroy(gameObject);
+            var result = player.AddLife(_healthAmount, _soundToPlay);
+            if (result)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        public void SetConfig(int healthAmount)
+        {
+            _healthAmount = healthAmount;
         }
     }
 }

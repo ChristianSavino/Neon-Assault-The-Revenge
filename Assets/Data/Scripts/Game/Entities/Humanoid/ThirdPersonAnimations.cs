@@ -1,5 +1,6 @@
 using Keru.Scripts.Game.Weapons;
 using Keru.Scripts.Helpers;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -44,6 +45,26 @@ namespace Keru.Scripts.Game.Entities.Humanoid
             _model.SetLayerWeight((int)AnimationLayers.WEAPON, 1);
 
             PlayAnimation(fullAnimationName, (int)AnimationLayers.WEAPON, timeAt);
+        }
+
+        public virtual void PlaySpecialAnimation(string name, float time)
+        {
+            _model.SetLayerWeight((int)AnimationLayers.SPECIAL, 1);
+            PlayAnimation(name, (int)AnimationLayers.SPECIAL);
+
+            StartCoroutine(ReturnToNormal(name, time));
+        }
+
+        private IEnumerator ReturnToNormal(string name, float time)
+        {
+            yield return new WaitForSeconds(time);
+            while (_model.GetLayerWeight((int)AnimationLayers.SPECIAL) > 0)
+            {
+                var weight = _model.GetLayerWeight((int)AnimationLayers.SPECIAL);
+                weight -= Time.deltaTime * 2;
+                _model.SetLayerWeight((int)AnimationLayers.SPECIAL, weight);
+                yield return new WaitForEndOfFrame();
+            }
         }
 
         public virtual void Die(Vector3 hitpoint, float damageForce)
@@ -97,7 +118,6 @@ namespace Keru.Scripts.Game.Entities.Humanoid
             {
                 var direction = (transform.position - hitpoint).normalized;
                 closestCollider.AddForce(direction * damageForce, ForceMode.Impulse);
-                print(closestCollider.gameObject.name);
             }
         }
 
@@ -116,23 +136,23 @@ namespace Keru.Scripts.Game.Entities.Humanoid
         {
             return _weaponsModels.First(x => x.WeaponData.WeaponCode == weaponCode).gameObject;
         }
-        
+
         private string GetAnimationName(WeaponActions weaponAction)
         {
             switch (weaponAction)
             {
                 case WeaponActions.DEPLOY:
-                   return AnimationNamesHelper.WeaponAimAnimation;
+                    return AnimationNamesHelper.WeaponAimAnimation;
                 case WeaponActions.SHOOT:
-                   return AnimationNamesHelper.WeaponShootAnimation;
+                    return AnimationNamesHelper.WeaponShootAnimation;
                 case WeaponActions.RELOAD:
-                   return AnimationNamesHelper.WeaponReloadAnimation;
+                    return AnimationNamesHelper.WeaponReloadAnimation;
                 case WeaponActions.RELOAD_EMPTY:
-                   return AnimationNamesHelper.WeaponEmptyReloadAnimation;
+                    return AnimationNamesHelper.WeaponEmptyReloadAnimation;
                 case WeaponActions.RELOAD_OPEN:
-                   return AnimationNamesHelper.WeaponReloadOpenAnimation;
+                    return AnimationNamesHelper.WeaponReloadOpenAnimation;
                 case WeaponActions.RELOAD_CLOSE:
-                   return AnimationNamesHelper.WeaponReloadCloseAnimation;
+                    return AnimationNamesHelper.WeaponReloadCloseAnimation;
                 case WeaponActions.RELOAD_INSERT:
                     return AnimationNamesHelper.WeaponReloadInsertAnimation;
             }

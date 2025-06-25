@@ -6,6 +6,14 @@ namespace Keru.Scripts.Game
         SECONDARY = 1
     }
 
+    public enum AbilityAction
+    {
+        IDLE = 0,
+        CAST = 1,
+        TOGGLE = 2,
+        COOLDOWN = 3
+    }
+
     public enum AbilityType
     {
         DAMAGE = 0,

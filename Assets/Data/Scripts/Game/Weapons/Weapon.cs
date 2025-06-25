@@ -24,6 +24,8 @@ namespace Keru.Scripts.Game.Weapons
         private AudioSource _audioSource;
 
         private int _currentBulletsInMag;
+        private int _maxTotalBullets;
+        private int _currentTotalBullets;
 
         private bool _canShoot;
         private bool _isReloading;
@@ -33,7 +35,6 @@ namespace Keru.Scripts.Game.Weapons
         private bool _isShooting;
 
         private float _recoil;
-        private Camera _camera;
         private GameObject _owner;
         private GameObject _impact;
         private GameObject _casing;
@@ -41,7 +42,7 @@ namespace Keru.Scripts.Game.Weapons
         private int _layerMask;
 
 
-        public void SetConfig(PlayerWeaponHandler playerWeaponHandler, GameObject weaponModel, GameObject leftHand, int weaponLevel = 1, int currentBulletsInMag = 0, GameObject owner = null)
+        public void SetConfig(PlayerWeaponHandler playerWeaponHandler, GameObject weaponModel, GameObject leftHand, int weaponLevel = 1, int currentBulletsInMag = 0, int currentTotalBullets = 0, GameObject owner = null)
         {
             _playerWeaponHandler = playerWeaponHandler;
 
@@ -67,7 +68,6 @@ namespace Keru.Scripts.Game.Weapons
             }
 
             _audioSource = AudioManager.audioManager.CreateNewAudioSource(gameObject, Engine.SoundType.Effect);
-            _camera = Camera.main;
             if (owner != null)
             {
                 _owner = owner;
@@ -80,6 +80,9 @@ namespace Keru.Scripts.Game.Weapons
             _bulletTrail = CommonItemsManager.ItemsManager.BulletTrailDistortion;
             _weaponModel.ConfigWeapon(weaponLevel, leftHand.transform);
             _casing = GetCasing();
+
+            _maxTotalBullets = _currentWeaponLevel.MagazineSize * (2 + weaponLevel);
+            _currentTotalBullets = currentTotalBullets != 0 ? currentBulletsInMag : _maxTotalBullets;
         }
 
         public void Deploy()
@@ -88,6 +91,7 @@ namespace Keru.Scripts.Game.Weapons
             _isReloading = false;
             _canChangeWeapon = false;
             StartCoroutine(DeployWeapon());
+            _playerWeaponHandler.SetWeaponData(_weaponData.name, _currentWeaponLevel.AmmoType, _currentBulletsInMag, _currentWeaponLevel.MagazineSize, _currentTotalBullets);
         }
 
         public bool CanChangeWeapon()
@@ -123,6 +127,7 @@ namespace Keru.Scripts.Game.Weapons
                     _nextShot = Time.time + 1f / (_currentWeaponLevel.FireRate * fireRateMultiplier);
 
                     WeaponShoot(damageMultiplier, direction);
+                    _playerWeaponHandler.UpdateWeaponData(_currentBulletsInMag, _currentTotalBullets);
                 }
             }
             else if (_isReloading && _weaponData.WeaponType == WeaponType.SHOTGUN && !_reloadCancel)
@@ -175,7 +180,7 @@ namespace Keru.Scripts.Game.Weapons
 
         private void StartCasingSpawn()
         {
-            if(_casing != null)
+            if (_casing != null)
             {
                 StartCoroutine(CreateCasing());
             }
@@ -219,7 +224,7 @@ namespace Keru.Scripts.Game.Weapons
         {
             var line = new GameObject("Line");
             line = Instantiate(line, _bulletDrop.position, _bulletDrop.rotation);
-           
+
             var lineRenderer = line.AddComponent<LineRenderer>();
             lineRenderer.material = _bulletTrail;
             lineRenderer.startWidth = 0f;
@@ -228,7 +233,7 @@ namespace Keru.Scripts.Game.Weapons
             lineRenderer.textureMode = LineTextureMode.Tile;
             lineRenderer.SetPosition(0, _shootPos.position);
             lineRenderer.SetPosition(1, hit);
-            
+
             Destroy(line, 0.1f);
         }
 
@@ -246,7 +251,7 @@ namespace Keru.Scripts.Game.Weapons
 
         public void Reload()
         {
-            if (_currentBulletsInMag < _currentWeaponLevel.MagazineSize && !_isReloading)
+            if (_currentBulletsInMag < _currentWeaponLevel.MagazineSize && !_isReloading && _currentTotalBullets > 0)
             {
                 _canShoot = false;
                 _isReloading = true;
@@ -278,12 +283,26 @@ namespace Keru.Scripts.Game.Weapons
         private IEnumerator ReloadWeapon(bool isEmpty)
         {
             _weaponModel.PlayReloadAnimation(isEmpty);
+            var bulletsToRefill = _currentWeaponLevel.MagazineSize;
+
             yield return new WaitForSeconds(isEmpty ? _weaponData.ReloadTimeEmpty : _weaponData.ReloadTime);
-            _currentBulletsInMag = _currentWeaponLevel.MagazineSize;
+
+            if (_currentTotalBullets < _currentWeaponLevel.MagazineSize)
+            {
+                bulletsToRefill = _currentTotalBullets;
+                _currentTotalBullets = 0;
+            }
+            else
+            {
+                _currentTotalBullets -= _currentWeaponLevel.MagazineSize - _currentBulletsInMag;
+            }
+
+            _currentBulletsInMag = bulletsToRefill;
 
             _isReloading = false;
             _canShoot = true;
             _canChangeWeapon = true;
+            _playerWeaponHandler.UpdateWeaponData(_currentBulletsInMag, _currentTotalBullets);
         }
 
         private IEnumerator ReloadShotgun()
@@ -293,12 +312,14 @@ namespace Keru.Scripts.Game.Weapons
 
             yield return new WaitForSeconds(0.5f);
 
-            while (!_reloadCancel && _currentBulletsInMag < _currentWeaponLevel.MagazineSize)
+            while (!_reloadCancel && _currentBulletsInMag < _currentWeaponLevel.MagazineSize && _currentTotalBullets > 0)
             {
                 PlayAnimation(WeaponActions.RELOAD_INSERT);
                 _audioSource.PlayOneShot(_weaponData.ReloadSound);
                 yield return new WaitForSeconds(_weaponData.ReloadTime);
                 _currentBulletsInMag++;
+                _currentTotalBullets--;
+                _playerWeaponHandler.UpdateWeaponData(_currentBulletsInMag, _currentTotalBullets);
             }
 
             PlayAnimation(WeaponActions.RELOAD_CLOSE);
@@ -365,7 +386,7 @@ namespace Keru.Scripts.Game.Weapons
             yield return new WaitForSeconds(0.1f);
             if (!_isShooting)
             {
-                CalculateRecoilAmmount(-_currentWeaponLevel.RecoilRecover/5);
+                CalculateRecoilAmmount(-_currentWeaponLevel.RecoilRecover / 5);
             }
             StartCoroutine(RecoilRecover());
         }
@@ -386,6 +407,23 @@ namespace Keru.Scripts.Game.Weapons
             }
 
             return null;
+        }
+
+        public int GetMagazineSize()
+        {
+            return _currentWeaponLevel.MagazineSize;
+        }
+
+        public bool RefillMaxAmmo(float magazine)
+        {
+            if(_maxTotalBullets == _currentTotalBullets)
+            {
+                return false;
+            }
+
+            _currentTotalBullets += Mathf.RoundToInt(magazine * _currentWeaponLevel.MagazineSize);
+
+            return true;
         }
     }
 }

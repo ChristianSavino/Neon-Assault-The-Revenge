@@ -6,6 +6,7 @@ namespace Keru.Scripts.Engine.Module
     {
         public static CommonItemsManager ItemsManager;
         public Material BulletTrailDistortion;
+        public Material PlayerAfterImageMaterial;
         public GameObject SmallBulletCasing;
         public GameObject BigBulletCasing;
         public GameObject ShellCasing;

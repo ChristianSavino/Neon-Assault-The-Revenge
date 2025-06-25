@@ -34,6 +34,7 @@ namespace Keru.Scripts.Engine.Module
             var audioSource = origin.AddComponent<AudioSource>();
             audioSource.loop = false;
             audioSource.playOnAwake = false;
+            audioSource.pitch = Time.timeScale;
 
             switch (soundType)
             {

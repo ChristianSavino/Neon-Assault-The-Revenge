@@ -17,7 +17,7 @@ namespace Keru.Scripts.Engine.Master
 
         [SerializeField] private bool _isMenu;
         [SerializeField] private bool _usesMusic = true;
-        [SerializeField] private float _localTimeScale = 1f;
+        public float LocalTimeScale { get; set; } = 1f;
         [SerializeField] private bool _useMainVolumetricLights;
         [SerializeField] private bool _useExtraVolumetricLights;
 
@@ -59,7 +59,7 @@ namespace Keru.Scripts.Engine.Master
             }
 
             _startTime = DateTime.Now;
-            SetTimeScale(_localTimeScale);
+            SetTimeScale(LocalTimeScale);
         }
 
 
@@ -181,7 +181,7 @@ namespace Keru.Scripts.Engine.Master
             }
             else
             {
-                SetTimeScale(_localTimeScale);
+                SetTimeScale(LocalTimeScale);
                 _jukeBox.Pause(false);
             }
         }
@@ -193,6 +193,7 @@ namespace Keru.Scripts.Engine.Master
 
         public void Die()
         {
+            LocalTimeScale = 0.5f;
             SetTimeScale(0.5f);
             _jukeBox.StopMusic(false);
         }

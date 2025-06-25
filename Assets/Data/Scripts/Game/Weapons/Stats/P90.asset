@@ -23,7 +23,7 @@ MonoBehaviour:
     RecoilPerShot: 10
     MaxRecoil: 80
     RecoilRecover: 40
-    Attachments: 
+    Attachments: 1
     ShootSound: {fileID: 8300000, guid: 38b5dea44edc23a42b6ec14cf04ead02, type: 3}
     IsSilenced: 0
   - Damage: 40
