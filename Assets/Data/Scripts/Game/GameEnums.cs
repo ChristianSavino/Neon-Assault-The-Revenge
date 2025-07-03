@@ -42,7 +42,8 @@ namespace Keru.Scripts.Game
         AK47 = 10,
         SCARH = 11,
         GL40 = 12,
-        RPG = 13
+        RPG = 13,
+        KATANA = 14
     }
 
     public enum AmmoType
@@ -55,7 +56,8 @@ namespace Keru.Scripts.Game
         CAL50 = 5,
         ROCKET = 6,
         GRENADE = 7,
-        SPECIAL = 8
+        SPECIAL = 8,
+        MELEE = 9
     }
 
     public enum WeaponType
@@ -68,7 +70,8 @@ namespace Keru.Scripts.Game
     public enum WeaponSlot
     {
         PRIMARY = 0,
-        SECONDARY = 1
+        SECONDARY = 1,
+        MELEE = 2
     }
 
     public enum DamageType

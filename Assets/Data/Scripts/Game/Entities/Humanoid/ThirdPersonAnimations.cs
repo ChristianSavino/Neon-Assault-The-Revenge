@@ -42,29 +42,17 @@ namespace Keru.Scripts.Game.Entities.Humanoid
         public virtual void PlayWeaponAnimation(WeaponActions weaponAction, WeaponCodes weaponCode, int timeAt = 0)
         {
             var fullAnimationName = $"{WeaponAnimationNamesHelper.ReturnAnimationWeaponName(weaponCode)}{GetAnimationName(weaponAction)}";
-            _model.SetLayerWeight((int)AnimationLayers.WEAPON, 1);
+            StartCoroutine(SetAnimatorLayer(AnimationLayers.WEAPON, 1));
 
             PlayAnimation(fullAnimationName, (int)AnimationLayers.WEAPON, timeAt);
         }
 
         public virtual void PlaySpecialAnimation(string name, float time)
         {
-            _model.SetLayerWeight((int)AnimationLayers.SPECIAL, 1);
+            StartCoroutine(SetAnimatorLayer(AnimationLayers.SPECIAL, 1));
             PlayAnimation(name, (int)AnimationLayers.SPECIAL);
 
-            StartCoroutine(ReturnToNormal(name, time));
-        }
-
-        private IEnumerator ReturnToNormal(string name, float time)
-        {
-            yield return new WaitForSeconds(time);
-            while (_model.GetLayerWeight((int)AnimationLayers.SPECIAL) > 0)
-            {
-                var weight = _model.GetLayerWeight((int)AnimationLayers.SPECIAL);
-                weight -= Time.deltaTime * 2;
-                _model.SetLayerWeight((int)AnimationLayers.SPECIAL, weight);
-                yield return new WaitForEndOfFrame();
-            }
+            StartCoroutine(SetAnimatorLayer(AnimationLayers.SPECIAL, 0, time));
         }
 
         public virtual void Die(Vector3 hitpoint, float damageForce)
@@ -158,6 +146,35 @@ namespace Keru.Scripts.Game.Entities.Humanoid
             }
 
             return "";
+        }
+
+        private IEnumerator SetAnimatorLayer(AnimationLayers layer, int direction, float waitTime = 0f)
+        {
+            if(waitTime > 0f)
+            {
+                yield return new WaitForSeconds(waitTime);
+            }
+
+            var weight = _model.GetLayerWeight((int)layer);
+
+            if (direction == 1)
+            {
+                while(weight < 1)
+                {
+                    weight += Time.deltaTime / 0.25f;
+                    _model.SetLayerWeight((int)layer, Mathf.Clamp01(weight));
+                    yield return new WaitForEndOfFrame();
+                }
+            }
+            else
+            {
+                while(weight > 0)
+                {
+                    weight -= Time.deltaTime / 0.25f;
+                    _model.SetLayerWeight((int)layer, Mathf.Clamp01(weight));
+                    yield return new WaitForEndOfFrame();
+                }
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Keru.Game.Effects.AfterImages
+namespace Keru.Scripts.Game.Effects.AfterImages
 {
     public class AfterImage : MonoBehaviour
     {

@@ -56,6 +56,8 @@ namespace Keru.Scripts.Helpers
                     return "GL";
                 case WeaponCodes.RPG:
                     return "RPG";
+                case WeaponCodes.KATANA:
+                    return "Katana";
                 default:
                     return "Idle";
             }

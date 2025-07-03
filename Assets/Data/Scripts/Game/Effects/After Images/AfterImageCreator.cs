@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Keru.Game.Effects.AfterImages
+namespace Keru.Scripts.Game.Effects.AfterImages
 {
     public static class AfterImageCreator
     {

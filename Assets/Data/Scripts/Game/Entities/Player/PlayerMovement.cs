@@ -1,5 +1,5 @@
 using Keru.Debug.Scripts.Game.Entities.Player.UI;
-using Keru.Game.Effects.AfterImages;
+using Keru.Scripts.Game.Effects.AfterImages;
 using Keru.Scripts.Helpers;
 using System.Collections;
 using System.Collections.Generic;

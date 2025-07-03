@@ -27,7 +27,16 @@ namespace Keru.Scripts.Game.Entities.Player.UI
 
             _name.text = name.ToUpper();
             SetWeaponMunitionType(munitionType);
-            UpdateBullets(bulletsInMag, totalBullets);
+            if(munitionType == AmmoType.MELEE)
+            {
+                _bulletsCounter.text = "INF";
+                _bulletsInMag.fillAmount = 1f;
+                _munitionType.text = "MELEE";
+            }
+            else
+            {
+                UpdateBullets(bulletsInMag, totalBullets);
+            }              
         }
 
         private void SetWeaponMunitionType(AmmoType ammoType)

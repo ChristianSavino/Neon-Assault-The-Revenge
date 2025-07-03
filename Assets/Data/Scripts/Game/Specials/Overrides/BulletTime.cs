@@ -32,12 +32,10 @@ namespace Keru.Scripts.Game.Specials.Overrides
             Instantiate(_stats.SpecialEffects, transform.position, Quaternion.identity);
             _uiHandler.SetAbilityState(AbilityAction.CAST);
 
-            //specialHandler.TurnOnVolume(volumeProfile, 0.25f);
-
             yield return new WaitForSecondsRealtime(0.417f);
 
+            _uiHandler.SetVolumeProfile(_stats.Volume);
             _uiHandler.SetAbilityState(AbilityAction.TOGGLE, true);
-            _volume.weight = 1f;
             SetUpBulletTimeEffect();
             _bulletTimeEffect = _slowTimeEffect.DoSlowTime();
 
@@ -61,7 +59,7 @@ namespace Keru.Scripts.Game.Specials.Overrides
         private void SetUpBulletTimeEffect()
         {
             _slowTimeEffect = gameObject.AddComponent<SlowTime>();
-            _slowTimeEffect.SetUp(_currentLevel.Power, _currentLevel.Duration, 0.25f, _volume);
+            _slowTimeEffect.SetUp(_currentLevel.Power, _currentLevel.Duration, 0.5f, _uiHandler.GetVolume());
         }
     }
 }

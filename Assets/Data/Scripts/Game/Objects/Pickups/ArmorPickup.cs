@@ -10,10 +10,13 @@ public class ArmorPickup : Pickup
     {
         base.OnTriggerEnter(other);
         var player = other.GetComponent<Player>();
-        var result = player.AddArmor(_armorAmount, _soundToPlay);
-        if (result)
+        if (player != null)
         {
-            Destroy(gameObject);
+            var result = player.AddArmor(_armorAmount, _soundToPlay);
+            if (result)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

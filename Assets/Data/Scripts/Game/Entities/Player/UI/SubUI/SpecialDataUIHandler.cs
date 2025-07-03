@@ -3,6 +3,7 @@ using Keru.Scripts.Game.ScriptableObjects;
 using Keru.Scripts.Game.ScriptableObjects.Models;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace Keru.Scripts.Game.Entities.Player.UI
@@ -12,15 +13,19 @@ namespace Keru.Scripts.Game.Entities.Player.UI
         [SerializeField] private Image _image;
         [SerializeField] private Image _bg;
         [SerializeField] private Text _text;
+        private SpecialUIHandler _specialUIHandler;
 
         private SpecialStats _stats;
         private SpecialLevel _specialLevel;
+
         private KeyCode _keyCode;
+
         private Coroutine _imageRoutine;
         private Coroutine _timerRoutine;
 
-        public void SetConfig(SpecialStats stats, SpecialLevel specialLevel, KeyCode keyCode)
+        public void SetConfig(SpecialUIHandler specialUIHandler, SpecialStats stats, SpecialLevel specialLevel, KeyCode keyCode)
         {
+            _specialUIHandler = specialUIHandler;
             _stats = stats;
             _specialLevel = specialLevel;
             _keyCode = keyCode;
@@ -116,6 +121,16 @@ namespace Keru.Scripts.Game.Entities.Player.UI
                     yield return new WaitForSeconds(1f);
                 }
             }
+        }
+
+        public Volume GetVolume()
+        {
+            return _specialUIHandler.GetVolume();
+        }
+
+        public void SetVolumeProfile(VolumeProfile volumeProfile = null, float weight = 1f)
+        {
+            _specialUIHandler.SetVolumeProfile(volumeProfile, weight);
         }
     }
 }

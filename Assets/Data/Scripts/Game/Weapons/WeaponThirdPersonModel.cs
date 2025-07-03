@@ -25,12 +25,12 @@ namespace Keru.Scripts.Game.Weapons
 
         private void Start()
         {
-            if (_changeOnStart)
+            if (_changeOnStart && WeaponData.WeaponSlot != WeaponSlot.MELEE)
             {
                 _level = LevelBase.CurrentSave.Weapons.First(x => x.Code == WeaponData.WeaponCode).Level;
+                DisableAllAttachments();
+                SetUpAttachments(_level);
             }
-            DisableAllAttachments();
-            SetUpAttachments(_level);
         }
 
         public void ConfigWeapon(int level, Transform leftHand)

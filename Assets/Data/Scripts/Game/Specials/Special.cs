@@ -16,7 +16,6 @@ namespace Keru.Scripts.Game.Specials
         protected int _level;
         protected bool _canCast = true;
         protected Coroutine _coroutine;
-        protected Volume _volume;
 
         protected SpecialDataUIHandler _uiHandler;
 
@@ -25,18 +24,12 @@ namespace Keru.Scripts.Game.Specials
             _stats = stats;
             _level = level;
             _currentLevel = _stats.SpecialLevels[_level - 1];
-            if (_stats.Volume != null)
-            {
-                _volume = new Volume();
-                _volume.profile = _stats.Volume;
-                _volume.weight = 0f;
-            }
         }
 
-        public virtual void SetUIHandler(SpecialDataUIHandler uiHandler, KeyCode keyCode)
+        public virtual void SetUIHandler(SpecialUIHandler specialUIHandler, SpecialDataUIHandler uiHandler, KeyCode keyCode)
         {
             _uiHandler = uiHandler;
-            _uiHandler.SetConfig(_stats, _currentLevel, keyCode);
+            _uiHandler.SetConfig(specialUIHandler, _stats, _currentLevel, keyCode);
         }
 
         public virtual bool Execute()

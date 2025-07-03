@@ -12,6 +12,7 @@ namespace Keru.Scripts.Game.Entities.Player
         private WeaponUIHandler _uiHandler;
         private Weapon _primaryWeapon;
         private Weapon _secondaryWeapon;
+        private Weapon _katana;
         private Weapon _currentWeapon;
         private Dictionary<string, KeyCode> _keys;
         private bool _canDeploy;
@@ -19,6 +20,7 @@ namespace Keru.Scripts.Game.Entities.Player
         private Camera _camera;
 
         [SerializeField] private GameObject _leftHand;
+        [SerializeField] private WeaponCodes _meleeWeapon;
 
         [Header("Debug")]
         [SerializeField] private bool _debug;
@@ -41,6 +43,10 @@ namespace Keru.Scripts.Game.Entities.Player
                 else if (Input.GetKeyDown(KeyCode.Alpha2))
                 {
                     DeployWeapon(_secondaryWeapon);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    DeployWeapon(_katana, isMelee: true);
                 }
 
                 if (_currentWeapon != null)
@@ -107,9 +113,12 @@ namespace Keru.Scripts.Game.Entities.Player
 
             _camera = Camera.main;
             _uiHandler = weaponUiHandler;
+
+            _katana = _animations.GetWeaponModel(_meleeWeapon).AddComponent<Melee>();
+            _katana.SetConfig(this, _animations.GetWeaponModel(_meleeWeapon), null);
         }
 
-        public void DeployWeapon(Weapon weapon, bool forcedDeploy = false)
+        public void DeployWeapon(Weapon weapon, bool forcedDeploy = false, bool isMelee = false)
         {
             if (!_canDeploy && !forcedDeploy)
             {
@@ -139,6 +148,7 @@ namespace Keru.Scripts.Game.Entities.Player
                 _currentWeapon = weapon;
             }
 
+            TogglePlayerKatana(!isMelee);
             ToggleWeapons(false);
             _currentWeapon.gameObject.SetActive(true);
             _currentWeapon.Deploy();
@@ -148,6 +158,7 @@ namespace Keru.Scripts.Game.Entities.Player
         {
             _primaryWeapon.gameObject.SetActive(toggle);
             _secondaryWeapon.gameObject.SetActive(toggle);
+            _katana.gameObject.SetActive(toggle);
         }
 
         public void PlayAnimation(WeaponActions weaponAction, WeaponCodes weaponCodes)
@@ -183,7 +194,11 @@ namespace Keru.Scripts.Game.Entities.Player
             var secondaryResult = _secondaryWeapon.RefillMaxAmmo(ammount);
 
             return primaryResult || secondaryResult;
+        }
 
+        private void TogglePlayerKatana(bool toggle)
+        {
+            _animations.SetKatanaActive(toggle);
         }
     }
 }

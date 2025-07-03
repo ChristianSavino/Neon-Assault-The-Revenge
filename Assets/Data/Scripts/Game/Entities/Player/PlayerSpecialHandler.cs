@@ -79,7 +79,6 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private IEnumerator ResetPlayer(float castTime)
         {
-            castTime += 0.5f;
             yield return new WaitForSeconds(castTime);
             SetPlayerControls(true);
         }

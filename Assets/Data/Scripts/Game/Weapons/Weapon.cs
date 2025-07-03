@@ -11,17 +11,17 @@ namespace Keru.Scripts.Game.Weapons
 {
     public class Weapon : MonoBehaviour
     {
-        private GunStats _weaponData;
-        private WeaponLevel _currentWeaponLevel;
-        private WeaponThirdPersonModel _weaponModel;
+        protected GunStats _weaponData;
+        protected WeaponLevel _currentWeaponLevel;
+        protected WeaponThirdPersonModel _weaponModel;
 
         private Transform _shootPos;
         private Transform _magazineDrop;
         private Transform _bulletDrop;
         private Animator _muzzleFlash;
 
-        private PlayerWeaponHandler _playerWeaponHandler;
-        private AudioSource _audioSource;
+        protected PlayerWeaponHandler _playerWeaponHandler;
+        protected AudioSource _audioSource;
 
         private int _currentBulletsInMag;
         private int _maxTotalBullets;
@@ -29,20 +29,20 @@ namespace Keru.Scripts.Game.Weapons
 
         private bool _canShoot;
         private bool _isReloading;
-        private bool _canChangeWeapon;
+        protected bool _canChangeWeapon;
         private float _nextShot;
         private bool _reloadCancel;
         private bool _isShooting;
 
         private float _recoil;
-        private GameObject _owner;
+        protected GameObject _owner;
         private GameObject _impact;
         private GameObject _casing;
         private Material _bulletTrail;
         private int _layerMask;
 
 
-        public void SetConfig(PlayerWeaponHandler playerWeaponHandler, GameObject weaponModel, GameObject leftHand, int weaponLevel = 1, int currentBulletsInMag = 0, int currentTotalBullets = 0, GameObject owner = null)
+        public virtual void SetConfig(PlayerWeaponHandler playerWeaponHandler, GameObject weaponModel, GameObject leftHand, int weaponLevel = 1, int currentBulletsInMag = 0, int currentTotalBullets = 0, GameObject owner = null)
         {
             _playerWeaponHandler = playerWeaponHandler;
 
@@ -85,13 +85,26 @@ namespace Keru.Scripts.Game.Weapons
             _currentTotalBullets = currentTotalBullets != 0 ? currentBulletsInMag : _maxTotalBullets;
         }
 
-        public void Deploy()
+        public virtual void Deploy()
         {
             _canShoot = false;
             _isReloading = false;
             _canChangeWeapon = false;
             StartCoroutine(DeployWeapon());
-            _playerWeaponHandler.SetWeaponData(_weaponData.name, _currentWeaponLevel.AmmoType, _currentBulletsInMag, _currentWeaponLevel.MagazineSize, _currentTotalBullets);
+            SetWeaponData();
+        }
+
+        protected void SetWeaponData()
+        {
+            if(_playerWeaponHandler != null)
+            {
+                _playerWeaponHandler.SetWeaponData(_weaponData.name, _currentWeaponLevel.AmmoType, _currentBulletsInMag, _currentWeaponLevel.MagazineSize, _currentTotalBullets);
+            }
+        }
+
+        protected void UpdateWeaponData()
+        {
+            _playerWeaponHandler.UpdateWeaponData(_currentBulletsInMag, _currentTotalBullets);
         }
 
         public bool CanChangeWeapon()
@@ -104,7 +117,7 @@ namespace Keru.Scripts.Game.Weapons
             return _canShoot && _currentBulletsInMag > 0 && !_isReloading;
         }
 
-        public void StartsShoot()
+        public virtual void StartsShoot()
         {
             if (AbleToShoot())
             {
@@ -112,12 +125,12 @@ namespace Keru.Scripts.Game.Weapons
             }
         }
 
-        public void EndsShoot()
+        public virtual void EndsShoot()
         {
             _isShooting = false;
         }
 
-        public void Shoot(Vector3 direction, float damageMultiplier = 1, float fireRateMultiplier = 1)
+        public virtual void Shoot(Vector3 direction, float damageMultiplier = 1, float fireRateMultiplier = 1)
         {
             if (AbleToShoot())
             {
@@ -127,7 +140,7 @@ namespace Keru.Scripts.Game.Weapons
                     _nextShot = Time.time + 1f / (_currentWeaponLevel.FireRate * fireRateMultiplier);
 
                     WeaponShoot(damageMultiplier, direction);
-                    _playerWeaponHandler.UpdateWeaponData(_currentBulletsInMag, _currentTotalBullets);
+                    UpdateWeaponData();
                 }
             }
             else if (_isReloading && _weaponData.WeaponType == WeaponType.SHOTGUN && !_reloadCancel)
@@ -249,7 +262,7 @@ namespace Keru.Scripts.Game.Weapons
             return direction;
         }
 
-        public void Reload()
+        public virtual void Reload()
         {
             if (_currentBulletsInMag < _currentWeaponLevel.MagazineSize && !_isReloading && _currentTotalBullets > 0)
             {
@@ -302,7 +315,7 @@ namespace Keru.Scripts.Game.Weapons
             _isReloading = false;
             _canShoot = true;
             _canChangeWeapon = true;
-            _playerWeaponHandler.UpdateWeaponData(_currentBulletsInMag, _currentTotalBullets);
+            UpdateWeaponData();
         }
 
         private IEnumerator ReloadShotgun()
@@ -319,7 +332,7 @@ namespace Keru.Scripts.Game.Weapons
                 yield return new WaitForSeconds(_weaponData.ReloadTime);
                 _currentBulletsInMag++;
                 _currentTotalBullets--;
-                _playerWeaponHandler.UpdateWeaponData(_currentBulletsInMag, _currentTotalBullets);
+                UpdateWeaponData();
             }
 
             PlayAnimation(WeaponActions.RELOAD_CLOSE);
@@ -358,18 +371,19 @@ namespace Keru.Scripts.Game.Weapons
             StartCoroutine(RecoilRecover());
         }
 
-        private void PlayAnimation(WeaponActions weaponAction)
+        protected void PlayAnimation(WeaponActions weaponAction)
         {
-            _playerWeaponHandler.PlayAnimation(weaponAction, _weaponData.WeaponCode);
+            if (_playerWeaponHandler != null)
+            {
+                _playerWeaponHandler.PlayAnimation(weaponAction, _weaponData.WeaponCode);
+            }         
         }
 
         public void Die()
         {
             _canShoot = false;
             _isReloading = false;
-            _canChangeWeapon = false;
-            gameObject.AddComponent<BoxCollider>();
-            gameObject.AddComponent<Rigidbody>();
+            _canChangeWeapon = false;           
 
             StartCoroutine(WeaponSeparation());
         }
@@ -377,6 +391,9 @@ namespace Keru.Scripts.Game.Weapons
         private IEnumerator WeaponSeparation()
         {
             yield return new WaitForSeconds(0.5f);
+            gameObject.AddComponent<BoxCollider>();
+            var rb = gameObject.AddComponent<Rigidbody>();
+            rb.velocity = Vector3.zero;
             gameObject.transform.parent = null;
             this.enabled = false;
         }

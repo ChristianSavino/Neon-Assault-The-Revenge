@@ -9,6 +9,7 @@ namespace Keru.Scripts.Game.Entities.Player
     public class PlayerThirdPersonAnimations : ThirdPersonAnimations
     {
         private Collider _hips;
+        [SerializeField] private GameObject _katana;
 
         public override void SetConfig()
         {
@@ -24,6 +25,14 @@ namespace Keru.Scripts.Game.Entities.Player
                 var camera = Camera.main;
                 var lookAt = camera.AddComponent<CameraFollowTarget>();
                 lookAt.SetConfig(_hips.transform);
+            }
+        }
+
+        public void SetKatanaActive(bool active)
+        {
+            if (_katana != null)
+            {
+                _katana.SetActive(active);
             }
         }
     }
