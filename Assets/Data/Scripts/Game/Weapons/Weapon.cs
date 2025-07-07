@@ -371,7 +371,7 @@ namespace Keru.Scripts.Game.Weapons
             StartCoroutine(RecoilRecover());
         }
 
-        protected void PlayAnimation(WeaponActions weaponAction)
+        protected virtual void PlayAnimation(WeaponActions weaponAction)
         {
             if (_playerWeaponHandler != null)
             {

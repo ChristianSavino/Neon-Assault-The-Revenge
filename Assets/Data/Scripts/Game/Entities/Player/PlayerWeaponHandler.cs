@@ -171,6 +171,15 @@ namespace Keru.Scripts.Game.Entities.Player
             _animations.PlayWeaponAnimation(weaponAction, weaponCodes);
         }
 
+        public void PlayMeleeAnimation(WeaponActions weaponAction, WeaponCodes weaponCodes)
+        {
+            if (_currentWeapon == null)
+            {
+                return;
+            }
+            _animations.PlayMeleeWeaponAnimation(weaponAction, weaponCodes);
+        }
+
         public void Die()
         {
             _canDeploy = false;

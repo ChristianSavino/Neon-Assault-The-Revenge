@@ -61,22 +61,33 @@ namespace Keru.Scripts.Game.Weapons
 
         public override void Shoot(Vector3 direction, float damageMultiplier = 1, float fireRateMultiplier = 1)
         {
-            _collider.enabled = true;
             _currentDamageMultiplier = damageMultiplier;
             _canChangeWeapon = false;
-            if(_attackRoutine == null)
+            if (_attackRoutine == null)
             {
-                _trailRenderer.Toggle(true);
                 _attackRoutine = StartCoroutine(AttackRoutine());
             }
         }
 
         IEnumerator AttackRoutine()
         {
+            var enableTime = _currentWeaponLevel.FireRate * 0.3333f;
+            var activeTime = _currentWeaponLevel.FireRate * 0.6666f;
+
             PlayAnimation(WeaponActions.SHOOT);
-            yield return new WaitForSeconds(_currentWeaponLevel.FireRate);
+
+            yield return new WaitForSeconds(enableTime);
+
+            _collider.enabled = true;
+            _trailRenderer.Toggle(true);
+
+            yield return new WaitForSeconds(activeTime);
+
             _collider.enabled = false;
             _trailRenderer.Toggle(false);
+
+            yield return new WaitForSeconds(_currentWeaponLevel.FireRate - enableTime - activeTime);
+
             _attackRoutine = null;
             _canChangeWeapon = true;
         }
@@ -88,6 +99,14 @@ namespace Keru.Scripts.Game.Weapons
             if (entity != null)
             {
                 entity.OnDamagedUnit(Mathf.RoundToInt(_currentWeaponLevel.Damage * _currentDamageMultiplier), collision.contacts[0].point, _owner, DamageType.MELEE, 10f);
+            }
+        }
+
+        protected override void PlayAnimation(WeaponActions weaponAction)
+        {
+            if (_playerWeaponHandler != null)
+            {
+                _playerWeaponHandler.PlayMeleeAnimation(weaponAction, _weaponData.WeaponCode);
             }
         }
     }
