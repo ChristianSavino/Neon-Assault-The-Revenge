@@ -208,5 +208,10 @@ namespace Keru.Scripts.Game.Entities.Humanoid
                 }
             }
         }
+
+        public GameObject GetModelObject()
+        {
+            return _model.gameObject;
+        }
     }
 }

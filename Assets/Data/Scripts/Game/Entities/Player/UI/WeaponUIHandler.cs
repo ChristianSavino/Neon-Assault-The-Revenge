@@ -22,7 +22,15 @@ namespace Keru.Scripts.Game.Entities.Player.UI
 
         public void SetWeapon(string name, AmmoType munitionType, int bulletsInMag, int maxBulletsInMag, int totalBullets)
         {
-            _weaponBlock.SetActive(true);
+            if(name == string.Empty)
+            {
+                _weaponBlock.SetActive(false);
+            }
+            else
+            {
+                _weaponBlock.SetActive(true);
+            }
+
             _maxBulletsInMag = maxBulletsInMag;
 
             _name.text = name.ToUpper();

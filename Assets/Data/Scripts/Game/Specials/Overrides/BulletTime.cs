@@ -1,4 +1,5 @@
 using Keru.Game.Actions.Effects;
+using Keru.Scripts.Game.Entities.Humanoid;
 using Keru.Scripts.Game.ScriptableObjects;
 using System.Collections;
 using UnityEngine;
@@ -10,9 +11,9 @@ namespace Keru.Scripts.Game.Specials.Overrides
         private SlowTime _slowTimeEffect;
         private Coroutine _bulletTimeEffect;
 
-        public override void SetConfig(SpecialStats stats, int level)
+        public override void SetConfig(ThirdPersonAnimations animations, SpecialStats stats, int level, GameObject owner)
         {
-            base.SetConfig(stats, level);
+            base.SetConfig(animations, stats, level, owner);
         }
 
         public override bool Execute()

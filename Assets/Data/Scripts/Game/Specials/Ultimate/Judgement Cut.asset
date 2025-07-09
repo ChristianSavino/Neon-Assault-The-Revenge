@@ -15,8 +15,14 @@ MonoBehaviour:
   AbilityCode: 1
   AbilitySlot: 0
   SpecialEffects: {fileID: 0}
+  SpecialObject: {fileID: 5281214246430728526, guid: a41c3ca6b06b5144ebbaf2763e048922,
+    type: 3}
   Volume: {fileID: 0}
   Icon: {fileID: 21300000, guid: 5a42fd0f8266de347aad8ae7d8602913, type: 3}
+  CastTime: 1.2
+  SoundEffect: {fileID: 0}
+  EndSoundEffect: {fileID: 0}
+  UsesMelee: 1
   SpecialLevels:
   - Power: 300
     Cooldown: 60

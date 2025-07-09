@@ -1,3 +1,4 @@
+using Keru.Scripts.Game.Entities.Humanoid;
 using Keru.Scripts.Game.Entities.Player;
 using Keru.Scripts.Game.Entities.Player.UI;
 using Keru.Scripts.Game.ScriptableObjects;
@@ -18,12 +19,18 @@ namespace Keru.Scripts.Game.Specials
         protected Coroutine _coroutine;
 
         protected SpecialDataUIHandler _uiHandler;
+        protected ThirdPersonAnimations _animations;
 
-        public virtual void SetConfig(SpecialStats stats, int level)
+        protected GameObject _owner;
+
+        public virtual void SetConfig(ThirdPersonAnimations animations, SpecialStats stats, int level, GameObject owner)
         {
+            _animations = animations;
             _stats = stats;
             _level = level;
             _currentLevel = _stats.SpecialLevels[_level - 1];
+
+            _owner = owner;
         }
 
         public virtual void SetUIHandler(SpecialUIHandler specialUIHandler, SpecialDataUIHandler uiHandler, KeyCode keyCode)
@@ -61,6 +68,11 @@ namespace Keru.Scripts.Game.Specials
             {
                 StopCoroutine(_coroutine);
             }
+        }
+
+        public bool UsesMelee()
+        {
+            return _stats.UsesMelee;
         }
     }
 }

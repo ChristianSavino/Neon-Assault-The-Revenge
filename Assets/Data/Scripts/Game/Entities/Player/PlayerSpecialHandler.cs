@@ -5,6 +5,7 @@ using Keru.Scripts.Game.Specials.Overrides;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 namespace Keru.Scripts.Game.Entities.Player
@@ -34,10 +35,16 @@ namespace Keru.Scripts.Game.Entities.Player
             _specialUiHandler = specialUIHandler;
             _specialUiHandler.SetConfig(_keys);
 
+            var ultimateSkill = saveGame.CurrentCharacterData.UltimateSkill;
+            _ultimate = GetCorrectSpecial(ultimateSkill);
+            _ultimate.SetConfig(_animations, _allSpecials.First(x => x.AbilityCode == ultimateSkill), saveGame.UnlockedSkills.First(x => x.Code == ultimateSkill).Level, gameObject);
+            _specialUiHandler.SetConfigSpecial(_ultimate);
+
             var secondarySkill = saveGame.CurrentCharacterData.SecondarySkill;
             _secondary = GetCorrectSpecial(secondarySkill);
-            _secondary.SetConfig(_allSpecials.First(x => x.AbilityCode == secondarySkill), saveGame.UnlockedSkills.First(x => x.Code == secondarySkill).Level);
+            _secondary.SetConfig(_animations, _allSpecials.First(x => x.AbilityCode == secondarySkill), saveGame.UnlockedSkills.First(x => x.Code == secondarySkill).Level, gameObject);
             _specialUiHandler.SetConfigSpecial(_secondary);
+
         }
 
         private void Update()
@@ -60,7 +67,7 @@ namespace Keru.Scripts.Game.Entities.Player
                 var stats = special.GetStats();
                 _animations.PlaySpecialAnimation(stats.name, stats.CastTime);
                 SetPlayerControls(false);
-                StartCoroutine(ResetPlayer(stats.CastTime));
+                StartCoroutine(ResetPlayer(stats.CastTime, stats.UsesMelee));
             }
         }
 
@@ -71,14 +78,15 @@ namespace Keru.Scripts.Game.Entities.Player
                 case AbilityCodes.BULLETTIME:
                     return _container.AddComponent<BulletTime>();
                 case AbilityCodes.JUDGEMENTCUT:
-                    return null;
+                    return _container.AddComponent<JudgementCut>();
                 default:
                     return null;
             }
         }
 
-        private IEnumerator ResetPlayer(float castTime)
+        private IEnumerator ResetPlayer(float castTime, bool usesKatana)
         {
+            _weaponHandler.SpecialWeaponsHolster(castTime, usesKatana);
             yield return new WaitForSeconds(castTime);
             SetPlayerControls(true);
         }
@@ -99,6 +107,7 @@ namespace Keru.Scripts.Game.Entities.Player
             {
                 _ultimate.Die();
             }
+            enabled = false;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Keru.Scripts.Game.ScriptableObjects
         public float CastTime;
         public AudioClip SoundEffect;
         public AudioClip EndSoundEffect;
+        public bool UsesMelee;
 
         [Header("Level Data")]
         public List<SpecialLevel> SpecialLevels;

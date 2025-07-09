@@ -1,5 +1,6 @@
 using Keru.Scripts.Game.Entities.Player.UI;
 using Keru.Scripts.Game.Weapons;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -209,5 +210,37 @@ namespace Keru.Scripts.Game.Entities.Player
         {
             _animations.SetKatanaActive(toggle);
         }
+
+        public void SpecialWeaponsHolster(float castTime, bool usesMelee)
+        {
+            StartCoroutine(HoldingWeapon(castTime, usesMelee));
+        }
+
+        public void HolsterWeapons()
+        {
+            ToggleWeapons(false);
+            _currentWeapon = null;
+            SetWeaponData(string.Empty, AmmoType.MELEE, 0, 0, 0);
+        }
+
+        private IEnumerator HoldingWeapon(float castTime, bool usesMelee)
+        {
+            var auxWeapon = _currentWeapon;
+            HolsterWeapons();
+
+            if (usesMelee)
+            {
+                DeployWeapon(_katana, forcedDeploy: true, isMelee: true);
+            }
+
+            yield return new WaitForSeconds(castTime);
+
+            if (auxWeapon != null)
+            {
+                DeployWeapon(auxWeapon, forcedDeploy: true);
+            }
+        }
+
+
     }
 }

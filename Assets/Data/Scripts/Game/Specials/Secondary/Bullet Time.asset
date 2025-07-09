@@ -22,16 +22,17 @@ MonoBehaviour:
   CastTime: 0.5
   SoundEffect: {fileID: 0}
   EndSoundEffect: {fileID: 0}
+  UsesMelee: 0
   SpecialLevels:
   - Power: 0.5
     Cooldown: 30
-    Duration: 5
+    Duration: 7
     Range: 0
   - Power: 0.5
     Cooldown: 25
-    Duration: 6
+    Duration: 10
     Range: 0
   - Power: 0.5
     Cooldown: 20
-    Duration: 7
+    Duration: 12
     Range: 0
