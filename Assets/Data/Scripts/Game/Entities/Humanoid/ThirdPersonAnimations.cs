@@ -16,6 +16,7 @@ namespace Keru.Scripts.Game.Entities.Humanoid
         protected IEnumerable<Collider> _ragdollColliders;
         protected IEnumerable<WeaponThirdPersonModel> _weaponsModels;
         protected MultiAimConstraint _bodyRig;
+        protected Rig _rig;
 
         public virtual void SetConfig()
         {
@@ -28,6 +29,7 @@ namespace Keru.Scripts.Game.Entities.Humanoid
             var rigBuilder = _model.GetComponent<RigBuilder>();
             if (rigBuilder != null)
             {
+                _rig = rigBuilder.layers.FirstOrDefault(x => x.rig.name == "AimRig").rig;
                 _bodyRig = rigBuilder.layers.FirstOrDefault(x => x.rig.name == "AimRig").rig.transform.Find("MultiAim").GetComponent<MultiAimConstraint>();
             }
         }
@@ -54,7 +56,7 @@ namespace Keru.Scripts.Game.Entities.Humanoid
 
         public virtual void PlayWeaponAnimation(WeaponActions weaponAction, WeaponCodes weaponCode, int timeAt = 0)
         {
-            SetRigWeight(1);
+            SetMultiAimRigWeight(1);
             var fullAnimationName = $"{WeaponAnimationNamesHelper.ReturnAnimationWeaponName(weaponCode)}{GetAnimationName(weaponAction)}";
             StartCoroutine(SetAnimatorLayer(AnimationLayers.WEAPON, 1));
 
@@ -63,7 +65,7 @@ namespace Keru.Scripts.Game.Entities.Humanoid
 
         public virtual void PlayMeleeWeaponAnimation(WeaponActions weaponAction, WeaponCodes weaponCode, int timeAt = 0)
         {
-            SetRigWeight(0);
+            SetMultiAimRigWeight(0);
             var fullAnimationName = $"{WeaponAnimationNamesHelper.ReturnAnimationWeaponName(weaponCode)}{GetAnimationName(weaponAction)}";
             var attack = Random.Range(0, 11);
             SetParameter("meleeAttack", attack);
@@ -73,6 +75,7 @@ namespace Keru.Scripts.Game.Entities.Humanoid
 
         public virtual void PlaySpecialAnimation(string name, float time)
         {
+            SetRigWeight(0);
             StartCoroutine(SetAnimatorLayer(AnimationLayers.SPECIAL, 1));
             PlayAnimation(name, (int)AnimationLayers.SPECIAL);
 
@@ -146,6 +149,14 @@ namespace Keru.Scripts.Game.Entities.Humanoid
 
         protected virtual void SetRigWeight(float weight)
         {
+            if (_rig != null)
+            {
+                _rig.weight = weight;
+            }
+        }
+
+        protected virtual void SetMultiAimRigWeight(float weight)
+        {
             if (_bodyRig != null)
             {
                 _bodyRig.weight = weight;
@@ -203,9 +214,11 @@ namespace Keru.Scripts.Game.Entities.Humanoid
                 while(weight > 0)
                 {
                     weight -= Time.deltaTime / 0.25f;
+                    SetRigWeight(1 - weight);
                     _model.SetLayerWeight((int)layer, Mathf.Clamp01(weight));
                     yield return new WaitForEndOfFrame();
                 }
+                SetRigWeight(1);
             }
         }
 

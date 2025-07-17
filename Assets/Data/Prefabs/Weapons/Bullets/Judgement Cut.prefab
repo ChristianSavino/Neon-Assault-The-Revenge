@@ -6658,6 +6658,7 @@ GameObject:
   - component: {fileID: 8092222977031714673}
   - component: {fileID: 1698360612433703196}
   - component: {fileID: 5638662464633379537}
+  - component: {fileID: 1903525493780954221}
   m_Layer: 0
   m_Name: Judgement Cut
   m_TagString: Untagged
@@ -6746,7 +6747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _action: {fileID: 5638662464633379537}
-  _damageType: 5
+  _damageType: 4
   _usesGravity: 0
   _affectsPlayer: 0
   _lifeTime: 2
@@ -6803,6 +6804,25 @@ MonoBehaviour:
   _type: 0
   _overritePrefab: {fileID: 3195087726147349803, guid: dde0be8439344ee40911ca866ffe6596,
     type: 3}
+--- !u!114 &1903525493780954221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2769899289504379160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 803ec75ec24f5ac47be3ab7a34f7b484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loops: 0
+  _clipToReproduce: {fileID: 8300000, guid: 0c972d80ff53bf54f98f955e74cdf435, type: 3}
+  _sourceType: 0
+  _is3dAudio: 0
+  _maxDistance: 0
+  _minDistance: 0
+  _rollOffMode: 0
 --- !u!1 &2775840392584039097
 GameObject:
   m_ObjectHideFlags: 0
@@ -15248,7 +15268,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4896038480791498455, guid: dde0be8439344ee40911ca866ffe6596, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

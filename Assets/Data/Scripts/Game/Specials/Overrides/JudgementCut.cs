@@ -28,7 +28,7 @@ namespace Keru.Scripts.Game.Specials.Overrides
         {
             _canCast = false;
             
-            //Instantiate(_stats.SpecialEffects, transform.position, Quaternion.identity);
+            Instantiate(_stats.SpecialEffects, transform.position, Quaternion.identity);
             _uiHandler.SetAbilityState(AbilityAction.CAST);
 
             yield return new WaitForSeconds(0.6f);
@@ -40,8 +40,9 @@ namespace Keru.Scripts.Game.Specials.Overrides
             cut.transform.position = vector;
             cut.transform.forward = _animations.GetModelObject().transform.forward;
             
-            var bullet = cut.GetComponent<Bullet>();
+            var bullet = cut.GetComponent<TriggerBullet>();
             bullet.SetUp((int)_currentLevel.Power, 20, _owner);
+            cut.layer = _owner.layer;
 
             yield return new WaitForSeconds(0.6f);
             StartCoroutine(CoolDown(_currentLevel.Cooldown));

@@ -15,6 +15,15 @@ namespace Keru.Scripts.Game.Weapons
         {
             base.SetUp(damage, force, owner);
             StartCoroutine(DestroyBullet());
+
+            if(_hitAction != null)
+            {
+                _hitAction.SetUp(damage, force, "", owner, false);
+            }
+            if(_action != null)
+            {
+                _action.SetUp(damage, force, "", owner, false);
+            }
         }
 
         private void OnTriggerEnter(Collider other)

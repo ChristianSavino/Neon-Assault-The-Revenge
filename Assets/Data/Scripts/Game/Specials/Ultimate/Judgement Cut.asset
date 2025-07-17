@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityCode: 1
   AbilitySlot: 0
-  SpecialEffects: {fileID: 0}
+  SpecialEffects: {fileID: 6724536864018797016, guid: b0eb476f67908e0448309b01c2c85f21,
+    type: 3}
   SpecialObject: {fileID: 2769899289504379160, guid: 04fe276b1c0ad3547b693b9d364f4882,
     type: 3}
   Volume: {fileID: 0}

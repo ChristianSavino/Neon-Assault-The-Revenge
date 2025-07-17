@@ -25,6 +25,8 @@ namespace Keru.Scripts.Game.Entities.Player
         private PlayerThirdPersonAnimations _animations;
         private SpecialUIHandler _specialUiHandler;
 
+        public bool CanCast { get; set; } = true;
+
         public void SetConfig(SaveGameFile saveGame, Dictionary<string, KeyCode> keys, PlayerMovement playerMovement, PlayerWeaponHandler weaponHandler, PlayerThirdPersonAnimations thirdPersonAnimations, SpecialUIHandler specialUIHandler)
         {
             _keys = keys;
@@ -49,11 +51,11 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private void Update()
         {
-            if (Input.GetKeyDown(_keys["Second"]) && _secondary != null)
+            if (Input.GetKeyDown(_keys["Second"]) && _secondary != null && CanCast)
             {
                 CastSpecial(_secondary);
             }
-            else if (Input.GetKeyDown(_keys["Special"]) && _ultimate != null)
+            else if (Input.GetKeyDown(_keys["Special"]) && _ultimate != null && CanCast)
             {
                 CastSpecial(_ultimate);
             }
@@ -95,6 +97,7 @@ namespace Keru.Scripts.Game.Entities.Player
         {
             _weaponHandler.CanInteract = toggle;
             _movement.CanMove = toggle;
+            CanCast = toggle;
         }
 
         public void Die()

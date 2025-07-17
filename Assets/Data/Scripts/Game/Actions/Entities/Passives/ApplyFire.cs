@@ -14,7 +14,6 @@ namespace Keru.Scripts.Game.Actions.Entities.Passives
         public override void SetUp(int paramater, float floatParameter, string stringParameter, GameObject gameObjectParameter, bool boolParameter)
         {
             _damagePerSecond = paramater;
-            _fireColor = gameObjectParameter.GetComponent<Renderer>().material.color;
         }
 
         public override void Execute(GameObject target = null)

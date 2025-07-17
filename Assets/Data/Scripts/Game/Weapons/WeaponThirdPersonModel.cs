@@ -28,7 +28,6 @@ namespace Keru.Scripts.Game.Weapons
             if (_changeOnStart && WeaponData.WeaponSlot != WeaponSlot.MELEE)
             {
                 _level = LevelBase.CurrentSave.Weapons.First(x => x.Code == WeaponData.WeaponCode).Level;
-                DisableAllAttachments();
                 SetUpAttachments(_level);
             }
         }
@@ -38,6 +37,7 @@ namespace Keru.Scripts.Game.Weapons
             _changeOnStart = false;
             _level = level;
             _leftHand = leftHand;
+            SetUpAttachments(level);
         }
 
         private void DisableAllAttachments()
@@ -50,6 +50,7 @@ namespace Keru.Scripts.Game.Weapons
 
         private void SetUpAttachments(int level)
         {
+            DisableAllAttachments();
             var attachments = WeaponData.WeaponDataPerLevel[level - 1].Attachments.Split(",");
             foreach (var attachment in attachments)
             {

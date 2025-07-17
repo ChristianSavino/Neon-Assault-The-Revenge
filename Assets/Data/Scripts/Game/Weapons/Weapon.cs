@@ -83,6 +83,9 @@ namespace Keru.Scripts.Game.Weapons
 
             _maxTotalBullets = _currentWeaponLevel.MagazineSize * (2 + weaponLevel);
             _currentTotalBullets = currentTotalBullets != 0 ? currentBulletsInMag : _maxTotalBullets;
+            _audioSource.clip = _currentWeaponLevel.ShootSound;
+
+
         }
 
         public virtual void Deploy()
@@ -176,8 +179,11 @@ namespace Keru.Scripts.Game.Weapons
             }
 
             PlayAnimation(WeaponActions.SHOOT);
-            _muzzleFlash.Play("Shoot");
-            _audioSource.PlayOneShot(_currentWeaponLevel.ShootSound);
+            if (!_currentWeaponLevel.IsSilenced)
+            {
+                _muzzleFlash.Play("Shoot");
+            }
+            _audioSource.Play();
             _currentBulletsInMag--;
             CalculateRecoilAmmount(_currentWeaponLevel.RecoilPerShot);
             StartCasingSpawn();
