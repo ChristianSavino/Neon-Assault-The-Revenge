@@ -1,14 +1,14 @@
 using Keru.Scripts.Engine.Module;
-using Keru.Scripts.Game;
 using Keru.Scripts.Game.Entities;
 using UnityEngine;
 
-namespace Keru.Game.Actions.Entities.Effects
+namespace Keru.Scripts.Game.Actions.Entities.Effects
 {
     public class Explosion : Action
     {
         [SerializeField] float _radius;
         [SerializeField] private ExplosionType _type;
+        [SerializeField] private GameObject _overritePrefab;
         private float _force;
         private int _damage;
         private GameObject _explosionObject;
@@ -21,10 +21,17 @@ namespace Keru.Game.Actions.Entities.Effects
             _force = floatParameter;
             _owner = gameObjectParamater;
             _affectOwner = boolParameter;
-            _explosionObject = _type == ExplosionType.LARGE ? CommonItemsManager.ItemsManager.BigExplosionEffect : CommonItemsManager.ItemsManager.SmallExplosionEffect;
+            if(_overritePrefab != null)
+            {
+                _explosionObject = _overritePrefab;
+            }
+            else
+            {
+                _explosionObject = _type == ExplosionType.LARGE ? CommonItemsManager.ItemsManager.BigExplosionEffect : CommonItemsManager.ItemsManager.SmallExplosionEffect;
+            }              
         }
 
-        public override void Execute()
+        public override void Execute(GameObject target = null)
         {
             var objects = Physics.OverlapSphere(transform.position, _radius);
             var explosion = Instantiate(_explosionObject);

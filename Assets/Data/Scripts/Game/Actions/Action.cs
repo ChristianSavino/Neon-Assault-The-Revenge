@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Keru.Game.Actions
+namespace Keru.Scripts.Game.Actions
 {
     public class Action : MonoBehaviour
     {
@@ -11,7 +11,7 @@ namespace Keru.Game.Actions
 
         }
         
-        public virtual void Execute()
+        public virtual void Execute(GameObject target = null)
         {
 
         }

@@ -13,7 +13,6 @@ namespace Keru.Scripts.Game.Weapons
 
         private float _currentDamageMultiplier = 1f;
         private Collider _collider;
-        private Coroutine _attackRoutine;
 
         public override void SetConfig(PlayerWeaponHandler playerWeaponHandler, GameObject weaponModel, GameObject leftHand, int weaponLevel = 1, int currentBulletsInMag = 0, int currentTotalBullets = 0, GameObject owner = null)
         {
@@ -61,11 +60,12 @@ namespace Keru.Scripts.Game.Weapons
 
         public override void Shoot(Vector3 direction, float damageMultiplier = 1, float fireRateMultiplier = 1)
         {
-            _currentDamageMultiplier = damageMultiplier;
-            _canChangeWeapon = false;
-            if (_attackRoutine == null)
+            if(_canShoot)
             {
-                _attackRoutine = StartCoroutine(AttackRoutine());
+                _currentDamageMultiplier = damageMultiplier;
+                _canChangeWeapon = false;
+                _canShoot = false;
+                StartCoroutine(AttackRoutine());
             }
         }
 
@@ -88,8 +88,8 @@ namespace Keru.Scripts.Game.Weapons
 
             yield return new WaitForSeconds(_currentWeaponLevel.FireRate - enableTime - activeTime);
 
-            _attackRoutine = null;
             _canChangeWeapon = true;
+            _canShoot = true;
         }
 
         private void OnCollisionEnter(Collision collision)

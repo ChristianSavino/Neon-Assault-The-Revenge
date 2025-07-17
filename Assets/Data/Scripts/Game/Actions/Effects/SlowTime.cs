@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Keru.Game.Actions.Effects
+namespace Keru.Scripts.Game.Actions.Effects
 {
     public class SlowTime : MonoBehaviour
     {

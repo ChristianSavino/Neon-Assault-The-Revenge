@@ -3,7 +3,7 @@ using Keru.Scripts.Engine.Module;
 using System.Collections;
 using UnityEngine;
 
-namespace Keru.Game.Actions.Effects
+namespace Keru.Scripts.Game.Actions.Effects
 {
     public class PlaySoundEffectOnEnable : Action
     {
@@ -20,7 +20,7 @@ namespace Keru.Game.Actions.Effects
             Execute();
         }
 
-        public override void Execute()
+        public override void Execute(GameObject target = null)
         {
             _audioSource = AudioManager.audioManager.CreateNewAudioSource(gameObject, _soundType);
             _audioSource.clip = _soundEffect;

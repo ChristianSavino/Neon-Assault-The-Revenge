@@ -115,6 +115,8 @@ namespace Keru.Scripts.Game.Entities.Player
             _lifeUIHandler.SetConfig(_life, _maxLife);
             _specialHandler.SetConfig(saveGame, _keys, _movement, _weaponHandler, _animations, specialUiHandler);
             _effectsHandler.SetConfig();
+
+            _passiveHandler.SetUp(_animations.GetModelObject());
         }
 
         private void Die(Vector3 hitpoint, float damageForce)
@@ -233,6 +235,20 @@ namespace Keru.Scripts.Game.Entities.Player
             
             SetArmorValue(armor);
             return true;
+        }
+
+        public bool AddAmmo(float magAmmount, bool appliesForBoth, WeaponSlot weaponSlot, AudioClip clip = null)
+        {
+            if (_weaponHandler.RefillAmmo(magAmmount, appliesForBoth, weaponSlot))
+            {
+                if (clip != null)
+                {
+                    _effectsHandler.CreateEffect(clip);
+                }
+                return true;
+            }
+
+            return false;
         }
 
         public void AddEffect(AudioClip soundEffect = null, GameObject effect = null, float? overrideDuration = null)

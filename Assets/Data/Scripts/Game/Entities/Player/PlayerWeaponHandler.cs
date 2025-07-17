@@ -198,12 +198,29 @@ namespace Keru.Scripts.Game.Entities.Player
             _uiHandler.UpdateBullets(bulletsInMag, currentTotalBullets);
         }
 
-        public bool RefillAmmo(float ammount)
+        public bool RefillAmmo(float magAmmount, bool applyForBoth, WeaponSlot weapon)
         {
-            var primaryResult = _primaryWeapon.RefillMaxAmmo(ammount);
-            var secondaryResult = _secondaryWeapon.RefillMaxAmmo(ammount);
+            var result = false;
 
-            return primaryResult || secondaryResult;
+            if (applyForBoth)
+            {
+                var primaryResult = _primaryWeapon.RefillMaxAmmo(magAmmount);
+                var secondaryResult = _secondaryWeapon.RefillMaxAmmo(magAmmount);
+                result = primaryResult || secondaryResult;
+            }
+            else
+            {
+                if (weapon == WeaponSlot.PRIMARY)
+                {
+                    result = _primaryWeapon.RefillMaxAmmo(magAmmount);
+                }
+                else
+                {
+                    result = _secondaryWeapon.RefillMaxAmmo(magAmmount);
+                }
+            }
+
+            return result;
         }
 
         private void TogglePlayerKatana(bool toggle)
@@ -240,7 +257,5 @@ namespace Keru.Scripts.Game.Entities.Player
                 DeployWeapon(auxWeapon, forcedDeploy: true);
             }
         }
-
-
     }
 }

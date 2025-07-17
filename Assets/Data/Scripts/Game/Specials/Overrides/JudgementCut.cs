@@ -34,11 +34,14 @@ namespace Keru.Scripts.Game.Specials.Overrides
             yield return new WaitForSeconds(0.6f);
 
             var cut = Instantiate(_stats.SpecialObject);
-            cut.transform.position = _animations.GetModelObject().transform.position + _animations.GetModelObject().transform.forward.normalized * 3.9f;
+            var vector = _animations.GetModelObject().transform.position + _animations.GetModelObject().transform.forward.normalized * 3.9f;
+            vector.y += 1f;
+            
+            cut.transform.position = vector;
             cut.transform.forward = _animations.GetModelObject().transform.forward;
+            
             var bullet = cut.GetComponent<Bullet>();
             bullet.SetUp((int)_currentLevel.Power, 20, _owner);
-
 
             yield return new WaitForSeconds(0.6f);
             StartCoroutine(CoolDown(_currentLevel.Cooldown));

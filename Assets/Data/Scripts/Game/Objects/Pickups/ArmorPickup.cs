@@ -2,26 +2,30 @@ using Keru.Scripts.Game.Entities.Player;
 using Keru.Scripts.Game.Objects.Pickups;
 using UnityEngine;
 
-public class ArmorPickup : Pickup
+namespace Keru.Scripts.Game.Objects.Pickups
 {
-    [SerializeField] private int _armorAmount = 100;
-
-    protected override void OnTriggerEnter(Collider other)
+    public class ArmorPickup : Pickup
     {
-        base.OnTriggerEnter(other);
-        var player = other.GetComponent<Player>();
-        if (player != null)
+        [SerializeField] private int _armorAmount = 100;
+
+        protected override void OnTriggerEnter(Collider other)
         {
-            var result = player.AddArmor(_armorAmount, _soundToPlay);
-            if (result)
+            base.OnTriggerEnter(other);
+            var player = other.GetComponent<Player>();
+            if (player != null)
             {
-                Destroy(gameObject);
+                var result = player.AddArmor(_armorAmount, _soundToPlay);
+                if (result)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
-    }
 
-    public void SetConfig(int armorAmount)
-    {
-        _armorAmount = armorAmount;
+        public void SetConfig(int armorAmount)
+        {
+            _armorAmount = armorAmount;
+        }
     }
 }
+

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Keru.Scripts.Game.Actions.Entities.Passive
+namespace Keru.Scripts.Game.Actions.Entities.Passives
 {
     public class EntityDeployWeapons : MonoBehaviour
     {

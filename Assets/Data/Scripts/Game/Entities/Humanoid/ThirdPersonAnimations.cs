@@ -15,7 +15,7 @@ namespace Keru.Scripts.Game.Entities.Humanoid
 
         protected IEnumerable<Collider> _ragdollColliders;
         protected IEnumerable<WeaponThirdPersonModel> _weaponsModels;
-        protected Rig _rig;
+        protected MultiAimConstraint _bodyRig;
 
         public virtual void SetConfig()
         {
@@ -28,7 +28,7 @@ namespace Keru.Scripts.Game.Entities.Humanoid
             var rigBuilder = _model.GetComponent<RigBuilder>();
             if (rigBuilder != null)
             {
-                _rig = rigBuilder.layers.FirstOrDefault(x => x.rig.name == "AimRig").rig;
+                _bodyRig = rigBuilder.layers.FirstOrDefault(x => x.rig.name == "AimRig").rig.transform.Find("MultiAim").GetComponent<MultiAimConstraint>();
             }
         }
 
@@ -146,9 +146,9 @@ namespace Keru.Scripts.Game.Entities.Humanoid
 
         protected virtual void SetRigWeight(float weight)
         {
-            if (_rig != null)
+            if (_bodyRig != null)
             {
-                _rig.weight = weight;
+                _bodyRig.weight = weight;
             }
         }
 

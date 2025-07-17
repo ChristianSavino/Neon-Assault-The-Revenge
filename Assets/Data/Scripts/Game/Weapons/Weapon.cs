@@ -27,7 +27,7 @@ namespace Keru.Scripts.Game.Weapons
         private int _maxTotalBullets;
         private int _currentTotalBullets;
 
-        private bool _canShoot;
+        protected bool _canShoot;
         private bool _isReloading;
         protected bool _canChangeWeapon;
         private float _nextShot;
@@ -96,7 +96,7 @@ namespace Keru.Scripts.Game.Weapons
 
         protected void SetWeaponData()
         {
-            if(_playerWeaponHandler != null)
+            if (_playerWeaponHandler != null)
             {
                 _playerWeaponHandler.SetWeaponData(_weaponData.name, _currentWeaponLevel.AmmoType, _currentBulletsInMag, _currentWeaponLevel.MagazineSize, _currentTotalBullets);
             }
@@ -104,7 +104,10 @@ namespace Keru.Scripts.Game.Weapons
 
         protected void UpdateWeaponData()
         {
-            _playerWeaponHandler.UpdateWeaponData(_currentBulletsInMag, _currentTotalBullets);
+            if (_playerWeaponHandler != null)
+            {
+                _playerWeaponHandler.UpdateWeaponData(_currentBulletsInMag, _currentTotalBullets);
+            }
         }
 
         public bool CanChangeWeapon()
@@ -376,14 +379,14 @@ namespace Keru.Scripts.Game.Weapons
             if (_playerWeaponHandler != null)
             {
                 _playerWeaponHandler.PlayAnimation(weaponAction, _weaponData.WeaponCode);
-            }         
+            }
         }
 
         public void Die()
         {
             _canShoot = false;
             _isReloading = false;
-            _canChangeWeapon = false;           
+            _canChangeWeapon = false;
 
             StartCoroutine(WeaponSeparation());
         }
@@ -433,12 +436,26 @@ namespace Keru.Scripts.Game.Weapons
 
         public bool RefillMaxAmmo(float magazine)
         {
-            if(_maxTotalBullets == _currentTotalBullets)
+            if (_currentTotalBullets >= _maxTotalBullets)
             {
                 return false;
             }
 
-            _currentTotalBullets += Mathf.RoundToInt(magazine * _currentWeaponLevel.MagazineSize);
+            var ammoToRefill = Mathf.RoundToInt(magazine * _currentWeaponLevel.MagazineSize);
+
+            if (ammoToRefill + _currentTotalBullets >= _maxTotalBullets)
+            {
+                _currentTotalBullets = _maxTotalBullets;
+            }
+            else
+            {
+                _currentTotalBullets += ammoToRefill;
+            }
+
+            if(gameObject.activeSelf)
+            {
+                UpdateWeaponData();
+            }
 
             return true;
         }

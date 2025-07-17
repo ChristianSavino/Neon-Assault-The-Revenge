@@ -1,4 +1,4 @@
-using Keru.Game.Actions.Effects;
+using Keru.Scripts.Game.Actions.Effects;
 using Keru.Scripts.Game.Entities.Humanoid;
 using Keru.Scripts.Game.ScriptableObjects;
 using System.Collections;

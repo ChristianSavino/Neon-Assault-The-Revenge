@@ -1,5 +1,7 @@
-using Keru.Game.Actions;
+using Keru.Scripts.Game.Actions;
 using Keru.Scripts.Game.Entities;
+using Keru.Scripts.Helpers;
+using System.Linq;
 using UnityEngine;
 
 namespace Keru.Scripts.Game.Weapons
@@ -35,7 +37,7 @@ namespace Keru.Scripts.Game.Weapons
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(!_affectsPlayer && collision.gameObject.CompareTag("Player"))
+            if (!_affectsPlayer && collision.gameObject.CompareTag("Player"))
             {
                 return;
             }
@@ -52,7 +54,39 @@ namespace Keru.Scripts.Game.Weapons
                 _action.Execute();
             }
 
+            BeforeDestroy();
             Destroy(gameObject);
+        }
+
+        protected virtual void BeforeDestroy()
+        {
+            var particleEffects = GetComponentsInChildren<ParticleSystem>();
+            var trailEffects = GetComponentsInChildren<TrailRenderer>();
+            var gameObjects = particleEffects.Select(x => x.gameObject)
+                .Concat(trailEffects.Select(x => x.gameObject));
+
+            if(gameObjects.Any())
+            {
+                var leftEffects = Instantiate(new GameObject("Bullet Left Effects"));
+                leftEffects.transform.position = transform.position;
+                leftEffects.transform.forward = transform.forward;
+                leftEffects.transform.localScale = transform.localScale;
+
+                CommonFunctions.SetGameObjectParent(leftEffects.transform, gameObjects);
+                foreach (var effect in particleEffects)
+                {
+                    var main = effect.main;
+                    main.stopAction = ParticleSystemStopAction.Destroy;
+                    main.loop = false;
+                }
+                foreach (var trail in trailEffects)
+                {
+                    trail.autodestruct = true;
+                    trail.emitting = false;
+                }
+
+                Destroy(leftEffects, 10f);
+            }
         }
     }
 }
