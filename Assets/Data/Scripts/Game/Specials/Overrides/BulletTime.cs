@@ -1,4 +1,5 @@
 using Keru.Scripts.Game.Actions.Effects;
+using Keru.Scripts.Game.Entities;
 using Keru.Scripts.Game.Entities.Humanoid;
 using Keru.Scripts.Game.ScriptableObjects;
 using System.Collections;
@@ -39,6 +40,7 @@ namespace Keru.Scripts.Game.Specials.Overrides
             _uiHandler.SetAbilityState(AbilityAction.TOGGLE, true);
             SetUpBulletTimeEffect();
             _bulletTimeEffect = _slowTimeEffect.DoSlowTime();
+            SetFireRatePassive();
 
             yield return new WaitForSecondsRealtime(_currentLevel.Duration);
 
@@ -61,6 +63,13 @@ namespace Keru.Scripts.Game.Specials.Overrides
         {
             _slowTimeEffect = gameObject.AddComponent<SlowTime>();
             _slowTimeEffect.SetUp(_currentLevel.Power, _currentLevel.Duration, 0.5f, _uiHandler.GetVolume());
+        }
+
+        private void SetFireRatePassive()
+        {
+            var passive = ApplyPassive();
+            passive.SetUp(_stats.Passive, Mathf.RoundToInt(_currentLevel.Power * 100), _owner.GetComponentInParent<Entity>());
+            passive.ExecutePassive();
         }
     }
 }

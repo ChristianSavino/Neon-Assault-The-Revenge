@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f20639482cc20e41b2899db987590c3, type: 3}
-  m_Name: Fire
+  m_Name: Fuego
   m_EditorClassIdentifier: 
+  Code: 0
+  Potivity: 1
   Description: You are on Fire!
   Icon: {fileID: 0}
   Duration: 5

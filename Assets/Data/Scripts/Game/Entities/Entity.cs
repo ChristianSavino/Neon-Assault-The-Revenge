@@ -1,4 +1,5 @@
 using Keru.Scripts.Game.Entities.Passives;
+using Keru.Scripts.Game.ScriptableObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,11 +28,11 @@ namespace Keru.Scripts.Game.Entities
 
         }
 
-        public virtual Passive UpdatePassiveValues(Type type = null)
+        public virtual Passive UpdatePassiveValues(Type type = null, PassiveCode? passiveCode = null)
         {
-            if(type != null)
+            if(type != null || passiveCode != null)
             {
-                return _passiveHandler.AddPassive(type);
+                return _passiveHandler.AddPassive(type, passiveCode);
             }
             else
             {

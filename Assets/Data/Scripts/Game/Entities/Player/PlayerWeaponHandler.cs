@@ -30,6 +30,10 @@ namespace Keru.Scripts.Game.Entities.Player
         [SerializeField] private WeaponCodes _secondaryForcedCode;
         [SerializeField] private int _secondaryForcedLevel = 1;
 
+        private float _bonusDamage = 1;
+        private float _bonusFireRate = 1;
+        private bool _autoReload;
+
         //Effects
         public bool CanInteract { get; set; } = true;
 
@@ -60,6 +64,11 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private void WeaponControls()
         {
+            if(_autoReload && _currentWeapon.GetCurrentBulletsInMag() == 0)
+            {
+                _currentWeapon.Reload();
+            }
+
             if (Input.GetKeyDown(_keys["Shoot"]))
             {
                 _currentWeapon.StartsShoot();
@@ -70,7 +79,7 @@ namespace Keru.Scripts.Game.Entities.Player
             }
             if (Input.GetKey(_keys["Shoot"]))
             {
-                _currentWeapon.Shoot(_direction);
+                _currentWeapon.Shoot(_direction, _bonusDamage, _bonusFireRate);
             }
 
             if (Input.GetKeyDown(_keys["Reload"]))
@@ -95,7 +104,7 @@ namespace Keru.Scripts.Game.Entities.Player
             _direction = (targetPoint - transform.position);
         }
 
-        public void SetConfig(PlayerThirdPersonAnimations pta, SaveGameFile saveGame, Dictionary<string, KeyCode> keys, WeaponUIHandler weaponUiHandler)
+        public void SetConfig(PlayerThirdPersonAnimations pta, SaveGameFile saveGame, Dictionary<string, KeyCode> keys, WeaponUIHandler weaponUiHandler, bool autoReload)
         {
             _animations = pta;
             _keys = keys;
@@ -117,6 +126,7 @@ namespace Keru.Scripts.Game.Entities.Player
 
             _katana = _animations.GetWeaponModel(_meleeWeapon).AddComponent<Melee>();
             _katana.SetConfig(this, _animations.GetWeaponModel(_meleeWeapon), null);
+            _autoReload = autoReload;
         }
 
         public void DeployWeapon(Weapon weapon, bool forcedDeploy = false, bool isMelee = false)
@@ -256,6 +266,12 @@ namespace Keru.Scripts.Game.Entities.Player
             {
                 DeployWeapon(auxWeapon, forcedDeploy: true);
             }
+        }
+
+        public void SetBonus(float damageBonus, float fireRateBonus)
+        {
+            _bonusDamage = 1 + damageBonus;
+            _bonusFireRate = 1 + fireRateBonus;
         }
     }
 }

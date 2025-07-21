@@ -36,3 +36,4 @@ MonoBehaviour:
     Cooldown: 20
     Duration: 12
     Range: 0
+  Passive: {fileID: 11400000, guid: ac5b943623cbb444cbd074288e45fe50, type: 2}

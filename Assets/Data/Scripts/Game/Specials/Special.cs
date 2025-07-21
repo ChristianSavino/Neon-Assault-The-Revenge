@@ -1,4 +1,6 @@
+using Keru.Scripts.Game.Entities;
 using Keru.Scripts.Game.Entities.Humanoid;
+using Keru.Scripts.Game.Entities.Passives;
 using Keru.Scripts.Game.Entities.Player;
 using Keru.Scripts.Game.Entities.Player.UI;
 using Keru.Scripts.Game.ScriptableObjects;
@@ -73,6 +75,18 @@ namespace Keru.Scripts.Game.Specials
         public bool UsesMelee()
         {
             return _stats.UsesMelee;
+        }
+
+        public Passive ApplyPassive()
+        {
+            if(_stats.Passive != null)
+            {
+                var entity = _owner.GetComponentInParent<Entity>();
+                var passive = entity.UpdatePassiveValues(null, _stats.Passive.Code);
+                return passive;
+            }
+
+            return null;
         }
     }
 }

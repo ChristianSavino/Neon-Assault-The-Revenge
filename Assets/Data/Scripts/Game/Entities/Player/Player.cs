@@ -110,13 +110,15 @@ namespace Keru.Scripts.Game.Entities.Player
             _movement.SetConfig(this, _animations, _uIHandler , _keys, gameOptions.Options.PlayerControls.Sensibility);
             _animations.SetConfig();
 
-            _weaponHandler.SetConfig(_animations, saveGame, _keys, weaponUiHandler);
+            _weaponHandler.SetConfig(_animations, saveGame, _keys, weaponUiHandler, gameOptions.Options.PlayerControls.AutoReload);
             _uIHandler.SetConfig();
             _lifeUIHandler.SetConfig(_life, _maxLife);
             _specialHandler.SetConfig(saveGame, _keys, _movement, _weaponHandler, _animations, specialUiHandler);
             _effectsHandler.SetConfig();
 
             _passiveHandler.SetUp(_animations.GetModelObject());
+            var playerPassiveHandler = _passiveHandler as PlayerPassiveHandler;
+            playerPassiveHandler.SetUpPlayer(this, _weaponHandler, _movement, _animations, _specialHandler);
         }
 
         private void Die(Vector3 hitpoint, float damageForce)

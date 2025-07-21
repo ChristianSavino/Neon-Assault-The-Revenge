@@ -21,14 +21,24 @@ namespace Keru.Scripts.Game.Entities.Passives
             return _model;
         }
 
-        public virtual Passive AddPassive(Type type)
+        public virtual Passive AddPassive(Type type = null, PassiveCode? passiveCode = null)
         {
             UpdatePassives();
 
-            var exists = CheckIfPassiveExists(type);
+            var exists = CheckIfPassiveExists(type, passiveCode);
             if (!exists)
             {
-                var passive = (Passive)gameObject.AddComponent(type);
+                Passive passive;
+               
+                if(type != null)
+                {
+                    passive = (Passive)gameObject.AddComponent(type);
+                }
+                else
+                {
+                    passive = gameObject.AddComponent<Passive>();
+                }
+                
                 _passives.Add(passive);
                 return passive;
             }
@@ -41,8 +51,19 @@ namespace Keru.Scripts.Game.Entities.Passives
             _passives = _passives.Where(x => x != null || !x.Equals(null)).ToList();
         }
 
-        protected bool CheckIfPassiveExists(Type type)
+        public virtual void DestroyPassive(Passive passive)
         {
+            _passives.Remove(passive);
+            UpdatePassives();
+        }
+
+        protected bool CheckIfPassiveExists(Type type = null, PassiveCode? passiveCode = null)
+        {
+            if(passiveCode.HasValue)
+            {
+                return _passives.Any(p => p.GetStats().Code == passiveCode.Value);
+            }
+
             foreach (var p in _passives)
             {
                 if (p.GetType() == type)

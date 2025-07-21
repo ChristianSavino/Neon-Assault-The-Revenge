@@ -36,6 +36,7 @@ namespace Keru.Scripts.Game.Weapons
 
             _playerWeaponHandler.SetWeaponData(_weaponData.name, AmmoType.MELEE, 0, 0, 0);
             _trailRenderer = GetComponentInChildren<SwordTrailRenderer>();
+            _currentBulletsInMag = 1;
         }
 
         public override void Deploy()

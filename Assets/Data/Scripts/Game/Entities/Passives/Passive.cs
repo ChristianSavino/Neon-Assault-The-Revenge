@@ -1,4 +1,5 @@
 using Keru.Scripts.Game.ScriptableObjects;
+using System.Collections;
 using UnityEngine;
 
 namespace Keru.Scripts.Game.Entities.Passives
@@ -16,6 +17,7 @@ namespace Keru.Scripts.Game.Entities.Passives
             _power = power;
             _entity = entity;
             _passiveHandler = gameObject.GetComponentInChildren<PassiveHandler>();
+            
         }
 
         public PassiveStats GetStats()
@@ -25,7 +27,20 @@ namespace Keru.Scripts.Game.Entities.Passives
 
         public virtual void ExecutePassive()
         {
+            _passiveHandler.UpdatePassives();
+            StartCoroutine(Duration());
+        }
 
+        private void OnDestroy()
+        {
+            _passiveHandler.DestroyPassive(this);
+        }
+
+        private IEnumerator Duration()
+        {
+            _passiveHandler.UpdatePassives();
+            yield return new WaitForSeconds(_passiveStats.Duration);
+            Destroy(this);
         }
 
         protected virtual void SetUpEffect()
@@ -37,6 +52,11 @@ namespace Keru.Scripts.Game.Entities.Passives
                 var main = particleSystem.main;
                 main.duration = _passiveStats.Duration;
             }
+        }
+
+        public int Power()
+        {
+            return _power;
         }
     }
 }

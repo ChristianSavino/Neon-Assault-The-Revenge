@@ -22,5 +22,8 @@ namespace Keru.Scripts.Game.ScriptableObjects
 
         [Header("Level Data")]
         public List<SpecialLevel> SpecialLevels;
+
+        [Header("Passives")]
+        public PassiveStats Passive;
     }
 }

@@ -102,4 +102,18 @@ namespace Keru.Scripts.Game
         RELOAD_CLOSE = 5,
         RELOAD_INSERT = 6
     }
+
+    public enum PassivePotivity
+    {
+        POSITIVE = 0,
+        NEGATIVE = 1
+    }
+
+    public enum PassiveCode
+    {
+        DOT_LIFE = 0,
+        FIRE_RATE = 1,
+        DAMAGE_RATE = 2,
+        DAMAGE_REDUCTION = 3
+    }
 }

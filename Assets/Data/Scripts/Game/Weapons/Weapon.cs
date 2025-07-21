@@ -23,7 +23,7 @@ namespace Keru.Scripts.Game.Weapons
         protected PlayerWeaponHandler _playerWeaponHandler;
         protected AudioSource _audioSource;
 
-        private int _currentBulletsInMag;
+        protected int _currentBulletsInMag;
         private int _maxTotalBullets;
         private int _currentTotalBullets;
 
@@ -438,6 +438,11 @@ namespace Keru.Scripts.Game.Weapons
         public int GetMagazineSize()
         {
             return _currentWeaponLevel.MagazineSize;
+        }
+
+        public int GetCurrentBulletsInMag()
+        {
+            return _currentBulletsInMag;
         }
 
         public bool RefillMaxAmmo(float magazine)
