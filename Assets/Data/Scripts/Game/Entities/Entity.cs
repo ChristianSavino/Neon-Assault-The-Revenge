@@ -28,11 +28,11 @@ namespace Keru.Scripts.Game.Entities
 
         }
 
-        public virtual Passive UpdatePassiveValues(Type type = null, PassiveCode? passiveCode = null)
+        public virtual Passive UpdatePassiveValues(PassiveStats stats, int power, Entity owner, Type type = null, PassiveCode? passiveCode = null)
         {
             if(type != null || passiveCode != null)
             {
-                return _passiveHandler.AddPassive(type, passiveCode);
+                return _passiveHandler.AddPassive(stats, power, owner, type, passiveCode);
             }
             else
             {

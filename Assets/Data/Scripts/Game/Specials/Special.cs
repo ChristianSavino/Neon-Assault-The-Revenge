@@ -77,12 +77,16 @@ namespace Keru.Scripts.Game.Specials
             return _stats.UsesMelee;
         }
 
-        public Passive ApplyPassive()
+        public Passive ApplyPassive(PassiveStats stats, int power, Entity owner)
         {
             if(_stats.Passive != null)
             {
                 var entity = _owner.GetComponentInParent<Entity>();
-                var passive = entity.UpdatePassiveValues(null, _stats.Passive.Code);
+                var passive = entity.UpdatePassiveValues(stats, power, owner, null, _stats.Passive.Code);
+                if (passive != null)
+                {
+                    passive.SetUp(stats, power, owner);
+                }
                 return passive;
             }
 

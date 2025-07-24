@@ -92,6 +92,7 @@ namespace Keru.Scripts.Game.Entities.Player
             _lifeUIHandler = camera.GetComponentInChildren<LifeUIHandler>();
             var weaponUiHandler = camera.GetComponentInChildren<WeaponUIHandler>();
             var specialUiHandler = camera.GetComponentInChildren<SpecialUIHandler>();
+            var passiveUiHandler = camera.GetComponentInChildren<PassiveUIHandler>();
             _effectsHandler = _effectsGameObject.GetComponent<PlayerEffectsHandler>();
 
             _keys = gameOptions.Options.PlayerControls.Keys;
@@ -118,7 +119,7 @@ namespace Keru.Scripts.Game.Entities.Player
 
             _passiveHandler.SetUp(_animations.GetModelObject());
             var playerPassiveHandler = _passiveHandler as PlayerPassiveHandler;
-            playerPassiveHandler.SetUpPlayer(this, _weaponHandler, _movement, _animations, _specialHandler);
+            playerPassiveHandler.SetUpPlayer(this, _weaponHandler, _movement, _animations, _specialHandler, passiveUiHandler);
         }
 
         private void Die(Vector3 hitpoint, float damageForce)

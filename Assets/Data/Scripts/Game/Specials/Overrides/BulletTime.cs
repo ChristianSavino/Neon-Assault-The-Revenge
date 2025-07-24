@@ -67,8 +67,7 @@ namespace Keru.Scripts.Game.Specials.Overrides
 
         private void SetFireRatePassive()
         {
-            var passive = ApplyPassive();
-            passive.SetUp(_stats.Passive, Mathf.RoundToInt(_currentLevel.Power * 100), _owner.GetComponentInParent<Entity>());
+            var passive = ApplyPassive(_stats.Passive, Mathf.RoundToInt(_currentLevel.Power * 100), _owner.GetComponentInParent<Entity>());
             passive.ExecutePassive();
         }
     }

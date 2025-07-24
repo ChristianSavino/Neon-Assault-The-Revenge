@@ -1,4 +1,6 @@
 using Keru.Scripts.Game.Entities.Passives;
+using Keru.Scripts.Game.Entities.Player.UI;
+using Keru.Scripts.Game.ScriptableObjects;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,24 +16,27 @@ namespace Keru.Scripts.Game.Entities.Player
         private PlayerMovement _movementHandler;
         private PlayerThirdPersonAnimations _animations;
         private PlayerSpecialHandler _specialHandler;
+        private PassiveUIHandler _passiveHandler;
 
         public override void SetUp(GameObject model)
         {
             base.SetUp(model);
         }
 
-        public void SetUpPlayer(Player player, PlayerWeaponHandler weaponHandler, PlayerMovement playerMovement, PlayerThirdPersonAnimations thirdPersonAnimations, PlayerSpecialHandler specialHandler)
+        public void SetUpPlayer(Player player, PlayerWeaponHandler weaponHandler, PlayerMovement playerMovement, PlayerThirdPersonAnimations thirdPersonAnimations, PlayerSpecialHandler specialHandler, PassiveUIHandler passiveHandler)
         {
             _player = player;
             _weaponHandler = weaponHandler;
             _movementHandler = playerMovement;
             _animations = thirdPersonAnimations;
             _specialHandler = specialHandler;
+            _passiveHandler = passiveHandler;
         }
 
-        public override Passive AddPassive(Type type = null, PassiveCode? passiveCode = null)
+        public override Passive AddPassive(PassiveStats stats, int power, Entity owner, Type type = null, PassiveCode? passiveCode = null)
         {
-            var result = base.AddPassive(type, passiveCode);
+            var result = base.AddPassive(stats, power, owner, type, passiveCode);
+            _passiveHandler.AddPassive(result.GetStats());
             return result;
         }
 

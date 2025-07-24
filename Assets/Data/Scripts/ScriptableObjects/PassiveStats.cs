@@ -13,5 +13,7 @@ namespace Keru.Scripts.Game.ScriptableObjects
         public Sprite Icon;
         public float Duration;
         public GameObject Effects;
+        public bool IsMeshParticle;
+        public bool UsesRealTime;
     }
 }

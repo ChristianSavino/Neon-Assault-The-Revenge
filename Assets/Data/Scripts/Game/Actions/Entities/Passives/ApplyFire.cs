@@ -23,11 +23,11 @@ namespace Keru.Scripts.Game.Actions.Entities.Passives
                 var entity = target.GetComponent<Entity>();
                 if (entity != null)
                 {
-                    var firePassive = entity.UpdatePassiveValues(typeof(FireDotPassive)) as FireDotPassive;
+                    var firePassive = entity.UpdatePassiveValues(_firePassive, _damagePerSecond, entity, typeof(FireDotPassive)) as FireDotPassive;
                     if(firePassive != null)
                     {
                         firePassive.SetFireColor(_fireColor);
-                        firePassive.SetUp(_firePassive, _damagePerSecond, entity);
+                        //firePassive.SetUpEffect();
                         firePassive.ExecutePassive();
                     }     
                 }

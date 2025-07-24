@@ -37,3 +37,4 @@ MonoBehaviour:
     Cooldown: 50
     Duration: 0
     Range: 20
+  Passive: {fileID: 0}
