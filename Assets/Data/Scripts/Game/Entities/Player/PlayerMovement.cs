@@ -115,19 +115,26 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private void JumpMovement()
         {
-            if (Input.GetKeyDown(_keys["Jump"]) && _isAbleToDoubleJump && !_isCrouching)
+            if (!Input.GetKeyDown(_keys["Jump"]))
             {
-                Jump();
-                _isAbleToDoubleJump = false;
+                return;
             }
-            if (Input.GetKeyDown(_keys["Jump"]) && GroundCheck() && !_isCrouching)
+
+            if (_isCrouching)
+            {
+                SetCrouching();
+                return;
+            }
+
+            if (GroundCheck())
             {
                 Jump();
                 _isAbleToDoubleJump = _canDoubleJump;
             }
-            else if(Input.GetKeyDown(_keys["Jump"]) && _isCrouching)
+            else if (_isAbleToDoubleJump)
             {
-                SetCrouching();
+                Jump();
+                _isAbleToDoubleJump = false;
             }
         }
 
@@ -156,7 +163,7 @@ namespace Keru.Scripts.Game.Entities.Player
 
                 if (Input.GetKey(_keys["Up"]) || Input.GetKey(_keys["Left"]) || Input.GetKey(_keys["Back"]) || Input.GetKey(_keys["Right"]))
                 {
-                    _axis = getDirection();
+                    _axis = GetDirection();
                     accelerate = true;
                 }
 
@@ -200,6 +207,11 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private void SetCrouching()
         {
+            if (_isCrouching && !CalculateIfCanStand())
+            {
+                return;
+            }
+
             _isCrouching = !_isCrouching;
 
             if (!_isCrouching)
@@ -208,27 +220,24 @@ namespace Keru.Scripts.Game.Entities.Player
             }
         }
 
-        private Vector3 getDirection()
+        private static readonly Dictionary<string, Vector3> _inputDirections = new()
         {
-            var vector = Vector3.zero;
+            { "Up", Vector3.right },
+            { "Left", Vector3.forward },
+            { "Back", Vector3.left },
+            { "Right", Vector3.back }
+        };
 
-            if (Input.GetKey(_keys["Up"]))
+        private Vector3 GetDirection()
+        {
+            Vector3 vector = Vector3.zero;
+            foreach (var key in _inputDirections.Keys)
             {
-                vector += Vector3.right;
+                if (Input.GetKey(_keys[key]))
+                {
+                    vector += _inputDirections[key];
+                }                
             }
-            if (Input.GetKey(_keys["Left"]))
-            {
-                vector += Vector3.forward;
-            }
-            if (Input.GetKey(_keys["Back"]))
-            {
-                vector += Vector3.left;
-            }
-            if (Input.GetKey(_keys["Right"]))
-            {
-                vector += Vector3.back;
-            }
-
             return vector;
         }
 
@@ -236,7 +245,7 @@ namespace Keru.Scripts.Game.Entities.Player
         {
             if (Input.GetKeyDown(_keys["Dash"]) && !_isDashing && _dash > 0 && _maxDashes > 0 && !_isCrouching)
             {
-                var direction = getDirection();
+                var direction = GetDirection();
                 if (direction != Vector3.zero)
                 {
                     StartCoroutine(Dashing(direction.normalized));
@@ -255,7 +264,6 @@ namespace Keru.Scripts.Game.Entities.Player
             _rigidBody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
             _dash--;
             _rigidBody.velocity = direction;
-            //UI Code
 
             yield return new WaitForSeconds(0.1f);
 
@@ -283,14 +291,15 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private IEnumerator WalkSound()
         {
-            yield return new WaitForSeconds(0.5f);
-
-            if (_rigidBody.velocity != Vector3.zero && !_isCrouching && GroundCheck())
+            while (true)
             {
-                //Director Code
-            }
+                yield return new WaitForSeconds(0.5f);
 
-            StartCoroutine(WalkSound());
+                if (_rigidBody.velocity != Vector3.zero && !_isCrouching && GroundCheck())
+                {
+                    //Director Code
+                }
+            }
         }
 
         public float CheckIsCrouching()
@@ -341,7 +350,5 @@ namespace Keru.Scripts.Game.Entities.Player
         {
             return _maxSpeed * _acceleration * (_isCrouching ? 0.5f : 1);
         }
-
-
     }
 }

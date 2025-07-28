@@ -1,13 +1,11 @@
 using Keru.Scripts.Game.Entities;
 using Keru.Scripts.Game.Entities.Humanoid;
 using Keru.Scripts.Game.Entities.Passives;
-using Keru.Scripts.Game.Entities.Player;
 using Keru.Scripts.Game.Entities.Player.UI;
 using Keru.Scripts.Game.ScriptableObjects;
 using Keru.Scripts.Game.ScriptableObjects.Models;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Keru.Scripts.Game.Specials
 {
@@ -29,16 +27,15 @@ namespace Keru.Scripts.Game.Specials
         {
             _animations = animations;
             _stats = stats;
-            _level = level;
+            _level = Mathf.Clamp(level, 1, _stats.SpecialLevels.Count);
             _currentLevel = _stats.SpecialLevels[_level - 1];
-
             _owner = owner;
         }
 
         public virtual void SetUIHandler(SpecialUIHandler specialUIHandler, SpecialDataUIHandler uiHandler, KeyCode keyCode)
         {
             _uiHandler = uiHandler;
-            _uiHandler.SetConfig(specialUIHandler, _stats, _currentLevel, keyCode);
+            _uiHandler?.SetConfig(specialUIHandler, _stats, _currentLevel, keyCode);
         }
 
         public virtual bool Execute()
@@ -47,50 +44,47 @@ namespace Keru.Scripts.Game.Specials
             {
                 return false;
             }
-
             return true;
         }
 
         protected virtual IEnumerator CoolDown(float time)
         {
-            _uiHandler.SetAbilityState(AbilityAction.COOLDOWN);
+            if (_uiHandler != null)
+            {
+                _uiHandler.SetAbilityState(AbilityAction.COOLDOWN);
+            }
+                
             yield return new WaitForSeconds(time);
             _canCast = true;
-            _uiHandler.SetAbilityState(AbilityAction.IDLE);
+
+            if (_uiHandler != null)
+            {
+                _uiHandler.SetAbilityState(AbilityAction.IDLE);
+            }  
         }
 
-        public SpecialStats GetStats()
-        {
-            return _stats;
-        }
+        public SpecialStats GetStats() => _stats;
 
         public virtual void Die()
         {
             if (_coroutine != null)
             {
                 StopCoroutine(_coroutine);
+                _coroutine = null;
             }
-        }
-
-        public bool UsesMelee()
-        {
-            return _stats.UsesMelee;
         }
 
         public Passive ApplyPassive(PassiveStats stats, int power, Entity owner)
         {
-            if(_stats.Passive != null)
+            if (_stats?.Passive == null)
             {
-                var entity = _owner.GetComponentInParent<Entity>();
-                var passive = entity.UpdatePassiveValues(stats, power, owner, null, _stats.Passive.Code);
-                if (passive != null)
-                {
-                    passive.SetUp(stats, power, owner);
-                }
-                return passive;
+                return null;
             }
-
-            return null;
+                
+            var entity = _owner.GetComponentInParent<Entity>();
+            var passive = entity.UpdatePassiveValues(stats, power, owner, null, _stats.Passive.Code);
+            passive?.SetUp(stats, power, owner);
+            return passive;
         }
     }
 }

@@ -1,11 +1,10 @@
-using Keru.Scripts.Game.Entities.Player.UI;
+    using Keru.Scripts.Game.Entities.Player.UI;
 using Keru.Scripts.Game.ScriptableObjects;
 using Keru.Scripts.Game.Specials;
 using Keru.Scripts.Game.Specials.Overrides;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 namespace Keru.Scripts.Game.Entities.Player
@@ -25,28 +24,61 @@ namespace Keru.Scripts.Game.Entities.Player
         private PlayerThirdPersonAnimations _animations;
         private SpecialUIHandler _specialUiHandler;
 
+        private Coroutine _resetCoroutine;
+
         public bool CanCast { get; set; } = true;
 
-        public void SetConfig(SaveGameFile saveGame, Dictionary<string, KeyCode> keys, PlayerMovement playerMovement, PlayerWeaponHandler weaponHandler, PlayerThirdPersonAnimations thirdPersonAnimations, SpecialUIHandler specialUIHandler)
+        public void SetConfig(
+            SaveGameFile saveGame,
+            Dictionary<string, KeyCode> keys,
+            PlayerMovement playerMovement,
+            PlayerWeaponHandler weaponHandler,
+            PlayerThirdPersonAnimations thirdPersonAnimations,
+            SpecialUIHandler specialUIHandler)
         {
             _keys = keys;
             _movement = playerMovement;
             _weaponHandler = weaponHandler;
             _animations = thirdPersonAnimations;
-
             _specialUiHandler = specialUIHandler;
             _specialUiHandler.SetConfig(_keys);
 
-            var ultimateSkill = saveGame.CurrentCharacterData.UltimateSkill;
-            _ultimate = GetCorrectSpecial(ultimateSkill);
-            _ultimate.SetConfig(_animations, _allSpecials.First(x => x.AbilityCode == ultimateSkill), saveGame.UnlockedSkills.First(x => x.Code == ultimateSkill).Level, gameObject);
-            _specialUiHandler.SetConfigSpecial(_ultimate);
+            _ultimate = ConfigureSpecial(
+                saveGame.CurrentCharacterData.UltimateSkill,
+                saveGame,
+                AbilitySlot.ULTIMATE);
 
-            var secondarySkill = saveGame.CurrentCharacterData.SecondarySkill;
-            _secondary = GetCorrectSpecial(secondarySkill);
-            _secondary.SetConfig(_animations, _allSpecials.First(x => x.AbilityCode == secondarySkill), saveGame.UnlockedSkills.First(x => x.Code == secondarySkill).Level, gameObject);
-            _specialUiHandler.SetConfigSpecial(_secondary);
+            _secondary = ConfigureSpecial(
+                saveGame.CurrentCharacterData.SecondarySkill,
+                saveGame,
+                AbilitySlot.SECONDARY);
+        }
 
+        private Special ConfigureSpecial(AbilityCodes abilityCode, SaveGameFile saveGame, AbilitySlot slot)
+        {
+            var stats = _allSpecials.FirstOrDefault(x => x.AbilityCode == abilityCode);
+            var unlocked = saveGame.UnlockedSkills.FirstOrDefault(x => x.Code == abilityCode);
+
+            if (stats == null || unlocked == null)
+                return null;
+
+            var special = GetOrAddSpecialComponent(abilityCode);
+            special.SetConfig(_animations, stats, unlocked.Level, gameObject);
+            _specialUiHandler.SetConfigSpecial(special);
+            return special;
+        }
+
+        private Special GetOrAddSpecialComponent(AbilityCodes abilityCode)
+        {
+            switch (abilityCode)
+            {
+                case AbilityCodes.BULLETTIME:
+                    return _container.GetComponent<BulletTime>() ?? _container.AddComponent<BulletTime>();
+                case AbilityCodes.JUDGEMENTCUT:
+                    return _container.GetComponent<JudgementCut>() ?? _container.AddComponent<JudgementCut>();
+                default:
+                    return null;
+            }
         }
 
         private void Update()
@@ -63,26 +95,19 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private void CastSpecial(Special special)
         {
+            if (special == null) return;
+
             var casted = special.Execute();
             if (casted)
             {
                 var stats = special.GetStats();
                 _animations.PlaySpecialAnimation(stats.name, stats.CastTime);
                 SetPlayerControls(false);
-                StartCoroutine(ResetPlayer(stats.CastTime, stats.UsesMelee));
-            }
-        }
 
-        private Special GetCorrectSpecial(AbilityCodes abilityCode)
-        {
-            switch (abilityCode)
-            {
-                case AbilityCodes.BULLETTIME:
-                    return _container.AddComponent<BulletTime>();
-                case AbilityCodes.JUDGEMENTCUT:
-                    return _container.AddComponent<JudgementCut>();
-                default:
-                    return null;
+                if (_resetCoroutine != null)
+                    StopCoroutine(_resetCoroutine);
+
+                _resetCoroutine = StartCoroutine(ResetPlayer(stats.CastTime, stats.UsesMelee));
             }
         }
 
@@ -102,14 +127,8 @@ namespace Keru.Scripts.Game.Entities.Player
 
         public void Die()
         {
-            if (_secondary != null)
-            {
-                _secondary.Die();
-            }
-            if (_ultimate != null)
-            {
-                _ultimate.Die();
-            }
+            _secondary?.Die();
+            _ultimate?.Die();
             enabled = false;
         }
     }

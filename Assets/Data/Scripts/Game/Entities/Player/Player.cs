@@ -9,7 +9,7 @@ namespace Keru.Scripts.Game.Entities.Player
     public class Player : Entity
     {
         public static Player Singleton;
-        
+
         [SerializeField] private int _maxLife;
         [SerializeField] private GameObject _effectsGameObject;
         private int _armor;
@@ -22,7 +22,7 @@ namespace Keru.Scripts.Game.Entities.Player
         private PlayerSpecialHandler _specialHandler;
         private PlayerEffectsHandler _effectsHandler;
 
-        private Dictionary<string,KeyCode> _keys;
+        private Dictionary<string, KeyCode> _keys;
 
         private bool _paused;
         [SerializeField] private bool _debug;
@@ -40,19 +40,16 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private void ActionKeys()
         {
-            if(_alive)
+            if (_alive)
             {
                 if (Input.GetKeyDown(_keys["Pause"]))
                 {
                     PauseGame();
                 }
             }
-            else
+            else if (Input.GetKeyDown(KeyCode.R))
             {
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    RestartLevel();
-                }
+                RestartLevel();
             }
         }
 
@@ -83,34 +80,29 @@ namespace Keru.Scripts.Game.Entities.Player
         {
             var camera = Camera.main;
             Singleton = this;
-            _movement = gameObject.GetComponent<PlayerMovement>();
-            _weaponHandler = gameObject.GetComponent<PlayerWeaponHandler>();
-            _specialHandler = gameObject.GetComponent<PlayerSpecialHandler>();
-            _animations = gameObject.GetComponent<PlayerThirdPersonAnimations>();
+
+            _movement = GetComponent<PlayerMovement>();
+            _weaponHandler = GetComponent<PlayerWeaponHandler>();
+            _specialHandler = GetComponent<PlayerSpecialHandler>();
+            _animations = GetComponent<PlayerThirdPersonAnimations>();
+            _effectsHandler = _effectsGameObject.GetComponent<PlayerEffectsHandler>();
 
             _uIHandler = camera.GetComponentInChildren<PlayerUIHandler>();
             _lifeUIHandler = camera.GetComponentInChildren<LifeUIHandler>();
             var weaponUiHandler = camera.GetComponentInChildren<WeaponUIHandler>();
             var specialUiHandler = camera.GetComponentInChildren<SpecialUIHandler>();
             var passiveUiHandler = camera.GetComponentInChildren<PassiveUIHandler>();
-            _effectsHandler = _effectsGameObject.GetComponent<PlayerEffectsHandler>();
 
             _keys = gameOptions.Options.PlayerControls.Keys;
             _maxLife = saveGame.CurrentCharacterData.MaxHealth;
             _life = saveGame.CurrentCharacterData.CurrentHealth;
-            if(_debug)
-            {
-                SetArmorValue(Mathf.Clamp(_armorOverride, 0, 100));
-            }
-            else
-            {
-                SetArmorValue(saveGame.CurrentCharacterData.CurrentArmor);
-            }
-            
 
-            _movement.SetConfig(this, _animations, _uIHandler , _keys, gameOptions.Options.PlayerControls.Sensibility);
+            SetArmorValue(_debug
+                ? Mathf.Clamp(_armorOverride, 0, 100)
+                : saveGame.CurrentCharacterData.CurrentArmor);
+
+            _movement.SetConfig(this, _animations, _uIHandler, _keys, gameOptions.Options.PlayerControls.Sensibility);
             _animations.SetConfig();
-
             _weaponHandler.SetConfig(_animations, saveGame, _keys, weaponUiHandler, gameOptions.Options.PlayerControls.AutoReload);
             _uIHandler.SetConfig();
             _lifeUIHandler.SetConfig(_life, _maxLife);
@@ -118,8 +110,10 @@ namespace Keru.Scripts.Game.Entities.Player
             _effectsHandler.SetConfig();
 
             _passiveHandler.SetUp(_animations.GetModelObject());
-            var playerPassiveHandler = _passiveHandler as PlayerPassiveHandler;
-            playerPassiveHandler.SetUpPlayer(this, _weaponHandler, _movement, _animations, _specialHandler, passiveUiHandler);
+            if (_passiveHandler is PlayerPassiveHandler playerPassiveHandler)
+            {
+                playerPassiveHandler.SetUpPlayer(this, _weaponHandler, _movement, _animations, _specialHandler, passiveUiHandler);
+            }
         }
 
         private void Die(Vector3 hitpoint, float damageForce)
@@ -147,69 +141,66 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private int DamageResist(int damage, DamageType damageType)
         {
-            damage = damageType == DamageType.EXPLOSION ? Mathf.RoundToInt(damage * 0.25f) : damage;
+            if (damageType == DamageType.EXPLOSION)
+            {
+                damage = Mathf.RoundToInt(damage * 0.25f);
+            }   
 
-            if(damageType == DamageType.TRUE_DAMAGE)
+            if (damageType == DamageType.TRUE_DAMAGE)
             {
                 return damage;
             }
-
-            var difficulty = LevelBase.CurrentSave.Difficulty;
-            switch (difficulty) {
-                case Difficulty.Easy:
-                    return Mathf.RoundToInt(damage * 0.25f);
-                case Difficulty.Normal:
-                    return Mathf.RoundToInt(damage * 0.5f);
-                case Difficulty.Hard:
-                    return Mathf.RoundToInt(damage * 0.75f);
-                case Difficulty.KeruMustDie:
-                    return damage;
-            }
-
-            // Default case, should not happen
-            return damage;
+                
+            return LevelBase.CurrentSave.Difficulty switch
+            {
+                Difficulty.Easy => Mathf.RoundToInt(damage * 0.25f),
+                Difficulty.Normal => Mathf.RoundToInt(damage * 0.5f),
+                Difficulty.Hard => Mathf.RoundToInt(damage * 0.75f),
+                _ => damage
+            };
         }
 
         private int DamageArmor(int damage, bool trueDamage = false)
         {
-            var healthDamage = damage;
-            if(!trueDamage)
+            if (trueDamage)
             {
-                var percentageProtected = Mathf.Clamp(_armor / 100f, 0f, 0.9f);
-                healthDamage = Mathf.RoundToInt(damage * (1 - percentageProtected));
+                SetArmorValue(-Mathf.RoundToInt(damage * 0.5f));
+                return damage;
             }
-            SetArmorValue(-Mathf.RoundToInt(damage * 0.5f));
 
+            var percentageProtected = Mathf.Clamp(_armor / 100f, 0f, 0.9f);
+            var healthDamage = Mathf.RoundToInt(damage * (1 - percentageProtected));
+            SetArmorValue(-Mathf.RoundToInt(damage * 0.5f));
             return healthDamage;
         }
 
         private void SetArmorValue(int armor)
         {
-            var hasArmor = _armor > 0;
-            _armor += armor;
-            _armor = Mathf.Clamp(_armor, 0, 100);
-            if(hasArmor && _armor == 0)
+            var hadArmor = _armor > 0;
+            _armor = Mathf.Clamp(_armor + armor, 0, 100);
+
+            if (hadArmor && _armor == 0)
             {
                 AddEffect(_armorBrokenSoundEffect, _armorBrokenEffects);
             }
+
             _armorModel.SetActive(_armor > 0);
             _lifeUIHandler.SetArmor(_armor);
         }
 
         private void SetLife(int life, bool isHealing = true, GameObject origin = null)
-        {       
-            _life += life;
-            _life = Mathf.Clamp(_life, 0, _maxLife);
+        {
+            _life = Mathf.Clamp(_life + life, 0, _maxLife);
             _lifeUIHandler.SetLife(_life, isHealing, origin?.transform);
         }
 
         public bool AddLife(int life, AudioClip clip = null)
         {
-            if(_life >= _maxLife)
+            if (_life >= _maxLife)
             {
                 return false;
             }
-
+                
             if(clip != null)
             {
                 _effectsHandler.CreateEffect(clip);
@@ -221,8 +212,8 @@ namespace Keru.Scripts.Game.Entities.Player
 
         public void SetArmor(int armor)
         {
-           SetArmorValue(armor);
-        }
+            SetArmorValue(armor);
+        }       
 
         public bool AddArmor(int armor, AudioClip clip = null)
         {
@@ -230,12 +221,12 @@ namespace Keru.Scripts.Game.Entities.Player
             {
                 return false;
             }
-            
+                
             if (clip != null)
             {
                 _effectsHandler.CreateEffect(clip);
             }
-            
+
             SetArmorValue(armor);
             return true;
         }
@@ -248,9 +239,9 @@ namespace Keru.Scripts.Game.Entities.Player
                 {
                     _effectsHandler.CreateEffect(clip);
                 }
+
                 return true;
             }
-
             return false;
         }
 

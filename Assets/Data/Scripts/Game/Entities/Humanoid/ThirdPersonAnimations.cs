@@ -29,8 +29,14 @@ namespace Keru.Scripts.Game.Entities.Humanoid
             var rigBuilder = _model.GetComponent<RigBuilder>();
             if (rigBuilder != null)
             {
-                _rig = rigBuilder.layers.FirstOrDefault(x => x.rig.name == "AimRig").rig;
-                _bodyRig = rigBuilder.layers.FirstOrDefault(x => x.rig.name == "AimRig").rig.transform.Find("MultiAim").GetComponent<MultiAimConstraint>();
+                var aimRigLayer = rigBuilder.layers.FirstOrDefault(x => x.rig.name == "AimRig");
+                if (aimRigLayer != null)
+                {
+                    _rig = aimRigLayer.rig;
+                    var multiAim = _rig.transform.Find("MultiAim");
+                    if (multiAim != null)
+                        _bodyRig = multiAim.GetComponent<MultiAimConstraint>();
+                }
             }
         }
 
@@ -143,8 +149,11 @@ namespace Keru.Scripts.Game.Entities.Humanoid
                 model.gameObject.SetActive(false);
             }
 
-            var weapon = _weaponsModels.First(x => x.WeaponData.WeaponCode == weaponCode);
-            weapon.gameObject.SetActive(true);
+            var weapon = _weaponsModels.FirstOrDefault(x => x.WeaponData.WeaponCode == weaponCode);
+            if (weapon != null)
+            {
+                weapon.gameObject.SetActive(true);
+            }     
         }
 
         protected virtual void SetRigWeight(float weight)
@@ -168,58 +177,42 @@ namespace Keru.Scripts.Game.Entities.Humanoid
             return _weaponsModels.First(x => x.WeaponData.WeaponCode == weaponCode).gameObject;
         }
 
-        private string GetAnimationName(WeaponActions weaponAction)
+        private string GetAnimationName(WeaponActions weaponAction) => weaponAction switch
         {
-            switch (weaponAction)
-            {
-                case WeaponActions.DEPLOY:
-                    return AnimationNamesHelper.WeaponAimAnimation;
-                case WeaponActions.SHOOT:
-                    return AnimationNamesHelper.WeaponShootAnimation;
-                case WeaponActions.RELOAD:
-                    return AnimationNamesHelper.WeaponReloadAnimation;
-                case WeaponActions.RELOAD_EMPTY:
-                    return AnimationNamesHelper.WeaponEmptyReloadAnimation;
-                case WeaponActions.RELOAD_OPEN:
-                    return AnimationNamesHelper.WeaponReloadOpenAnimation;
-                case WeaponActions.RELOAD_CLOSE:
-                    return AnimationNamesHelper.WeaponReloadCloseAnimation;
-                case WeaponActions.RELOAD_INSERT:
-                    return AnimationNamesHelper.WeaponReloadInsertAnimation;
-            }
-
-            return "";
-        }
+            WeaponActions.DEPLOY => AnimationNamesHelper.WeaponAimAnimation,
+            WeaponActions.SHOOT => AnimationNamesHelper.WeaponShootAnimation,
+            WeaponActions.RELOAD => AnimationNamesHelper.WeaponReloadAnimation,
+            WeaponActions.RELOAD_EMPTY => AnimationNamesHelper.WeaponEmptyReloadAnimation,
+            WeaponActions.RELOAD_OPEN => AnimationNamesHelper.WeaponReloadOpenAnimation,
+            WeaponActions.RELOAD_CLOSE => AnimationNamesHelper.WeaponReloadCloseAnimation,
+            WeaponActions.RELOAD_INSERT => AnimationNamesHelper.WeaponReloadInsertAnimation,
+            _ => ""
+        };
 
         private IEnumerator SetAnimatorLayer(AnimationLayers layer, int direction, float waitTime = 0f)
         {
-            if(waitTime > 0f)
+            if (waitTime > 0f)
             {
                 yield return new WaitForSeconds(waitTime);
             }
+                
+            float weight = _model.GetLayerWeight((int)layer);
+            float target = direction == 1 ? 1f : 0f;
+            float sign = direction == 1 ? 1f : -1f;
 
-            var weight = _model.GetLayerWeight((int)layer);
-
-            if (direction == 1)
+            while ((direction == 1 && weight < 1f) || (direction == 0 && weight > 0f))
             {
-                while(weight < 1)
-                {
-                    weight += Time.deltaTime / 0.25f;
-                    _model.SetLayerWeight((int)layer, Mathf.Clamp01(weight));
-                    yield return new WaitForEndOfFrame();
-                }
+                weight += sign * Time.deltaTime / 0.25f;
+                weight = Mathf.Clamp01(weight);
+                _model.SetLayerWeight((int)layer, weight);
+                if (direction == 0) SetRigWeight(1 - weight);
+                yield return new WaitForEndOfFrame();
             }
-            else
+
+            if (direction == 0)
             {
-                while(weight > 0)
-                {
-                    weight -= Time.deltaTime / 0.25f;
-                    SetRigWeight(1 - weight);
-                    _model.SetLayerWeight((int)layer, Mathf.Clamp01(weight));
-                    yield return new WaitForEndOfFrame();
-                }
                 SetRigWeight(1);
-            }
+            }               
         }
 
         public GameObject GetModelObject()

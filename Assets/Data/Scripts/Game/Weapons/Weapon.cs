@@ -42,50 +42,35 @@ namespace Keru.Scripts.Game.Weapons
         private int _layerMask;
 
 
+        private Coroutine _recoilCoroutine;
+
         public virtual void SetConfig(PlayerWeaponHandler playerWeaponHandler, GameObject weaponModel, GameObject leftHand, int weaponLevel = 1, int currentBulletsInMag = 0, int currentTotalBullets = 0, GameObject owner = null)
         {
             _playerWeaponHandler = playerWeaponHandler;
 
             var objects = weaponModel.transform.Find("Objects");
-
-            var muzzleFlash = objects.transform.Find("MuzzleFlash");
-            _shootPos = muzzleFlash.transform;
-            _muzzleFlash = muzzleFlash.GetComponent<Animator>();
-            _bulletDrop = objects.transform.Find("Bullet Drop");
-            _magazineDrop = objects.transform.Find("MagDrop");
+            var muzzleFlash = objects?.Find("MuzzleFlash");
+            _shootPos = muzzleFlash?.transform;
+            _muzzleFlash = muzzleFlash?.GetComponent<Animator>();
+            _bulletDrop = objects?.Find("Bullet Drop");
+            _magazineDrop = objects?.Find("MagDrop");
 
             _weaponModel = weaponModel.GetComponent<WeaponThirdPersonModel>();
             _weaponData = _weaponModel.WeaponData;
             _currentWeaponLevel = _weaponData.WeaponDataPerLevel[weaponLevel - 1];
 
-            if (currentBulletsInMag != 0)
-            {
-                _currentBulletsInMag = currentBulletsInMag;
-            }
-            else
-            {
-                _currentBulletsInMag = _currentWeaponLevel.MagazineSize;
-            }
+            _currentBulletsInMag = currentBulletsInMag != 0 ? currentBulletsInMag : _currentWeaponLevel.MagazineSize;
 
             _audioSource = AudioManager.audioManager.CreateNewAudioSource(gameObject, Engine.SoundType.Effect);
-            if (owner != null)
-            {
-                _owner = owner;
-            }
-            else
-            {
-                _owner = Player.Singleton.gameObject;
-            }
+            _owner = owner ?? Player.Singleton.gameObject;
             _layerMask = ~(1 << _owner.layer);
             _bulletTrail = CommonItemsManager.ItemsManager.BulletTrailDistortion;
             _weaponModel.ConfigWeapon(weaponLevel, leftHand.transform);
             _casing = GetCasing();
 
             _maxTotalBullets = _currentWeaponLevel.MagazineSize * (2 + weaponLevel);
-            _currentTotalBullets = currentTotalBullets != 0 ? currentBulletsInMag : _maxTotalBullets;
+            _currentTotalBullets = currentTotalBullets != 0 ? currentTotalBullets : _maxTotalBullets;
             _audioSource.clip = _currentWeaponLevel.ShootSound;
-
-
         }
 
         public virtual void Deploy()
@@ -377,7 +362,13 @@ namespace Keru.Scripts.Game.Weapons
             yield return new WaitForSeconds(0.5f);
             _canChangeWeapon = true;
             _canShoot = true;
-            StartCoroutine(RecoilRecover());
+
+            if (_recoilCoroutine != null)
+            {
+                StopCoroutine(_recoilCoroutine);
+            }
+                
+            _recoilCoroutine = StartCoroutine(RecoilRecover());
         }
 
         protected virtual void PlayAnimation(WeaponActions weaponAction)
@@ -409,12 +400,14 @@ namespace Keru.Scripts.Game.Weapons
 
         private IEnumerator RecoilRecover()
         {
-            yield return new WaitForSeconds(0.1f);
-            if (!_isShooting)
+            while (enabled)
             {
-                CalculateRecoilAmmount(-_currentWeaponLevel.RecoilRecover / 5);
+                yield return new WaitForSeconds(0.1f);
+                if (!_isShooting)
+                {
+                    CalculateRecoilAmmount(-_currentWeaponLevel.RecoilRecover / 5);
+                }
             }
-            StartCoroutine(RecoilRecover());
         }
 
         private GameObject GetCasing()

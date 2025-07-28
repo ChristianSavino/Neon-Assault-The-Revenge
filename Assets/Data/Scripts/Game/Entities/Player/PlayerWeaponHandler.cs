@@ -135,41 +135,35 @@ namespace Keru.Scripts.Game.Entities.Player
             {
                 return;
             }
-
-            _canDeploy = true;
-
-            if (_currentWeapon != null)
-            {
-                if (!_currentWeapon.CanChangeWeapon())
-                {
-                    return;
-                }
+            if (_currentWeapon != null && !_currentWeapon.CanChangeWeapon())
+            { 
+                return; 
             }
-
             if (weapon == null)
             {
-                _currentWeapon = _primaryWeapon;
+                weapon = _primaryWeapon;
             }
-            else if (_currentWeapon == weapon)
+            if (_currentWeapon == weapon)
             {
                 return;
             }
-            else
-            {
-                _currentWeapon = weapon;
-            }
+            
+            _currentWeapon = weapon;
 
             TogglePlayerKatana(!isMelee);
             ToggleWeapons(false);
+
             _currentWeapon.gameObject.SetActive(true);
             _currentWeapon.Deploy();
+            _canDeploy = true;
         }
 
         private void ToggleWeapons(bool toggle)
         {
-            _primaryWeapon.gameObject.SetActive(toggle);
-            _secondaryWeapon.gameObject.SetActive(toggle);
-            _katana.gameObject.SetActive(toggle);
+            foreach (var weapon in new[] { _primaryWeapon, _secondaryWeapon, _katana })
+            {
+                weapon.gameObject.SetActive(toggle);
+            }                
         }
 
         public void PlayAnimation(WeaponActions weaponAction, WeaponCodes weaponCodes)
