@@ -213,11 +213,6 @@ namespace Keru.Scripts.Game.Entities.Player
             }
 
             _isCrouching = !_isCrouching;
-
-            if (!_isCrouching)
-            {
-                _isCrouching = CalculateIfCanStand();
-            }
         }
 
         private static readonly Dictionary<string, Vector3> _inputDirections = new()
@@ -302,11 +297,6 @@ namespace Keru.Scripts.Game.Entities.Player
             }
         }
 
-        public float CheckIsCrouching()
-        {
-            return _isCrouching ? 0.5f : 1;
-        }
-
         public void Die()
         {
             _rigidBody.constraints = RigidbodyConstraints.FreezeAll;
@@ -328,7 +318,8 @@ namespace Keru.Scripts.Game.Entities.Player
         {
             if (_capsuleCollider.height < 2)
             {
-                return Physics.Raycast(_capsuleCollider.bounds.max, Vector3.up, 2f - _capsuleCollider.height);
+                var result = !Physics.Raycast(_capsuleCollider.bounds.max, Vector3.up, 2f - _capsuleCollider.height);
+                return result;
             }
 
             return false;

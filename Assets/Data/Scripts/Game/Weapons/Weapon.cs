@@ -384,6 +384,7 @@ namespace Keru.Scripts.Game.Weapons
             _canShoot = false;
             _isReloading = false;
             _canChangeWeapon = false;
+            Destroy(_audioSource);
 
             StartCoroutine(WeaponSeparation());
         }
