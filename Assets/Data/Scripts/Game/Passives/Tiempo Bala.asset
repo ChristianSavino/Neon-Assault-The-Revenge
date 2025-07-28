@@ -15,7 +15,8 @@ MonoBehaviour:
   Code: 1
   Potivity: 0
   Description: "Disparas m\xE1s r\xE1pido"
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 95ee17b03af640d42b8783a7e0d843f2, type: 3}
   Duration: 7
   Effects: {fileID: 0}
+  IsMeshParticle: 0
   UsesRealTime: 1

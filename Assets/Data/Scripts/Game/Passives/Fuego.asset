@@ -15,6 +15,8 @@ MonoBehaviour:
   Code: 0
   Potivity: 1
   Description: You are on Fire!
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: e20268da1faae1b4bb75b9e53db02e37, type: 3}
   Duration: 5
   Effects: {fileID: 4765164489166042650, guid: 04190ac00894a7449ba3235b7dd3168c, type: 3}
+  IsMeshParticle: 1
+  UsesRealTime: 0
