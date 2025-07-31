@@ -206,7 +206,7 @@ namespace Keru.Scripts.Game.Weapons
             if (Physics.Raycast(_shootPos.position, direction, out hit, 1000f, _layerMask))
             {
                 CreateLine(hit.point);
-                var entity = hit.transform.GetComponent<Entity>();
+                var entity = hit.transform.GetComponentInParent<Entity>();
                 if (entity != null)
                 {
                     var damage = damageMultiplier * _currentWeaponLevel.Damage;
@@ -230,7 +230,6 @@ namespace Keru.Scripts.Game.Weapons
         private void CreateLine(Vector3 hit)
         {
             var line = new GameObject("Line");
-            line = Instantiate(line, _bulletDrop.position, _bulletDrop.rotation);
 
             var lineRenderer = line.AddComponent<LineRenderer>();
             lineRenderer.material = _bulletTrail;

@@ -11,7 +11,11 @@ namespace Keru.Scripts.Game.Entities
     {
         [SerializeField] protected int _life;
         [SerializeField] protected bool _alive = true;
+        [SerializeField] protected GameObject _impactParticle;
+        [SerializeField] protected GameObject _deadParticle;
         [SerializeField] protected PassiveHandler _passiveHandler;
+
+        protected Collider _collider;
 
         protected void Start()
         {
@@ -38,6 +42,24 @@ namespace Keru.Scripts.Game.Entities
             {
                 _passiveHandler.UpdatePassives();
                 return null;
+            }
+        }
+
+        protected void CreateDamageParticle(Vector3 hitpoint, bool alive, DamageType damageType)
+        {
+            var direction = hitpoint - transform.position;
+            if(new[] { DamageType.LIGHTNING, DamageType.EXPLOSION, DamageType.TRUE_DAMAGE, DamageType.FIRE, DamageType.POISON }.Contains(damageType))
+            {
+                return;
+            }
+
+            if (alive)
+            {
+                Instantiate(_impactParticle, hitpoint, Quaternion.LookRotation(direction));
+            }
+            else
+            {
+                Instantiate(_deadParticle, hitpoint, Quaternion.LookRotation(direction));
             }
         }
     }

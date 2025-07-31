@@ -53,7 +53,7 @@ MonoBehaviour:
     RecoilPerShot: 5
     MaxRecoil: 25
     RecoilRecover: 12.5
-    Attachments: 3,4
+    Attachments: 4,5
     ShootSound: {fileID: 8300000, guid: e6815a0bf9b505b489a0faf145da6192, type: 3}
     IsSilenced: 1
   HeadShotMultiplier: 2

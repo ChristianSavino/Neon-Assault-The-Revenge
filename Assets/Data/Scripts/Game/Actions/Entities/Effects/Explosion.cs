@@ -1,5 +1,6 @@
 using Keru.Scripts.Engine.Module;
 using Keru.Scripts.Game.Entities;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Keru.Scripts.Game.Actions.Entities.Effects
@@ -14,6 +15,7 @@ namespace Keru.Scripts.Game.Actions.Entities.Effects
         private GameObject _explosionObject;
         private GameObject _owner;
         private bool _affectOwner;
+        private List<Entity> _alreadyAffectedEntities;
 
         public override void SetUp(int intParamater, float floatParameter, string stringParameter, GameObject gameObjectParamater, bool boolParameter)
         {
@@ -28,7 +30,8 @@ namespace Keru.Scripts.Game.Actions.Entities.Effects
             else
             {
                 _explosionObject = _type == ExplosionType.LARGE ? CommonItemsManager.ItemsManager.BigExplosionEffect : CommonItemsManager.ItemsManager.SmallExplosionEffect;
-            }              
+            }
+            _alreadyAffectedEntities = new List<Entity>();
         }
 
         public override void Execute(GameObject target = null)
@@ -39,8 +42,8 @@ namespace Keru.Scripts.Game.Actions.Entities.Effects
 
             foreach (var obj in objects)
             {
-                var entity = obj.GetComponent<Entity>();
-                if (entity != null)
+                var entity = obj.GetComponentInParent<Entity>();
+                if (entity != null && !_alreadyAffectedEntities.Contains(entity))
                 {
                     if (_affectOwner || entity.gameObject != _owner)
                     {
@@ -52,6 +55,7 @@ namespace Keru.Scripts.Game.Actions.Entities.Effects
                         var realDamage = Mathf.RoundToInt((1 - distance / _radius) * _damage);
                         entity.OnDamagedUnit(realDamage, transform.position, _owner, DamageType.EXPLOSION, _force);
                     }
+                    _alreadyAffectedEntities.Add(entity);
                 }
             }
         }

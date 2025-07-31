@@ -105,13 +105,23 @@ namespace Keru.Scripts.Game.Entities.Humanoid
                 var rb = collider.attachedRigidbody;
                 if (rb != null)
                 {
-                    rb.isKinematic = !value;
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = Vector3.zero;
+                    rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+                    rb.interpolation = RigidbodyInterpolation.Interpolate;
+                    rb.drag = 0.5f;
+                    rb.angularDrag = 0.5f;
                 }
             }
         }
 
-        protected void ApplyForceToClosestCollider(Vector3 hitpoint, float damageForce)
+        public void ApplyForceToClosestCollider(Vector3 hitpoint, float damageForce)
         {
+            if (damageForce <= 0)
+            {
+                return;
+            }
+
             Rigidbody closestCollider = null;
             var minDistance = float.MaxValue;
 
@@ -121,12 +131,6 @@ namespace Keru.Scripts.Game.Entities.Humanoid
                 var rb = collider.attachedRigidbody;
                 if (rb != null)
                 {
-                    rb.velocity = Vector3.zero;
-                    rb.angularVelocity = Vector3.zero;
-                    rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-                    rb.interpolation = RigidbodyInterpolation.Interpolate;
-                    rb.drag = 1;
-                    rb.angularDrag = 0.5f;
                     if (distance < minDistance)
                     {
                         minDistance = distance;

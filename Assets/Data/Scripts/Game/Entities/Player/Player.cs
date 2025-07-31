@@ -67,6 +67,8 @@ namespace Keru.Scripts.Game.Entities.Player
                     Die(hitpoint, damageForce);
                 }
             }
+
+            CreateDamageParticle(hitpoint, _alive, damageType);
         }
 
         public void PauseGame(bool overwrite = false)
@@ -114,6 +116,8 @@ namespace Keru.Scripts.Game.Entities.Player
             {
                 playerPassiveHandler.SetUpPlayer(this, _weaponHandler, _movement, _animations, _specialHandler, passiveUiHandler);
             }
+
+            _collider = GetComponent<CapsuleCollider>();
         }
 
         private void Die(Vector3 hitpoint, float damageForce)
@@ -124,6 +128,7 @@ namespace Keru.Scripts.Game.Entities.Player
             _lifeUIHandler.Die();
             _uIHandler.Die();
             _specialHandler.Die();
+            _collider.enabled = false;
 
             LevelBase.levelBase.Die();
         }
