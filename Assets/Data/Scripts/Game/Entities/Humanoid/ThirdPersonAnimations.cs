@@ -17,6 +17,7 @@ namespace Keru.Scripts.Game.Entities.Humanoid
         protected IEnumerable<WeaponThirdPersonModel> _weaponsModels;
         protected MultiAimConstraint _bodyRig;
         protected Rig _rig;
+        protected Vector3 _modelOriginalPosition;
 
         public virtual void SetConfig()
         {
@@ -38,6 +39,7 @@ namespace Keru.Scripts.Game.Entities.Humanoid
                         _bodyRig = multiAim.GetComponent<MultiAimConstraint>();
                 }
             }
+            _modelOriginalPosition = _model.transform.localPosition;
         }
 
         public virtual void SetParameter(string parameterName, float value)
@@ -94,6 +96,8 @@ namespace Keru.Scripts.Game.Entities.Humanoid
             _model.enabled = false;
 
             ToggleCollider(true);
+
+            _model.transform.position = transform.position - Vector3.up;
             ApplyForceToClosestCollider(hitpoint, damageForce);
         }
 
@@ -111,6 +115,7 @@ namespace Keru.Scripts.Game.Entities.Humanoid
                     rb.interpolation = RigidbodyInterpolation.Interpolate;
                     rb.drag = 0.5f;
                     rb.angularDrag = 0.5f;
+                    rb.isKinematic = !value;
                 }
             }
         }

@@ -25386,30 +25386,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1345665615 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6311121166001300404, guid: bb1a953e9e8edaf4faa77f8daf24aa67,
-    type: 3}
-  m_PrefabInstance: {fileID: 3207350762755222371}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1345665627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345665615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 949cb26b05de8e346a5e5e2af401de32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GizmoColor: {r: 1, g: 1, b: 1, a: 1}
-  Radius: 1
-  LocalPosition: {x: 0, y: 0, z: 1}
-  Direction: {x: 0, y: 0, z: 0}
-  Size: {x: 0, y: 0, z: 0}
-  Type: 0
 --- !u!1 &1347155960
 GameObject:
   m_ObjectHideFlags: 0
@@ -42362,16 +42338,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1382479835862373794}
     m_Modifications:
-    - target: {fileID: 2313775840740356646, guid: bb1a953e9e8edaf4faa77f8daf24aa67,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2313775840740356646, guid: bb1a953e9e8edaf4faa77f8daf24aa67,
-        type: 3}
-      propertyPath: m_ProvidesContacts
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3214372482359510066, guid: bb1a953e9e8edaf4faa77f8daf24aa67,
         type: 3}
       propertyPath: m_Name
@@ -42427,20 +42393,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -80.303
       objectReference: {fileID: 0}
-    - target: {fileID: 6311121166001300404, guid: bb1a953e9e8edaf4faa77f8daf24aa67,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2313775840740356646, guid: bb1a953e9e8edaf4faa77f8daf24aa67, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6311121166001300404, guid: bb1a953e9e8edaf4faa77f8daf24aa67,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1345665627}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb1a953e9e8edaf4faa77f8daf24aa67, type: 3}
 --- !u!1 &3320684035943019472
 GameObject:
@@ -45328,7 +45284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5466344470328032759}
   - component: {fileID: 5342571968833047455}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_Underwear_Male_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45345,7 +45301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5459155756621750135}
   - component: {fileID: 5342697349099083855}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_Underwear_Female_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45362,7 +45318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5459002652909450845}
   - component: {fileID: 5342441224750344129}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_GangMember_Female_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45379,7 +45335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5466603856359057523}
   - component: {fileID: 5342641045019287341}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_Asian_Gangster_Male_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45706,7 +45662,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5459098589774739575}
   - component: {fileID: 5344594600104854547}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_Hazmat_Suit_Male_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45758,7 +45714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5458949576782272089}
   - component: {fileID: 5343048106897269691}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_GangMember_Male_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45936,7 +45892,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5466340443939389267}
   - component: {fileID: 5344409405304696001}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_DEA_Agent_Female_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45969,7 +45925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5459136101160983195}
   - component: {fileID: 5344382558753289887}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_GangMember_Male_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46037,7 +45993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5466315041593405625}
   - component: {fileID: 5344376674485387089}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_DEA_Plainclothes_Male_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46137,7 +46093,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5458978322723811771}
   - component: {fileID: 5342948544549193979}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_British_Gangster_Male_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46331,7 +46287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5466560861291717443}
   - component: {fileID: 5342847213544616683}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_Cook_Male_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46364,7 +46320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5459261893945337899}
   - component: {fileID: 5344511264226885669}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_DEA_Agent_Male_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46624,7 +46580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5466311865905759575}
   - component: {fileID: 5342834697308759727}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_GangMember_Male_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46804,7 +46760,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5459151888610476333}
   - component: {fileID: 5377019984085201639}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46837,7 +46793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5459382975970271699}
   - component: {fileID: 5344263771063656961}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_GangBoss_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46854,7 +46810,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5466328021952640093}
   - component: {fileID: 5342518171895934607}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_StreetGirl_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46890,7 +46846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5466620479413778043}
   - component: {fileID: 5342604534606483189}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_Italian_Gangster_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46923,7 +46879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5466661984435226663}
   - component: {fileID: 5343057951694460727}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Chr_Cook_Female_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

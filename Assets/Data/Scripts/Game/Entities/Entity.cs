@@ -1,7 +1,6 @@
 using Keru.Scripts.Game.Entities.Passives;
 using Keru.Scripts.Game.ScriptableObjects;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 

@@ -32,7 +32,6 @@ namespace Keru.Scripts.Game.Entities.Enemy
             {
                 if(_alive)
                 {
-                    _collider.enabled = false;
                     Die(hitpoint, damageForce);
                     _alive = false;
                 }
@@ -48,6 +47,7 @@ namespace Keru.Scripts.Game.Entities.Enemy
         private void Die(Vector3 hitpoint, float damageForce)
         {
             _alive = false;
+            _collider.enabled = false;
             _animations.Die(hitpoint, damageForce);
         }
     }
