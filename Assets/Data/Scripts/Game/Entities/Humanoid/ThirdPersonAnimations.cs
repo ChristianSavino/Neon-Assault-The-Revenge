@@ -97,8 +97,32 @@ namespace Keru.Scripts.Game.Entities.Humanoid
 
             ToggleCollider(true);
 
-            _model.transform.position = transform.position - Vector3.up;
             ApplyForceToClosestCollider(hitpoint, damageForce);
+        }
+
+        protected Dictionary<GameObject, Vector3> GetBones()
+        {
+            var transforms = _model.transform.GetComponentsInChildren<Transform>().Where(x => x.gameObject.activeSelf);
+            if(transforms.Any())
+            {
+                var dictionary = new Dictionary<GameObject, Vector3>();
+                foreach (var transform in transforms)
+                {
+                    dictionary.Add(transform.gameObject, transform.position);
+                }
+
+                return dictionary;
+            }
+
+            return null;
+        }
+
+        protected void ApplyBones(Dictionary<GameObject, Vector3> transforms)
+        {
+            foreach (var value in transforms)
+            {
+                value.Key.transform.position = value.Value;
+            }
         }
 
         protected void ToggleCollider(bool value)
@@ -106,27 +130,29 @@ namespace Keru.Scripts.Game.Entities.Humanoid
             foreach (var collider in _ragdollColliders)
             {
                 collider.enabled = value;
-                var rb = collider.attachedRigidbody;
+                var rb = collider.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
-                    rb.velocity = Vector3.zero;
-                    rb.angularVelocity = Vector3.zero;
-                    rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-                    rb.interpolation = RigidbodyInterpolation.Interpolate;
-                    rb.drag = 0.5f;
-                    rb.angularDrag = 0.5f;
                     rb.isKinematic = !value;
+                    if (value)
+                    {
+                        rb.velocity = Vector3.zero;
+                        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                        rb.interpolation = RigidbodyInterpolation.Interpolate;
+                        rb.drag = 0.5f;
+                        rb.angularDrag = 0.5f;
+                    }         
                 }
             }
         }
 
         public void ApplyForceToClosestCollider(Vector3 hitpoint, float damageForce)
         {
-            if (damageForce <= 0)
+            if(damageForce <= 0)
             {
                 return;
             }
-
+            
             Rigidbody closestCollider = null;
             var minDistance = float.MaxValue;
 

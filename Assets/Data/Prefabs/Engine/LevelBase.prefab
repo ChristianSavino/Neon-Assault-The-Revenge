@@ -310,10 +310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4567d2b6815685d4ab628554fd99b7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletTrailDistortion: {fileID: 2100000, guid: 95a9b8acbd5903a42939c7fbc1af5411,
-    type: 2}
-  PlayerAfterImageMaterial: {fileID: 2100000, guid: f4ec59a5fd8b0ad41b357b57a85ffe9d,
-    type: 2}
   SmallBulletCasing: {fileID: 592762295993380993, guid: 138ede4007d2caa46a7c23742797382c,
     type: 3}
   BigBulletCasing: {fileID: 811216298675633739, guid: abaeec943a80d2047a3e5aac45e24aa1,
@@ -329,3 +325,8 @@ MonoBehaviour:
     type: 3}
   HumanGibs: {fileID: 511489698947698392, guid: 13423c566a504104d85f4de0ed63ca64,
     type: 3}
+  BulletTrailDistortion: {fileID: 2100000, guid: 95a9b8acbd5903a42939c7fbc1af5411,
+    type: 2}
+  PlayerAfterImageMaterial: {fileID: 2100000, guid: f4ec59a5fd8b0ad41b357b57a85ffe9d,
+    type: 2}
+  DissolveMaterial: {fileID: 2100000, guid: 358ae806ffe2fc8469e1c1be0b110220, type: 2}

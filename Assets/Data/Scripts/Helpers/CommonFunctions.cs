@@ -16,5 +16,23 @@ namespace Keru.Scripts.Helpers
                 }
             }
         }
+
+        public static Transform FindChild(Transform parent, string name)
+        {
+            foreach (Transform child in parent)
+            {
+                if (child.name.Contains(name))
+                {
+                    return child;
+                }
+                var result = FindChild(child, name);
+                if (result != null)
+                {
+                    return result;
+                }
+                    
+            }
+            return null;
+        }
     }
 }

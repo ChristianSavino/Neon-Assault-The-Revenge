@@ -28,12 +28,21 @@ namespace Keru.Scripts.Game.Effects.Blood
 
         private void CreateBloodDecal(ParticleCollisionEvent collision, GameObject gameObject)
         {
-            var decal = Instantiate(_decalPrefab, collision.intersection, Quaternion.LookRotation(collision.normal));
-            decal.transform.forward = collision.intersection - decal.transform.position;
-            decal.transform.localScale = _scale;
+            Quaternion rotation;
+            if (collision.normal != Vector3.zero)
+            {
+                rotation = Quaternion.LookRotation(collision.normal);
+            }
+            else
+            {
+                rotation = Quaternion.LookRotation(Vector3.up);
+            }
+
+            var decal = Instantiate(_decalPrefab, collision.intersection, rotation);
 
             var decalRenderer = decal.GetComponentInChildren<DecalProjector>();
             decalRenderer.material = _materialsOverride[Random.Range(0,_materialsOverride.Count)];
+            decalRenderer.size = _scale;
             Destroy(decal, 60);
         }
     }

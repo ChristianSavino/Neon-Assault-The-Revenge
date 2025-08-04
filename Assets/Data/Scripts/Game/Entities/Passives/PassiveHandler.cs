@@ -59,6 +59,14 @@ namespace Keru.Scripts.Game.Entities.Passives
             UpdatePassives();
         }
 
+        public virtual void Die()
+        {
+            foreach (Passive passive in _passives)
+            {
+                passive.Die();
+            }
+        }
+
         protected bool CheckIfPassiveExists(PassiveCode? passiveCode = null)
         {
             if(passiveCode.HasValue)

@@ -2,6 +2,7 @@ using Keru.Scripts.Engine;
 using Keru.Scripts.Engine.Module;
 using Keru.Scripts.Game.Effects.Blood;
 using Keru.Scripts.Game.Entities.Humanoid;
+using Keru.Scripts.Visuals.Effects.Dissolve;
 using UnityEngine;
 
 namespace Keru.Scripts.Game.Entities.Enemy
@@ -37,7 +38,7 @@ namespace Keru.Scripts.Game.Entities.Enemy
                     Die(hitpoint, damageForce);
                     ApplyDeathEffect(damageType, damageForce, hitpoint);
                 }
-
+                _animations.ApplyForceToClosestCollider(hitpoint, damageForce);
                 ApplyDeathEffect(damageType, damageForce, hitpoint);
             }
             else
@@ -51,27 +52,7 @@ namespace Keru.Scripts.Game.Entities.Enemy
             _alive = false;
             _collider.enabled = false;
             _animations.Die(hitpoint, damageForce);
-        }
-
-        private void ApplyDeathEffect(DamageType damageType, float damageForce, Vector3 hitPoint)
-        {
-            switch (damageType)
-            {
-                case DamageType.EXPLOSION:
-                    var gibs = Instantiate(CommonItemsManager.ItemsManager.HumanGibs, hitPoint, Quaternion.identity).GetComponent<GibsSpawner>();
-                    gibs.SetExplosionGibs(hitPoint, damageForce);
-                    Destroy(gameObject);
-                    break;
-                case DamageType.FIRE:
-
-                    break;
-                case DamageType.POISON:
-
-                    break;
-                default:
-                    _animations.ApplyForceToClosestCollider(hitPoint, damageForce);
-                    break;
-            }
+            _passiveHandler.Die();
         }
     }
 }

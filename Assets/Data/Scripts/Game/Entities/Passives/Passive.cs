@@ -55,6 +55,7 @@ namespace Keru.Scripts.Game.Entities.Passives
             if (_passiveStats.Effects != null)
             {
                 var particles = Instantiate(_passiveStats.Effects, gameObject.transform);
+                particles.name = _passiveStats.Effects.name;
                 _particles = particles.GetComponent<ParticleSystem>();
                 _particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
@@ -82,6 +83,11 @@ namespace Keru.Scripts.Game.Entities.Passives
 
                 _particles.Play(true);
             }
+        }
+
+        public virtual void Die()
+        {
+            _particles.Stop();
         }
 
         public int Power()
