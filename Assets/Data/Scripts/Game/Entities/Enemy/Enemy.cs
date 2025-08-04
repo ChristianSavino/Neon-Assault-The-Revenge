@@ -1,4 +1,6 @@
 using Keru.Scripts.Engine;
+using Keru.Scripts.Engine.Module;
+using Keru.Scripts.Game.Effects.Blood;
 using Keru.Scripts.Game.Entities.Humanoid;
 using UnityEngine;
 
@@ -26,22 +28,22 @@ namespace Keru.Scripts.Game.Entities.Enemy
 
         public override void OnDamagedUnit(int damage, Vector3 hitpoint, GameObject origin, DamageType damageType, float damageForce)
         {
-            base.OnDamagedUnit(damage, hitpoint, origin, damageType, damageForce);           
+            base.OnDamagedUnit(damage, hitpoint, origin, damageType, damageForce);
 
             if (_life <= 0)
             {
-                if(_alive)
+                if (_alive)
                 {
                     Die(hitpoint, damageForce);
-                    _alive = false;
+                    ApplyDeathEffect(damageType, damageForce, hitpoint);
                 }
-                else
-                {
-                    _animations.ApplyForceToClosestCollider(hitpoint, damageForce);
-                }                 
-            }
 
-            CreateDamageParticle(hitpoint, _alive, damageType);
+                ApplyDeathEffect(damageType, damageForce, hitpoint);
+            }
+            else
+            {
+                CreateDamageParticle(hitpoint, _alive, damageType);
+            }
         }
 
         private void Die(Vector3 hitpoint, float damageForce)
@@ -49,6 +51,27 @@ namespace Keru.Scripts.Game.Entities.Enemy
             _alive = false;
             _collider.enabled = false;
             _animations.Die(hitpoint, damageForce);
+        }
+
+        private void ApplyDeathEffect(DamageType damageType, float damageForce, Vector3 hitPoint)
+        {
+            switch (damageType)
+            {
+                case DamageType.EXPLOSION:
+                    var gibs = Instantiate(CommonItemsManager.ItemsManager.HumanGibs, hitPoint, Quaternion.identity).GetComponent<GibsSpawner>();
+                    gibs.SetExplosionGibs(hitPoint, damageForce);
+                    Destroy(gameObject);
+                    break;
+                case DamageType.FIRE:
+
+                    break;
+                case DamageType.POISON:
+
+                    break;
+                default:
+                    _animations.ApplyForceToClosestCollider(hitPoint, damageForce);
+                    break;
+            }
         }
     }
 }

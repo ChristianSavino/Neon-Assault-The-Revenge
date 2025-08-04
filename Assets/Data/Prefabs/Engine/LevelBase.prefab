@@ -168,7 +168,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isMenu: 1
   _usesMusic: 1
-  _localTimeScale: 1
   _useMainVolumetricLights: 0
   _useExtraVolumetricLights: 0
   _debug: 0
@@ -327,4 +326,6 @@ MonoBehaviour:
   BigExplosionEffect: {fileID: 6079224122516446114, guid: f72dfddfc0099144d93a1e827fde311e,
     type: 3}
   SmallExplosionEffect: {fileID: 7644276997484666445, guid: 2aed92a1ec7b9bf43b444476f33c5ebd,
+    type: 3}
+  HumanGibs: {fileID: 511489698947698392, guid: 13423c566a504104d85f4de0ed63ca64,
     type: 3}
