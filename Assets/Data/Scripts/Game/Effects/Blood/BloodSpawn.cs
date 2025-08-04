@@ -42,7 +42,7 @@ namespace Keru.Scripts.Game.Effects.Blood
 
             var decalRenderer = decal.GetComponentInChildren<DecalProjector>();
             decalRenderer.material = _materialsOverride[Random.Range(0,_materialsOverride.Count)];
-            decalRenderer.size = _scale;
+            decalRenderer.size = new Vector3(_scale.x, _scale.y, 0.09f);
             Destroy(decal, 60);
         }
     }

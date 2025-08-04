@@ -84,7 +84,7 @@ namespace Keru.Scripts.Game.Entities
             {
                 case DamageType.EXPLOSION:
                     _appliedDeathEffect = true;
-                    var gibs = Instantiate(_gibs, hitPoint, Quaternion.identity).GetComponent<GibsSpawner>();
+                    var gibs = Instantiate(_gibs, transform.position, Quaternion.identity).GetComponent<GibsSpawner>();
                     gibs.SetExplosionGibs(hitPoint, damageForce);
                     Destroy(gameObject);
                     break;
