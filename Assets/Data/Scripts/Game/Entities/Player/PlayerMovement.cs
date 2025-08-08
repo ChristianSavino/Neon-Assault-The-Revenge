@@ -17,7 +17,7 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private PlayerThirdPersonAnimations _animations;
         private PlayerUIHandler _uIHandler;
-        private Player _player;
+        private PlayerBase _player;
         private Dictionary<string, KeyCode> _keys;
 
         private Rigidbody _rigidBody;
@@ -65,7 +65,7 @@ namespace Keru.Scripts.Game.Entities.Player
 
             StartCoroutine(WalkSound());
         }
-        public void SetConfig(Player player, PlayerThirdPersonAnimations animationReference, PlayerUIHandler uiHandler, Dictionary<string, KeyCode> keys, float sensivity)
+        public void SetConfig(PlayerBase player, PlayerThirdPersonAnimations animationReference, PlayerUIHandler uiHandler, Dictionary<string, KeyCode> keys, float sensivity)
         {
             _player = player;
             _animations = animationReference;

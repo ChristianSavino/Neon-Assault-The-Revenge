@@ -68,10 +68,10 @@ namespace Keru.Scripts.Game.Entities.Player.UI
 
                 _redBarCoroutine = StartCoroutine(AnimateBar(currentLife, _coloredLifeBar));
 
-                if(origin != null && origin.gameObject != Player.Singleton.gameObject)
+                if(origin != null && origin.gameObject != PlayerBase.Singleton.gameObject)
                 {
-                    var indicator = Instantiate(_indicatorPrefab, Player.Singleton.transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
-                    indicator.transform.parent = Player.Singleton.transform;
+                    var indicator = Instantiate(_indicatorPrefab, PlayerBase.Singleton.transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+                    indicator.transform.parent = PlayerBase.Singleton.transform;
                     indicator.SetConfig(origin);
                     AddIndicator(indicator);
                 }

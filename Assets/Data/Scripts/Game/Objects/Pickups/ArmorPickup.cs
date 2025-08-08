@@ -11,7 +11,7 @@ namespace Keru.Scripts.Game.Objects.Pickups
         protected override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
-            var player = other.GetComponent<Player>();
+            var player = other.GetComponent<PlayerBase>();
             if (player != null)
             {
                 var result = player.AddArmor(_armorAmount, _soundToPlay);

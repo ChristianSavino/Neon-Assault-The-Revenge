@@ -41,8 +41,8 @@ namespace Keru.Scripts.Game.Weapons
         private Material _bulletTrail;
         private int _layerMask;
 
-
         private Coroutine _recoilCoroutine;
+        private Coroutine _currentCoroutine;
 
         public virtual void SetConfig(PlayerWeaponHandler playerWeaponHandler, GameObject weaponModel, GameObject leftHand, int weaponLevel = 1, int currentBulletsInMag = 0, int currentTotalBullets = 0, GameObject owner = null)
         {
@@ -62,7 +62,7 @@ namespace Keru.Scripts.Game.Weapons
             _currentBulletsInMag = currentBulletsInMag != 0 ? currentBulletsInMag : _currentWeaponLevel.MagazineSize;
 
             _audioSource = AudioManager.audioManager.CreateNewAudioSource(gameObject, Engine.SoundType.Effect);
-            _owner = owner ?? Player.Singleton.gameObject;
+            _owner = owner ?? PlayerBase.Singleton.gameObject;
             _layerMask = ~(1 << _owner.layer);
             _bulletTrail = CommonItemsManager.ItemsManager.BulletTrailDistortion;
             _weaponModel.ConfigWeapon(weaponLevel, leftHand.transform);
@@ -78,7 +78,7 @@ namespace Keru.Scripts.Game.Weapons
             _canShoot = false;
             _isReloading = false;
             _canChangeWeapon = false;
-            StartCoroutine(DeployWeapon());
+            _currentCoroutine = StartCoroutine(DeployWeapon());
             SetWeaponData();
         }
 
@@ -189,7 +189,7 @@ namespace Keru.Scripts.Game.Weapons
         {
             if (_casing != null)
             {
-                StartCoroutine(CreateCasing());
+               StartCoroutine(CreateCasing());
             }
         }
 
@@ -269,19 +269,19 @@ namespace Keru.Scripts.Game.Weapons
                     {
                         PlayAnimation(WeaponActions.RELOAD_EMPTY);
                         _audioSource.PlayOneShot(_weaponData.EmptyReloadSound);
-                        StartCoroutine(ReloadWeapon(true));
+                        _currentCoroutine = StartCoroutine(ReloadWeapon(true));
                     }
                     else
                     {
                         PlayAnimation(WeaponActions.RELOAD);
                         _audioSource.PlayOneShot(_weaponData.ReloadSound);
-                        StartCoroutine(ReloadWeapon(false));
+                        _currentCoroutine = StartCoroutine(ReloadWeapon(false));
                     }
                     StartCoroutine(DropMagazine());
                 }
                 else
                 {
-                    StartCoroutine(ReloadShotgun());
+                    _currentCoroutine = StartCoroutine(ReloadShotgun());
                 }
             }
         }
@@ -384,6 +384,7 @@ namespace Keru.Scripts.Game.Weapons
             _isReloading = false;
             _canChangeWeapon = false;
             Destroy(_audioSource);
+            StopCoroutine(_currentCoroutine);
 
             StartCoroutine(WeaponSeparation());
         }
@@ -395,7 +396,7 @@ namespace Keru.Scripts.Game.Weapons
             var rb = gameObject.AddComponent<Rigidbody>();
             rb.velocity = Vector3.zero;
             gameObject.transform.parent = null;
-            this.enabled = false;
+            enabled = false;
         }
 
         private IEnumerator RecoilRecover()

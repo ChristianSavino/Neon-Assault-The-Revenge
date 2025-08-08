@@ -29,7 +29,7 @@ namespace Keru.Scripts.Game.Weapons
             }
             else
             {
-                _owner = Player.Singleton.gameObject;
+                _owner = PlayerBase.Singleton.gameObject;
             }
 
             _playerWeaponHandler.SetWeaponData(_weaponData.name, AmmoType.MELEE, 0, 0, 0);

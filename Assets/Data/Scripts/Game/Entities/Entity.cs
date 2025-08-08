@@ -13,6 +13,7 @@ namespace Keru.Scripts.Game.Entities
     public class Entity : MonoBehaviour
     {
         [SerializeField] protected int _life;
+        [SerializeField] protected int _maxLife;
         [SerializeField] protected bool _alive = true;
         [SerializeField] protected PassiveHandler _passiveHandler;
         [Header("Gibs")]

@@ -25,7 +25,7 @@ namespace Keru.Scripts.Game.Actions.Entities.Passives
             {
                 if (other.gameObject.CompareTag("Player"))
                 {
-                    Player.Singleton.ForceDeployWeapon();
+                    PlayerBase.Singleton.ForceDeployWeapon();
                     Destroy(this);
                 }
             }

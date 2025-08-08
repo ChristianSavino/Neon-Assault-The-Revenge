@@ -6,11 +6,10 @@ using UnityEngine;
 
 namespace Keru.Scripts.Game.Entities.Player
 {
-    public class Player : Entity
+    public class PlayerBase : Entity
     {
-        public static Player Singleton;
+        public static PlayerBase Singleton;
 
-        [SerializeField] private int _maxLife;
         [SerializeField] private GameObject _effectsGameObject;
         private int _armor;
 

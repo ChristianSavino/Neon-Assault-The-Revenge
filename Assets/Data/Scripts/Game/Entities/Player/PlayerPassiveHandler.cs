@@ -2,8 +2,6 @@ using Keru.Scripts.Game.Entities.Passives;
 using Keru.Scripts.Game.Entities.Player.UI;
 using Keru.Scripts.Game.ScriptableObjects;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -11,7 +9,7 @@ namespace Keru.Scripts.Game.Entities.Player
 {
     public class PlayerPassiveHandler : PassiveHandler
     {
-        private Player _player;
+        private PlayerBase _player;
         private PlayerWeaponHandler _weaponHandler;
         private PlayerMovement _movementHandler;
         private PlayerThirdPersonAnimations _animations;
@@ -23,7 +21,7 @@ namespace Keru.Scripts.Game.Entities.Player
             base.SetUp(model);
         }
 
-        public void SetUpPlayer(Player player, PlayerWeaponHandler weaponHandler, PlayerMovement playerMovement, PlayerThirdPersonAnimations thirdPersonAnimations, PlayerSpecialHandler specialHandler, PassiveUIHandler passiveHandler)
+        public void SetUpPlayer(PlayerBase player, PlayerWeaponHandler weaponHandler, PlayerMovement playerMovement, PlayerThirdPersonAnimations thirdPersonAnimations, PlayerSpecialHandler specialHandler, PassiveUIHandler passiveHandler)
         {
             _player = player;
             _weaponHandler = weaponHandler;

@@ -27,7 +27,7 @@ namespace Keru.Scripts.Game.Entities.Player.UI
 
         public void DePause()
         {
-            Player.Singleton.PauseGame(true);
+            PlayerBase.Singleton.PauseGame(true);
         }
 
         public void ReloadCheckpoint()

@@ -116,4 +116,20 @@ namespace Keru.Scripts.Game
         DAMAGE_RATE = 2,
         DAMAGE_REDUCTION = 3
     }
+
+    public enum AiActions
+    {
+        NONE = 0,
+        IDLE = 1,
+        PATROL = 2,
+        FOLLOW = 3,
+        ATTACK = 4,
+        CHASE_TARGET = 5,
+        TAKE_COVER = 6,
+        RELOAD = 7,
+        USE_SPECIAL = 8,
+        USE_ULTIMATE = 9,
+        DIE = 10,
+        ESCAPE = 11
+    }
 }

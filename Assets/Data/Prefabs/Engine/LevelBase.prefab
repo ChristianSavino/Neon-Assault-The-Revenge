@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 7842414446341366280}
   - component: {fileID: 1219803289478327984}
   - component: {fileID: 5148083554653749683}
+  - component: {fileID: 3802251552086965104}
   m_Layer: 0
   m_Name: LevelBase
   m_TagString: Untagged
@@ -207,6 +208,37 @@ MonoBehaviour:
   fadeSpeed: 0.5
   drawDepth: -1000
   loadOnLevel: 1
+--- !u!114 &3802251552086965104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3128581630989222507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 8263
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1 &7052159982215687238
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,8 +354,6 @@ MonoBehaviour:
   BigExplosionEffect: {fileID: 6079224122516446114, guid: f72dfddfc0099144d93a1e827fde311e,
     type: 3}
   SmallExplosionEffect: {fileID: 7644276997484666445, guid: 2aed92a1ec7b9bf43b444476f33c5ebd,
-    type: 3}
-  HumanGibs: {fileID: 511489698947698392, guid: 13423c566a504104d85f4de0ed63ca64,
     type: 3}
   BulletTrailDistortion: {fileID: 2100000, guid: 95a9b8acbd5903a42939c7fbc1af5411,
     type: 2}

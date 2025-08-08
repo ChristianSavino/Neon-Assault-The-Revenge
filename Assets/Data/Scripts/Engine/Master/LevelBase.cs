@@ -31,7 +31,7 @@ namespace Keru.Scripts.Engine.Master
         private Volume _volume;
 
         private DateTime _startTime;
-        private Player _player;
+        private PlayerBase _player;
 
         [SerializeField] private bool _debug;
         [SerializeField] private Difficulty _debugDifficulty;
@@ -49,7 +49,7 @@ namespace Keru.Scripts.Engine.Master
             if (!_isMenu)
             {
                 var player = GameObject.Find("Player");
-                _player = player.GetComponent<Player>();
+                _player = player.GetComponent<PlayerBase>();
                 _player.ConfigPlayer(GameOptions, CurrentSave);
             }
 
