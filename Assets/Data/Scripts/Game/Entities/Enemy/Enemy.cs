@@ -154,6 +154,10 @@ namespace Keru.Scripts.Game.Entities.Enemy
             _animations.Die(hitpoint, damageForce);
             _passiveHandler.Die();
             
+            if(_patrolPoints != null)
+            {
+                _patrolPoints.Die();
+            }
             
             ExecuteNewAction(AiActions.DIE);
             Destroy(gameObject, 60f);

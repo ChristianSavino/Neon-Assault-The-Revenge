@@ -24,11 +24,6 @@ namespace Keru.Scripts.Game.Entities
         protected Collider _collider;
         protected bool _appliedDeathEffect;
 
-        protected void Start()
-        {
-
-        }
-
         public virtual void OnDamagedUnit(int damage, Vector3 hitpoint, GameObject origin, DamageType damageType, float damageForce)
         {
             _life -= damage;

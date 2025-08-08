@@ -19,11 +19,8 @@ namespace Keru.Scripts.Game.Entities.Utils
         {
             if (other.gameObject == _patroller.gameObject)
             {
-                print("Changed");
                 ChangeWaypoint();
             }
-
-            print("Nope");
         }
 
         private void ChangeWaypoint()
@@ -42,6 +39,11 @@ namespace Keru.Scripts.Game.Entities.Utils
         public Vector3 GetCurrentWaypoint()
         {
             return _waypoints[_currentWaypointIndex];
+        }
+
+        public void Die()
+        {
+            Destroy(gameObject);
         }
     }
 }
