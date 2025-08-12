@@ -1,15 +1,17 @@
 using Keru.Scripts.Engine;
 using Keru.Scripts.Engine.Master;
-using Keru.Scripts.Game.Entities.Humanoid;
 using Keru.Scripts.Game.Entities.Player;
 using UnityEngine;
 
 namespace Keru.Scripts.Game.Entities.Enemy
 {
     public class Enemy : NPC
-    { 
-        private ThirdPersonAnimations _animations;
+    {
         private GameObject _model;
+
+        private bool _isShooting = false;
+        private int _maxChaseTicks;
+        private int _currentChaseTicks;
 
         private void Start()
         {
@@ -19,11 +21,6 @@ namespace Keru.Scripts.Game.Entities.Enemy
         public override void SetConfig()
         {
             base.SetConfig();
-
-            _life = _maxLife;
-            
-            _animations = GetComponent<ThirdPersonAnimations>();
-            _animations.SetConfig();
             _model = _animations.GetModelObject();
 
             _collider = GetComponent<CapsuleCollider>();
@@ -34,22 +31,25 @@ namespace Keru.Scripts.Game.Entities.Enemy
             {
                 case Difficulty.Easy:
                     _decisionInterval = 1f;
-                    _acuracyMultiplier = 1.5f;
+                    _acuracyMultiplier = 1f;
                     break;
                 case Difficulty.Normal:
                     _decisionInterval = 0.75f;
-                    _acuracyMultiplier = 1f;
+                    _acuracyMultiplier = 0.75f;
                     break;
                 case Difficulty.Hard:
                     _decisionInterval = 0.5f;
-                    _acuracyMultiplier = 0.75f;
+                    _acuracyMultiplier = 0.5f;
                     break;
                 case Difficulty.KeruMustDie:
                     _decisionInterval = 0.2f;
-                    _acuracyMultiplier = 0.5f;
+                    _acuracyMultiplier = 0.25f;
                     break;
             }
 
+            _weaponHandler.SetAccuracyMultiplier(_acuracyMultiplier);
+
+            _maxChaseTicks = Mathf.RoundToInt(30 / _decisionInterval);
             _target = PlayerBase.Singleton.transform;
         }
 
@@ -57,7 +57,20 @@ namespace Keru.Scripts.Game.Entities.Enemy
         {
             base.Update();
 
-            UpdateModelDirection(_agent.velocity.normalized);
+            if (_alive)
+            {
+                if (_isShooting)
+                {
+                    var direction = (_target.position - transform.position).normalized;
+                    _weaponHandler.Shoot(direction);
+                    UpdateModelDirection(direction);
+                }
+                else
+                {
+                    UpdateModelDirection(_agent.velocity.normalized);
+                    _weaponHandler.StopShooting();
+                }
+            }
         }
 
         private void UpdateModelDirection(Vector3 direction)
@@ -81,50 +94,149 @@ namespace Keru.Scripts.Game.Entities.Enemy
 
         protected override void Think()
         {
-            var newAction = GetNewAction();
-            if(_currentAction != newAction)
-            {
-                _currentAction = newAction;
-                ExecuteNewAction(_currentAction);
-            }
-
+            ExecuteNewAction(GetNewAction());
         }
 
         private AiActions GetNewAction()
-        {           
-            return AiActions.PATROL; // Placeholder for actual AI logic
+        {
+            if (_currentAction == AiActions.RELOAD)
+            {
+                if (_weaponHandler.HasBulletsInMag())
+                {
+                    return AiActions.CHASE_TARGET;
+                }
+            }
+
+            if (!_weaponHandler.HasBulletsInMag())
+            {
+                if (_weaponHandler.HasBulletsInTotal())
+                {
+                    return AiActions.RELOAD;
+                }
+
+                if (_weaponHandler.GetCurrentWeaponSlot() == WeaponSlot.SECONDARY)
+                {
+                    _weaponHandler.RefillSecondaryAmmo();
+                    return AiActions.RELOAD;
+                }
+                else
+                {
+                    _weaponHandler.DeployWeapon(WeaponSlot.SECONDARY);
+                    return _currentAction;
+                }
+            }
+
+            var detectedTarget = DetectTarget();
+
+            if (_weaponHandler.CanShoot() && detectedTarget.detected && detectedTarget.distance <= _npcStats.AttackDistance)
+            {
+                _currentChaseTicks = 0;
+                return AiActions.ATTACK;
+            }
+            else if((_weaponHandler.CanShoot() && detectedTarget.detected && detectedTarget.distance <= _npcStats.ViewDistance) || ((_currentAction == AiActions.ATTACK || _currentAction == AiActions.CHASE_TARGET) && _currentChaseTicks < _maxChaseTicks))
+            {
+                _currentChaseTicks++;
+                return AiActions.CHASE_TARGET;
+            }
+
+            if (_patrolPoints != null)
+            {
+                _currentChaseTicks = 0;
+                return AiActions.PATROL;
+            }
+
+            return AiActions.IDLE;
         }
 
         private void ExecuteNewAction(AiActions newAction)
         {
             switch (newAction)
             {
+                case AiActions.IDLE:
+                    Idle();
+                    break;
                 case AiActions.PATROL:
                     Patrol();
                     break;
                 case AiActions.ATTACK:
-                    //Attack();
+                    Attack();
                     break;
                 case AiActions.RELOAD:
-                    //Reload();
+                    Reload();
                     break;
                 case AiActions.TAKE_COVER:
                     //SeekCover();
                     break;
                 case AiActions.CHASE_TARGET:
-                //ChasePlayer();
+                    ChasePlayer();
+                    break;
                 case AiActions.DIE:
                     _agent.isStopped = true;
                     break;
             }
+
+            _currentAction = newAction;
+        }
+
+        private void Idle()
+        {
+            _isShooting = false;
+        }
+
+        private (float distance, bool detected) DetectTarget()
+        {
+            var dirToTarget = (_target.transform.position - transform.position).normalized;
+            var angleToTarget = Vector3.Angle(_model.transform.forward, dirToTarget);
+            var distanceToTarget = Vector3.Distance(transform.position, _target.transform.position);
+
+            if (angleToTarget <= _npcStats.AngleVision && distanceToTarget <= _npcStats.ViewDistance)
+            {
+                RaycastHit rch;
+                if (Physics.Raycast(transform.position, dirToTarget, out rch, distanceToTarget))
+                {
+                    if (rch.collider.gameObject == _target.gameObject)
+                    {
+                        return (distanceToTarget, true);
+                    }
+                    else
+                    {
+                        return (distanceToTarget, false);
+                    }
+                }
+            }
+
+            return (distanceToTarget, false);
         }
 
         private void Patrol()
         {
-            if(_patrolPoints != null)
+            _isShooting = false;
+            _agent.isStopped = false;
+            if (_patrolPoints != null)
             {
                 _agent.SetDestination(_patrolPoints.GetCurrentWaypoint());
             }
+        }
+
+        private void Attack()
+        {
+            _isShooting = true;
+            _agent.isStopped = false;
+            _agent.SetDestination(_target.position);
+        }
+
+        private void Reload()
+        {
+            _isShooting = false;
+            _agent.isStopped = true;
+            _weaponHandler.Reload();
+        }
+
+        private void ChasePlayer()
+        {
+            _isShooting = false;
+            _agent.isStopped = false;
+            _agent.SetDestination(_target.position);
         }
 
         public override void OnDamagedUnit(int damage, Vector3 hitpoint, GameObject origin, DamageType damageType, float damageForce)
@@ -153,12 +265,13 @@ namespace Keru.Scripts.Game.Entities.Enemy
             _collider.enabled = false;
             _animations.Die(hitpoint, damageForce);
             _passiveHandler.Die();
-            
-            if(_patrolPoints != null)
+            _weaponHandler.Die();
+
+            if (_patrolPoints != null)
             {
                 _patrolPoints.Die();
             }
-            
+
             ExecuteNewAction(AiActions.DIE);
             Destroy(gameObject, 60f);
         }

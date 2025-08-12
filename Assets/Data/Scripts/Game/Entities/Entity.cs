@@ -88,7 +88,13 @@ namespace Keru.Scripts.Game.Entities
                     _appliedDeathEffect = true;
                     var dissolve = gameObject.AddComponent<DissolveAllObjects>();
                     var passiveFire = CommonFunctions.FindChild(transform, "Passive Fire");
-                    dissolve.SetConfig(passiveFire.GetComponent<ParticleSystem>().main.startColor.color);
+                    var color = Color.red;
+                    color = new Color(color.r * 1.5f, color.g * 1.5f, color.b * 1.5f, 1);
+                    if (passiveFire != null)
+                    {
+                        color = passiveFire.GetComponent<ParticleSystem>().main.startColor.color;
+                    }
+                    dissolve.SetConfig(color);
                     break;
                 case DamageType.POISON:
 

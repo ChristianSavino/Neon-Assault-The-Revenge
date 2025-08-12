@@ -33,7 +33,6 @@ namespace Keru.Scripts.Game.Entities.Utils
 
             _currentWaypointIndex = next;
             transform.position = _waypoints[_currentWaypointIndex];
-            _patroller.SetPatrolDestination(transform.position);
         }
 
         public Vector3 GetCurrentWaypoint()

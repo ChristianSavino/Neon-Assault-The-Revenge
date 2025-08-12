@@ -355,6 +355,8 @@ MonoBehaviour:
     type: 3}
   SmallExplosionEffect: {fileID: 7644276997484666445, guid: 2aed92a1ec7b9bf43b444476f33c5ebd,
     type: 3}
+  EnemyNormalBullet: {fileID: 8258815522916023284, guid: baa5c49e15ae2564983b937f6f6464de,
+    type: 3}
   BulletTrailDistortion: {fileID: 2100000, guid: 95a9b8acbd5903a42939c7fbc1af5411,
     type: 2}
   PlayerAfterImageMaterial: {fileID: 2100000, guid: f4ec59a5fd8b0ad41b357b57a85ffe9d,

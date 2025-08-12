@@ -19,7 +19,7 @@ namespace Keru.Scripts.Visuals.Effects.Dissolve
             _dissolveColor = color;
 
             _renderers = transform.GetComponentsInChildren<Renderer>()
-                .Where(x => x.gameObject.activeSelf && x.gameObject.GetComponent<ParticleSystem>() == null);
+                .Where(x => x != null && x.gameObject.activeSelf && x.gameObject.GetComponent<ParticleSystem>() == null);
 
             foreach (var renderer in _renderers)
             {

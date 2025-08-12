@@ -132,4 +132,15 @@ namespace Keru.Scripts.Game
         DIE = 10,
         ESCAPE = 11
     }
+
+    public enum NPCType
+    {
+        CIVILIAN = 0,
+        FRIENDLY = 1,
+        LIGHT_UNITY = 2,
+        MEDIUM_UNITY = 3,
+        HEAVY_UNITY = 4,
+        EXPLOSIVE_UNITY = 5,
+        BOSS = 6
+    }
 }

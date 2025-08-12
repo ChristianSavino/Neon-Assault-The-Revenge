@@ -15,12 +15,12 @@ namespace Keru.Scripts.Game.Weapons
         protected WeaponLevel _currentWeaponLevel;
         protected WeaponThirdPersonModel _weaponModel;
 
-        private Transform _shootPos;
-        private Transform _magazineDrop;
-        private Transform _bulletDrop;
-        private Animator _muzzleFlash;
+        protected Transform _shootPos;
+        protected Transform _magazineDrop;
+        protected Transform _bulletDrop;
+        protected Animator _muzzleFlash;
 
-        protected PlayerWeaponHandler _playerWeaponHandler;
+        protected WeaponHandler _weaponHandler;
         protected AudioSource _audioSource;
 
         protected int _currentBulletsInMag;
@@ -28,11 +28,12 @@ namespace Keru.Scripts.Game.Weapons
         private int _currentTotalBullets;
 
         protected bool _canShoot;
-        private bool _isReloading;
+        protected bool _isReloading;
         protected bool _canChangeWeapon;
-        private float _nextShot;
-        private bool _reloadCancel;
-        private bool _isShooting;
+        protected float _nextShot;
+        protected bool _reloadCancel;
+        protected bool _isShooting;
+        protected float _accuracy;
 
         private float _recoil;
         protected GameObject _owner;
@@ -43,10 +44,11 @@ namespace Keru.Scripts.Game.Weapons
 
         private Coroutine _recoilCoroutine;
         private Coroutine _currentCoroutine;
+        private GameObject _bullet;
 
-        public virtual void SetConfig(PlayerWeaponHandler playerWeaponHandler, GameObject weaponModel, GameObject leftHand, int weaponLevel = 1, int currentBulletsInMag = 0, int currentTotalBullets = 0, GameObject owner = null)
+        public virtual void SetConfig(WeaponHandler weaponHandler, GameObject weaponModel, GameObject leftHand, int weaponLevel = 1, int currentBulletsInMag = 0, int currentTotalBullets = 0, GameObject owner = null)
         {
-            _playerWeaponHandler = playerWeaponHandler;
+            _weaponHandler = weaponHandler;
 
             var objects = weaponModel.transform.Find("Objects");
             var muzzleFlash = objects?.Find("MuzzleFlash");
@@ -71,6 +73,22 @@ namespace Keru.Scripts.Game.Weapons
             _maxTotalBullets = _currentWeaponLevel.MagazineSize * (2 + weaponLevel);
             _currentTotalBullets = currentTotalBullets != 0 ? currentTotalBullets : _maxTotalBullets;
             _audioSource.clip = _currentWeaponLevel.ShootSound;
+            _accuracy = _currentWeaponLevel.MaxRecoil;
+
+            if (_weaponData.Projectile != null)
+            {
+                _bullet = _weaponData.Projectile;
+            }
+        }
+
+        protected void SetBullet(GameObject newBullet)
+        {
+            _bullet = newBullet;
+        }
+
+        public void SetAccuracy(float percentage)
+        {
+            _accuracy = _currentWeaponLevel.MaxRecoil * percentage;
         }
 
         public virtual void Deploy()
@@ -84,17 +102,17 @@ namespace Keru.Scripts.Game.Weapons
 
         protected void SetWeaponData()
         {
-            if (_playerWeaponHandler != null)
+            if (_weaponHandler != null)
             {
-                _playerWeaponHandler.SetWeaponData(_weaponData.name, _currentWeaponLevel.AmmoType, _currentBulletsInMag, _currentWeaponLevel.MagazineSize, _currentTotalBullets);
+                _weaponHandler.SetWeaponData(_weaponData.name, _currentWeaponLevel.AmmoType, _currentBulletsInMag, _currentWeaponLevel.MagazineSize, _currentTotalBullets);
             }
         }
 
         protected void UpdateWeaponData()
         {
-            if (_playerWeaponHandler != null)
+            if (_weaponHandler != null)
             {
-                _playerWeaponHandler.UpdateWeaponData(_currentBulletsInMag, _currentTotalBullets);
+                _weaponHandler.UpdateWeaponData(_currentBulletsInMag, _currentTotalBullets);
             }
         }
 
@@ -103,7 +121,7 @@ namespace Keru.Scripts.Game.Weapons
             return _canChangeWeapon;
         }
 
-        private bool AbleToShoot()
+        public bool AbleToShoot()
         {
             return _canShoot && _currentBulletsInMag > 0 && !_isReloading;
         }
@@ -144,23 +162,16 @@ namespace Keru.Scripts.Game.Weapons
         {
             if (_weaponData.WeaponType == WeaponType.SHOTGUN)
             {
-                _recoil = _currentWeaponLevel.MaxRecoil;
+                _recoil = _accuracy;
 
                 for (int i = 0; i < 12; i++)
                 {
-                    CreateBullet(damageMultiplier, GetDirectionRecoil(direction));
+                    CreateShot(damageMultiplier, direction);
                 }
             }
             else
             {
-                if (_weaponData.Projectile == null)
-                {
-                    CreateBullet(damageMultiplier, GetDirectionRecoil(direction));
-                }
-                else
-                {
-                    CreateBulletObject(damageMultiplier, GetDirectionRecoil(direction));
-                }
+                CreateShot(damageMultiplier, direction);
             }
 
             PlayAnimation(WeaponActions.SHOOT);
@@ -179,13 +190,25 @@ namespace Keru.Scripts.Game.Weapons
             }
         }
 
-        private void CalculateRecoilAmmount(float ammountToSum)
+        protected void CreateShot(float damageMultiplier, Vector3 direction)
         {
-            _recoil += ammountToSum;
-            _recoil = Mathf.Clamp(_recoil, 0, _currentWeaponLevel.MaxRecoil);
+            if (_bullet == null)
+            {
+                CreateBullet(damageMultiplier, GetDirectionRecoil(direction));
+            }
+            else
+            {
+                CreateBulletObject(damageMultiplier, GetDirectionRecoil(direction));
+            }
         }
 
-        private void StartCasingSpawn()
+        protected void CalculateRecoilAmmount(float ammountToSum)
+        {
+            _recoil += ammountToSum;
+            _recoil = Mathf.Clamp(_recoil, 0, _accuracy);
+        }
+
+        protected void StartCasingSpawn()
         {
             if (_casing != null)
             {
@@ -217,7 +240,7 @@ namespace Keru.Scripts.Game.Weapons
 
         private void CreateBulletObject(float damageMultiplier, Vector3 direction)
         {
-            var bullet = Instantiate(_weaponData.Projectile, _muzzleFlash.transform.position, Quaternion.identity);
+            var bullet = Instantiate(_bullet, _muzzleFlash.transform.position, Quaternion.identity);
             bullet.transform.forward = direction;
             bullet.layer = _owner.layer;
             var bulletData = bullet.GetComponent<Bullet>();
@@ -243,7 +266,7 @@ namespace Keru.Scripts.Game.Weapons
             Destroy(line, 0.1f);
         }
 
-        private Vector3 GetDirectionRecoil(Vector3 direction)
+        protected Vector3 GetDirectionRecoil(Vector3 direction)
         {
             var recoil = _recoil / 100;
 
@@ -372,9 +395,9 @@ namespace Keru.Scripts.Game.Weapons
 
         protected virtual void PlayAnimation(WeaponActions weaponAction)
         {
-            if (_playerWeaponHandler != null)
+            if (_weaponHandler != null)
             {
-                _playerWeaponHandler.PlayAnimation(weaponAction, _weaponData.WeaponCode);
+                _weaponHandler.PlayAnimation(weaponAction, _weaponData.WeaponCode);
             }
         }
 
@@ -437,6 +460,11 @@ namespace Keru.Scripts.Game.Weapons
         public int GetCurrentBulletsInMag()
         {
             return _currentBulletsInMag;
+        }
+
+        public int GetCurrentTotalBullets()
+        {
+            return _currentTotalBullets;
         }
 
         public bool RefillMaxAmmo(float magazine)

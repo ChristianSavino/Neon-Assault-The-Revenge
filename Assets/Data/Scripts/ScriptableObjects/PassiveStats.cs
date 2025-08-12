@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Keru.Scripts.Game.ScriptableObjects
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(fileName = "PassiveStats", menuName = "ScriptableObjects/PassiveStats", order = 3)]
     public class PassiveStats : ScriptableObject
     {
         public PassiveCode Code;

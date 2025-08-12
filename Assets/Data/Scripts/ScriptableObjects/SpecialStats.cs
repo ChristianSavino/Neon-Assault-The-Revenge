@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 namespace Keru.Scripts.Game.ScriptableObjects
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(fileName = "SpecialStats", menuName = "ScriptableObjects/SpecialStats", order = 4)]
     public class SpecialStats : ScriptableObject
     {
         [Header("Base Stats")]

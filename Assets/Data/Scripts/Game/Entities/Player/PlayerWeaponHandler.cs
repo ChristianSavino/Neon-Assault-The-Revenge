@@ -7,21 +7,16 @@ using UnityEngine;
 
 namespace Keru.Scripts.Game.Entities.Player
 {
-    public class PlayerWeaponHandler : MonoBehaviour
+    public class PlayerWeaponHandler : WeaponHandler
     {
-        private PlayerThirdPersonAnimations _animations;
         private WeaponUIHandler _uiHandler;
-        private Weapon _primaryWeapon;
-        private Weapon _secondaryWeapon;
-        private Weapon _katana;
-        private Weapon _currentWeapon;
         private Dictionary<string, KeyCode> _keys;
         private bool _canDeploy;
         private Vector3 _direction;
         private Camera _camera;
 
         [SerializeField] private GameObject _leftHand;
-        [SerializeField] private WeaponCodes _meleeWeapon;
+        [SerializeField] private WeaponCodes _meleeWeaponCode;
 
         [Header("Debug")]
         [SerializeField] private bool _debug;
@@ -51,7 +46,7 @@ namespace Keru.Scripts.Game.Entities.Player
                 }
                 else if (Input.GetKeyDown(KeyCode.Alpha3))
                 {
-                    DeployWeapon(_katana, isMelee: true);
+                    DeployWeapon(_meleeWeapon, isMelee: true);
                 }
 
                 if (_currentWeapon != null)
@@ -64,7 +59,7 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private void WeaponControls()
         {
-            if(_autoReload && _currentWeapon.GetCurrentBulletsInMag() == 0)
+            if (_autoReload && _currentWeapon.GetCurrentBulletsInMag() == 0)
             {
                 _currentWeapon.Reload();
             }
@@ -124,20 +119,20 @@ namespace Keru.Scripts.Game.Entities.Player
             _camera = Camera.main;
             _uiHandler = weaponUiHandler;
 
-            _katana = _animations.GetWeaponModel(_meleeWeapon).AddComponent<Melee>();
-            _katana.SetConfig(this, _animations.GetWeaponModel(_meleeWeapon), null);
+            _meleeWeapon = _animations.GetWeaponModel(_meleeWeaponCode).AddComponent<Melee>();
+            _meleeWeapon.SetConfig(this, _animations.GetWeaponModel(_meleeWeaponCode), null);
             _autoReload = autoReload;
         }
 
-        public void DeployWeapon(Weapon weapon, bool forcedDeploy = false, bool isMelee = false)
+        public override void DeployWeapon(Weapon weapon, bool forcedDeploy = false, bool isMelee = false)
         {
             if (!_canDeploy && !forcedDeploy)
             {
                 return;
             }
             if (_currentWeapon != null && !_currentWeapon.CanChangeWeapon())
-            { 
-                return; 
+            {
+                return;
             }
             if (weapon == null)
             {
@@ -147,7 +142,7 @@ namespace Keru.Scripts.Game.Entities.Player
             {
                 return;
             }
-            
+
             _currentWeapon = weapon;
 
             TogglePlayerKatana(!isMelee);
@@ -158,46 +153,19 @@ namespace Keru.Scripts.Game.Entities.Player
             _canDeploy = true;
         }
 
-        private void ToggleWeapons(bool toggle)
+        public override void Die()
         {
-            foreach (var weapon in new[] { _primaryWeapon, _secondaryWeapon, _katana })
-            {
-                weapon.gameObject.SetActive(toggle);
-            }                
-        }
-
-        public void PlayAnimation(WeaponActions weaponAction, WeaponCodes weaponCodes)
-        {
-            if (_currentWeapon == null)
-            {
-                return;
-            }
-
-            _animations.PlayWeaponAnimation(weaponAction, weaponCodes);
-        }
-
-        public void PlayMeleeAnimation(WeaponActions weaponAction, WeaponCodes weaponCodes)
-        {
-            if (_currentWeapon == null)
-            {
-                return;
-            }
-            _animations.PlayMeleeWeaponAnimation(weaponAction, weaponCodes);
-        }
-
-        public void Die()
-        {
+            base.Die();
             _canDeploy = false;
-            _currentWeapon?.Die();
             enabled = false;
         }
 
-        public void SetWeaponData(string name, AmmoType munitionType, int bulletsInMag, int maxBulletsInMag, int currentTotalBullets)
+        public override void SetWeaponData(string name, AmmoType munitionType, int bulletsInMag, int maxBulletsInMag, int currentTotalBullets)
         {
             _uiHandler.SetWeapon(name, munitionType, bulletsInMag, maxBulletsInMag, currentTotalBullets);
         }
 
-        public void UpdateWeaponData(int bulletsInMag, int currentTotalBullets)
+        public override void UpdateWeaponData(int bulletsInMag, int currentTotalBullets)
         {
             _uiHandler.UpdateBullets(bulletsInMag, currentTotalBullets);
         }
@@ -229,7 +197,11 @@ namespace Keru.Scripts.Game.Entities.Player
 
         private void TogglePlayerKatana(bool toggle)
         {
-            _animations.SetKatanaActive(toggle);
+            var playerAnimations = _animations as PlayerThirdPersonAnimations;
+            if (playerAnimations != null)
+            {
+                playerAnimations.SetKatanaActive(toggle);
+            }
         }
 
         public void SpecialWeaponsHolster(float castTime, bool usesMelee)
@@ -237,7 +209,7 @@ namespace Keru.Scripts.Game.Entities.Player
             StartCoroutine(HoldingWeapon(castTime, usesMelee));
         }
 
-        public void HolsterWeapons()
+        public override void HolsterWeapons()
         {
             ToggleWeapons(false);
             _currentWeapon = null;
@@ -251,7 +223,7 @@ namespace Keru.Scripts.Game.Entities.Player
 
             if (usesMelee)
             {
-                DeployWeapon(_katana, forcedDeploy: true, isMelee: true);
+                DeployWeapon(_meleeWeapon, forcedDeploy: true, isMelee: true);
             }
 
             yield return new WaitForSeconds(castTime);

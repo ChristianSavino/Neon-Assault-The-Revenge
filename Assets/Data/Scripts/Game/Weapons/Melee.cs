@@ -14,9 +14,9 @@ namespace Keru.Scripts.Game.Weapons
         private List<Entity> _alreadyHitEntities = new List<Entity>();
         private float _currentDamageMultiplier = 1f;
 
-        public override void SetConfig(PlayerWeaponHandler playerWeaponHandler, GameObject weaponModel, GameObject leftHand, int weaponLevel = 1, int currentBulletsInMag = 0, int currentTotalBullets = 0, GameObject owner = null)
+        public override void SetConfig(WeaponHandler weaponHandler, GameObject weaponModel, GameObject leftHand, int weaponLevel = 1, int currentBulletsInMag = 0, int currentTotalBullets = 0, GameObject owner = null)
         {
-            _playerWeaponHandler = playerWeaponHandler;
+            _weaponHandler = weaponHandler;
             _weaponModel = weaponModel.GetComponent<WeaponThirdPersonModel>();
             _weaponData = _weaponModel.WeaponData;
             _currentWeaponLevel = _weaponData.WeaponDataPerLevel[weaponLevel - 1];
@@ -32,7 +32,7 @@ namespace Keru.Scripts.Game.Weapons
                 _owner = PlayerBase.Singleton.gameObject;
             }
 
-            _playerWeaponHandler.SetWeaponData(_weaponData.name, AmmoType.MELEE, 0, 0, 0);
+            _weaponHandler.SetWeaponData(_weaponData.name, AmmoType.MELEE, 0, 0, 0);
             _trailRenderer = GetComponentInChildren<SwordTrailRenderer>();
             _currentBulletsInMag = 1;
         }
@@ -99,7 +99,7 @@ namespace Keru.Scripts.Game.Weapons
         private void DetectHits()
         {
             var distance = 1f;
-            float radius = 1f;
+            var radius = 1f;
 
             var center = transform.position + transform.forward * distance;
 
@@ -131,9 +131,9 @@ namespace Keru.Scripts.Game.Weapons
 
         protected override void PlayAnimation(WeaponActions weaponAction)
         {
-            if (_playerWeaponHandler != null)
+            if (_weaponHandler != null)
             {
-                _playerWeaponHandler.PlayMeleeAnimation(weaponAction, _weaponData.WeaponCode);
+                _weaponHandler.PlayMeleeAnimation(weaponAction, _weaponData.WeaponCode);
             }
         }
     }

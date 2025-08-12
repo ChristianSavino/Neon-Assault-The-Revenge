@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Keru.Scripts.Game.ScriptableObjects
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(fileName = "GunStats", menuName = "ScriptableObjects/GunStats", order = 1)]
     public class GunStats : ScriptableObject
     {
         [Header("Base Parameters")]

@@ -14,6 +14,7 @@ namespace Keru.Scripts.Engine.Module
         public GameObject ImpactEffect;
         public GameObject BigExplosionEffect;
         public GameObject SmallExplosionEffect;
+        public GameObject EnemyNormalBullet;
 
         [Header("Materials")]
         public Material BulletTrailDistortion;
